@@ -36,4 +36,4 @@ pipelines:
             ENVIRONMENT_NAME: '2102wbikonicc-group-2'
             ZIP_FILE: '2102WB-phase1_group2.zip'
             S3_BUCKET: 'elasticbeanstalk-us-west-2-870923424064'
-            VERSION_LABEL: 'Accounts: ${BITBUCKET_COMMIT:0:8}'
+            VERSION_LABEL: 'Accounts(Group 2): ${BITBUCKET_COMMIT:0:8}'

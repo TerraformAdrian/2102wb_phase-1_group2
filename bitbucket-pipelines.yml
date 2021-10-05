@@ -19,15 +19,15 @@ pipelines:
         artifacts: 
           - 2102WB-phase1_group2.zip
     - step:
-        name: "Deploy to Staging"
+        name: "Deploy to 2102WB - Ikonicc (Group 2)"
         # Track staging environments builds using deployments.
         deployment: staging
         script:
-        - echo "Deploy to Staging"
+        - echo "Deploy to 2102WB - Ikonicc (Group 2)"
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
           variables:
             DEBUG: 'TRUE'
-            # upload-only is upload to S3 only, but don�t deploy to beanstalk
+            # upload-only is upload to S3 only, but dont deploy to beanstalk
             # COMMAND: 'upload-only'
             AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY

@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
 import {Page as Root} from "./pages/root.page"
-import {Page as Account} from "./pages/account"
+import {Page as Publish} from "./pages/publish.page"
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -25,7 +25,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/publish">
-            <Account />
+            <Publish />
           </Route>
           <Route exact path="/">
             <Root />

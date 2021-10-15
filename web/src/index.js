@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
 import {Page as Root} from "./pages/root.page"
 import {Page as Publish} from "./pages/publish.page"
+import {Page as List} from "./pages/list.page"
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -26,6 +27,9 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/publish">
             <Publish />
+          </Route>
+          <Route exact path="/list">
+            <List />
           </Route>
           <Route exact path="/">
             <Root />

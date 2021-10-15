@@ -70,6 +70,66 @@ class HandyItemsService {
     });
   };
 
+  transfer = async (recipient: string, itemID: number) => {
+    const authorization = this.flowService.authorizeMinter();
+
+    const transaction = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../../cadence/transactions/handyItems/transfer_handy_item.cdc`
+        ),
+        "utf8"
+      )
+      .replace(
+        nonFungibleTokenPath,
+        fcl.withPrefix(this.nonFungibleTokenAddress)
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.sendTx({
+      transaction,
+      args: [fcl.arg(recipient, t.Address), fcl.arg(itemID, t.UInt64)],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    });
+  };
+
+  getCollectionIds = async (account: string): Promise<number[]> => {
+    const script = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../../cadence/scripts/handyItems/get_collection_ids.cdc`
+        ),
+        "utf8"
+      )
+      .replace(
+        nonFungibleTokenPath,
+        fcl.withPrefix(this.nonFungibleTokenAddress)
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.executeScript<number[]>({
+      script,
+      args: [fcl.arg(account, t.Address)],
+    });
+  };
+
+  getSupply = async (): Promise<number> => {
+    const script = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../../cadence/scripts/handyItems/get_handy_items_supply.cdc`
+        ),
+        "utf8"
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.executeScript<number>({ script, args: [] });
+  };
 }
 
 export { HandyItemsService };

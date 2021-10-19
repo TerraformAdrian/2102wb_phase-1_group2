@@ -6,16 +6,16 @@ import { HandyItemsService } from "./services/handy-items";
 
 const config = {
   port: 3003,
-  minterAddress: "",
-  minterPrivateKeyHex: "",
-  minterAccountKeyIndex: "",
+  minterAddress: "f8d6e0586b0a20c7",
+  minterPrivateKeyHex: "e5ca2b0946358223f0555206144fe4d74e65cbd58b0933c5232ce195b9058cdd",
+  minterAccountKeyIndex: "0",
 
-  accessApi: "accessApi",
+  accessApi: "http://localhost:8080",
 
-  fungibleTokenAddress: "",
+  fungibleTokenAddress: "0xee82856bf20e2aa6",
   fusdAddress: "",
 
-  nonFungibleTokenAddress: ""
+  nonFungibleTokenAddress: "0xf8d6e0586b0a20c7"
 }
 
 async function run() {

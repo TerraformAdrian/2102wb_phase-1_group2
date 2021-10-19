@@ -15,8 +15,7 @@ export const $status = atomFamily({
   default: IDLE,
 })
 
-export function useAccountItems(address, name, 
-  imageUrl, color, info, quantity) {
+export function useAccountItems(address) {
   const [items, setItems] = useRecoilState($state(address))
   const [status, setStatus] = useRecoilState($status(address))
 
@@ -24,7 +23,8 @@ export function useAccountItems(address, name,
     ids: items,
     status,
 
-    async mint() {
+    async mint(recipient, name, 
+      imageUrl, color, info, quantity) {
       setStatus(PROCESSING)
       await fetch(process.env.REACT_APP_API_ITEM_MINT, {
         method: "POST",
@@ -32,15 +32,15 @@ export function useAccountItems(address, name,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          recipient: address,
+          recipient: recipient,
           name: name,
-          imageUrl: imageUrl,
+          tokenURI: imageUrl,
           color: color,
           info: info,
           quantity: quantity,
         }),
       })
-      await fetchAccountItems(address).then(setItems)
+      await fetchAccountItems(recipient).then(setItems)
       setStatus(IDLE)
     },
     async refresh() {

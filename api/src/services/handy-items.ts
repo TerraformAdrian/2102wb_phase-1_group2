@@ -45,6 +45,11 @@ class HandyItemsService {
                 info: string) => {
     const authorization = this.flowService.authorizeMinter();
 
+    console.log(name);
+    console.log(tokenURI);
+    console.log(color);
+    console.log(info);
+
     const transaction = fs
       .readFileSync(
         path.join(
@@ -59,11 +64,13 @@ class HandyItemsService {
       )
       .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
 
+      console.log(transaction);
+
     return this.flowService.sendTx({
       transaction,
       args: [fcl.arg(recipient, t.Address), fcl.arg(name, t.String), 
             fcl.arg(tokenURI, t.String), fcl.arg(color, t.String),
-            fcl.arg(info, t.String),],
+            fcl.arg(info, t.String)],
       authorizations: [authorization],
       payer: authorization,
       proposer: authorization,

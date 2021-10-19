@@ -166,7 +166,7 @@ pub contract HandyItems: NonFungibleToken {
 		// and deposit it in the recipients collection using their collection reference
         //
 		pub fun mintNFT(recipient: &{NonFungibleToken.CollectionPublic}, 
-			name: String, toeknURI: String, color: String, info: String) {
+			name: String, tokenURI: String, color: String, info: String) {
             emit Minted(id: HandyItems.totalSupply, name: name, tokenURI: tokenURI, color: color, info: info)
 
 			// deposit it in the recipient's account using their reference

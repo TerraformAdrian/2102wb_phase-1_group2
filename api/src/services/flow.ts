@@ -39,6 +39,8 @@ class FlowService {
 
   getAccount = async (addr: string) => {
     const { account } = await fcl.send([fcl.getAccount(addr)]);
+    if (!account)
+      console.log("Account Error");
     return account;
   };
 

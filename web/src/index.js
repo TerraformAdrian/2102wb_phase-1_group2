@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import {RecoilRoot} from "recoil"
 import reportWebVitals from './reportWebVitals'
@@ -17,7 +17,7 @@ window.t = t
 
 fcl
   .config()
-  .put("accessNode.api", "https://access-testnet.onflow.org")
+  .put("accessNode.api", "http://localhost:8080")
   .put("discovery.wallet", "https://fcl-discovery.onflow.org/testnet/authn");
 
 ReactDOM.render(
@@ -26,7 +26,9 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/publish">
-            <Publish />
+            <Suspense fallback={null}>
+              <Publish />
+            </Suspense>
           </Route>
           <Route exact path="/list">
             <List />

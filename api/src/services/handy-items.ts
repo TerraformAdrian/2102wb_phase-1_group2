@@ -21,7 +21,7 @@ class HandyItemsService {
       .readFileSync(
         path.join(
           __dirname,
-          `../../../cadence/transactions/handyItems/setup_account.cdc`
+          `../../cadence/transactions/handyItems/setup_account.cdc`
         ),
         "utf8"
       )
@@ -54,7 +54,7 @@ class HandyItemsService {
       .readFileSync(
         path.join(
           __dirname,
-          `../../../cadence/transactions/handyItems/mint_handy_item.cdc`
+          `../../cadence/transactions/handyItems/mint_handy_item.cdc`
         ),
         "utf8"
       )
@@ -84,7 +84,7 @@ class HandyItemsService {
       .readFileSync(
         path.join(
           __dirname,
-          `../../../cadence/transactions/handyItems/transfer_handy_item.cdc`
+          `../../cadence/transactions/handyItems/transfer_handy_item.cdc`
         ),
         "utf8"
       )
@@ -108,7 +108,7 @@ class HandyItemsService {
       .readFileSync(
         path.join(
           __dirname,
-          `../../../cadence/scripts/handyItems/get_collection_ids.cdc`
+          `../../cadence/scripts/handyItems/get_collection_ids.cdc`
         ),
         "utf8"
       )
@@ -129,7 +129,7 @@ class HandyItemsService {
       .readFileSync(
         path.join(
           __dirname,
-          `../../../cadence/scripts/handyItems/get_handy_items_supply.cdc`
+          `../../cadence/scripts/handyItems/get_handy_items_supply.cdc`
         ),
         "utf8"
       )

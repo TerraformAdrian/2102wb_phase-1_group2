@@ -4,8 +4,37 @@ import initApp from "./app";
 import { FlowService } from "./services/flow";
 import { HandyItemsService } from "./services/handy-items";
 
+import dotenv from 'dotenv'
+import envExpand from 'dotenv-expand'
+
+const env = envExpand(dotenv.config({ 
+    path: '.env.testnet'
+  })).parsed || process.env;
+
 const config = {
-  port: 3003,
+  port: process.env.PORT || 3003,
+  minterAddress: env.MINTER_ADDRESS!,
+  minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
+  minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
+  accessApi: env.FLOW_ACCESS_API_URL,
+  fungibleTokenAddress: env.FUNGIBLE_TOKEN_ADDRESS!,
+  nonFungibleTokenAddress: env.NON_FUNGIBLE_TOKEN_ADDRESS!
+}
+console.log(config);
+/*
+const config = process.env.NODE_ENV == "production" ? {
+  port: process.env.PORT || 3003,
+  minterAddress: "ab5876435fbf2063",
+  minterPrivateKeyHex: "241eb3a4f1be425a51f2b619bfe11823d034b57fbc4303c735279c78ab2c0102",
+  minterAccountKeyIndex: "0",
+
+  accessApi: "https://access-testnet.onflow.org",
+
+  fungibleTokenAddress: "0x9a0766d93b6608b7",
+
+  nonFungibleTokenAddress: "0xab5876435fbf2063"
+} : {
+  port: process.env.PORT || 3003,
   minterAddress: "f8d6e0586b0a20c7",
   minterPrivateKeyHex: "e5ca2b0946358223f0555206144fe4d74e65cbd58b0933c5232ce195b9058cdd",
   minterAccountKeyIndex: "0",
@@ -13,10 +42,11 @@ const config = {
   accessApi: "http://localhost:8080",
 
   fungibleTokenAddress: "0xee82856bf20e2aa6",
-  fusdAddress: "",
 
   nonFungibleTokenAddress: "0xf8d6e0586b0a20c7"
 }
+*/
+// console.log(process.env);
 
 async function run() {
   const flowService = new FlowService(

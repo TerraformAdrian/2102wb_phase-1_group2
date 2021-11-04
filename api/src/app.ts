@@ -24,6 +24,11 @@ const initApp = (
   app.use(urlencoded({ extended: false }));
   app.use(V1, initHandyItemsRouter(handyItemsService));
 
+  app.use(express.static(path.resolve(__dirname, "../web/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.resolve(__dirname, "../web/build/index.html"));
+  });
+
   app.all("*", async (req: Request, res: Response) => {
     return res.sendStatus(404);
   });

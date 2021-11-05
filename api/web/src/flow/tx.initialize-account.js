@@ -15,6 +15,18 @@ const CODE = cdc`
       .check()
   }
 
+  pub fun hasFLOW(_ address: Address): Bool {
+    let receiver = getAccount(address)
+      .getCapability<&FlowToken.Vault{FungibleToken.Receiver}>(/public/flowReceiver)
+      .check()
+
+    let balance = getAccount(address)
+      .getCapability<&FlowToken.Vault{FungibleToken.Balance}>(/public/flowBalance)
+      .check()
+
+    return receiver && balance
+  }
+
   pub fun hasStorefront(_ address: Address): Bool {
     return getAccount(address)
       .getCapability<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath)

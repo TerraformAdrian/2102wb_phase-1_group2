@@ -12,7 +12,9 @@ export function Page() {
 
   return (
     <div className="grid-center">
-      <h1>{user.addr}</h1>
+      <h1>
+        {user.addr}
+      </h1>
       <MarketItems />
     </div>
   )

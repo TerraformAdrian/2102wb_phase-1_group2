@@ -2,6 +2,7 @@ import {sansPrefix} from "@onflow/fcl"
 import {atomFamily, selectorFamily, useRecoilState} from "recoil"
 import {useCurrentUser} from "../hooks/use-current-user.hook"
 import {fetchAccountItem} from "../flow/script.get-account-item"
+import {createSaleOffer} from "../flow/tx.create-sale-offer"
 import {IDLE, PROCESSING} from "../global/constants"
 import {useAccountItems} from "../hooks/use-account-items.hook"
 
@@ -41,6 +42,25 @@ export function useAccountItem(address, id) {
       setStatus(PROCESSING)
       await fetchAccountItem(...expand(key)).then(setItem)
       setStatus(IDLE)
+    },
+    async sell(price) {
+      await createSaleOffer(
+        {itemID: id, price: price},
+        {
+          onStart() {
+            setStatus(PROCESSING)
+          },
+          async onSuccess() {
+            accountItems.refresh()
+          },
+          async onComplete() {
+            setStatus(IDLE)
+          },
+          async onError(error) {
+            
+          },
+        }
+      )
     },
   }
 }

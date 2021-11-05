@@ -19,18 +19,18 @@ export function AccountItemCluster({address, id}) {
       <p>{item.tokenURI}</p>
       <p>{item.color}</p>
       <p>{item.info}</p>
-      <button>Sell</button>
+      <button 
+        onClick={() => item.sell("5.0")}
+      >
+        Sell
+      </button>
     </div>
   )
 }
 
 export default function WrappedAccountItemCluster(props) {
   return (
-    <Suspense
-      fallback={
-        null
-      }
-    >
+    <Suspense fallback={null}>
       <AccountItemCluster {...props} />
     </Suspense>
   )

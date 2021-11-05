@@ -1,8 +1,9 @@
 import {Suspense} from "react"
 import {useMarketItems} from "../hooks/use-market-items.hook"
+import Item from './market-item'
 
 export function MarketItemsCluster() {
-  const {items} = useMarketItems("0xab5876435fbf2063");
+  const {items} = useMarketItems("0x048ac6df55e9c6e6");
 
   if (items.length == 0)
     return (
@@ -12,7 +13,11 @@ export function MarketItemsCluster() {
   return (
     <ul>
       {items.map(item => 
-        <li>item</li>
+        <Item
+          key={item}
+          id={item}
+          address={"0x048ac6df55e9c6e6"}
+        />
       )}
     </ul>
   )

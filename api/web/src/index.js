@@ -25,6 +25,7 @@ fcl
   .put("0xNonFungibleToken", process.env.REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN)
   .put("0xNFTStorefront", process.env.REACT_APP_CONTRACT_NFT_STOREFRONT)
   .put("0xHandyItems", process.env.REACT_APP_CONTRACT_HANDY_ITEMS)
+  .put("0xFlowToken", process.env.REACT_APP_CONTRACT_FLOW_TOKEN)
   .put("decoder.Type", val => val.staticType)
 
   console.log(process.env)

@@ -7,7 +7,6 @@ export const $state = atomFamily({
   default: selectorFamily({
     key: "account-items::default",
     get: address => async () => {
-      console.log("hello");
       return fetchAccountItems(address)},
   }),
 })

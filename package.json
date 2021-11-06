@@ -1,0 +1,22 @@
+{
+  "name": "2102wb_phase-1_group2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node api2/dist/index.js",
+    "build": "npx lerna exec npm install && npx lerna exec npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://sdev50464@bitbucket.org/terraform-development/2102wb_phase-1_group2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/terraform-development/2102wb_phase-1_group2#readme",
+  "description": "",
+  "dependencies": {
+    "lerna": "^4.0.0"
+  }
+}

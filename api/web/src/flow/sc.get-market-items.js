@@ -26,5 +26,5 @@ export function getMarketItems(address) {
     args([
       arg(address, Address)
     ])
-  ]).then(decode)
+  ]).then(decode).then(d => d.sort((a, b) => a - b))
 }

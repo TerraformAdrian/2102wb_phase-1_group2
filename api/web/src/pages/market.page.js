@@ -11,7 +11,7 @@ export function Page() {
   // if (user.addr == null) return <Redirect to={"/"} />
 
   return (
-    <div className="grid-center">
+    <div>
       <h1>
         {user.addr}
       </h1>

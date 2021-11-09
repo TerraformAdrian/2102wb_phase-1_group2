@@ -42,6 +42,11 @@ export function Page() {
     history.push("/publish");
   }
 
+  const handleMarket = (e) => {
+    e.preventDefault();
+    history.push("/market");
+  }
+
   return (
     <div>
       <h1>NFT Listings</h1>
@@ -50,6 +55,7 @@ export function Page() {
         <input name="txtAddress" id="txtAddress" onChange={handleChange}/>&nbsp;
         <button onClick={handleList}>List NFTs</button>
         &nbsp;<button onClick={handleMint}>Mint an NFT</button>
+        &nbsp;<button onClick={handleMarket}>View Marketplace</button>
         {
           address != "" && <AccountItemsCluster address={address} />
         }

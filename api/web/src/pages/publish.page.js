@@ -66,6 +66,11 @@ export function Page() {
       console.log(items.ids.length);
   }
 
+  const handleMarket = (e) => {
+    e.preventDefault();
+    history.push("/market");
+  }
+
   return (
     <div className="grid-center">
       <h1>{user.addr}</h1>
@@ -94,6 +99,7 @@ export function Page() {
             Send
           </button>
           <button onClick={handleView}>View List</button>
+          <button onClick={handleMarket}>View Marketplace</button>
         </div>
       </form>
     </div>

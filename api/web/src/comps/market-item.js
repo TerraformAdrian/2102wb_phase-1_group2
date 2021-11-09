@@ -7,10 +7,22 @@ export function MarketItemCluster({address, id}) {
   const [cu, loggedIn] = useCurrentUser()
   const item = useMarketItem(address, id)
 
-  console.log(item);
-
   return (
-    <div>ID: {item.itemID} name: {item.name} Image URL: {item.tokenURI} color: {item.color}</div>
+    <div>
+      <div className="grid-list">
+        <h3>Handy#{item.itemID}</h3>
+
+        <p>{item.name}</p>
+        <p>{item.tokenURI}</p>
+        <p>{item.color}</p>
+        <p>{item.info}</p>
+        <button 
+          onClick={() => item.buy()}
+        >
+          Buy
+        </button>
+     </div>
+    </div>
   )
 }
 

@@ -11,15 +11,23 @@ export function MarketItemsCluster() {
     )
 
   return (
-    <ul>
+    <div>
+      <h1>NFT Marketplace</h1>
+      <div className="grid-list">
+        <h2>ID</h2>
+        <h2>Name</h2>
+        <h2>Image URL</h2>
+        <h2>Color</h2>
+        <h2>Info</h2>
+      </div>
       {items.map(item => 
-        <Item
-          key={item}
-          id={item}
-          address={"0x048ac6df55e9c6e6"}
-        />
+          <Item
+            key={item}
+            id={item}
+            address={"0x048ac6df55e9c6e6"}
+          />
       )}
-    </ul>
+    </div>
   )
 }
 

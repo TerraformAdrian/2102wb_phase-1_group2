@@ -5,6 +5,7 @@ import {tx} from "./util/tx"
 
 const CODE = cdc`
   import FungibleToken from 0xFungibleToken
+  import FlowToken from 0xFlowToken
   import NonFungibleToken from 0xNonFungibleToken
   import HandyItems from 0xHandyItems
   import NFTStorefront from 0xNFTStorefront

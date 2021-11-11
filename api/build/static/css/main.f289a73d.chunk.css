@@ -1,2 +1,0 @@
-.grid-container{display:grid;grid-template-columns:30% 70%;grid-row-gap:10px;grid-column-gap:20px}form{width:100%}.grid-center{margin:auto;width:400px;display:flex;flex-direction:column;align-items:center;justify-content:center}@media screen and (max-width:400px){.grid-center{margin:0;width:100%}}.grid-list{display:grid;grid-template-columns:20% 20% 20% 20% 20%;grid-row-gap:10px;grid-column-gap:10px;align-content:center;align-items:center;border-bottom:1px solid #000}
-/*# sourceMappingURL=main.f289a73d.chunk.css.map */

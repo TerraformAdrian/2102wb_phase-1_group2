@@ -12,7 +12,7 @@ export function Page() {
   })
   const [address, setAddress] = useState("");
   const [count, setCount] = useState(0);
-  const history = useHistory();d
+  const history = useHistory();
   const [user] = useCurrentUser()
 
   const handleChange = (e) => {

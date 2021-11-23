@@ -27,18 +27,20 @@ form {
 }
 
 button {
-  min-width: 100px;
-  min-height: 40px;
-  border: 1px solid white;
-  border-radius: 100px;
-  color: white;
-  background-color: green;
+  min-width: 128px;
+  min-height: 34px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  background-color: #ff8383;
+  font-family: Roboto;
+  font-size: 18px;
 }
 
 button:hover {
-  background-color: darkgreen;
+  background-color: #ef4040;
 }
 
 button:disabled {
-  background-color: lightgreen;
+  background-color: #f7b3b3;
 }

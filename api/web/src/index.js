@@ -4,10 +4,13 @@ import {RecoilRoot} from "recoil"
 import reportWebVitals from './reportWebVitals'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
+import './index.css';
+
 import {Page as Root} from "./pages/root.page"
 import {Page as Publish} from "./pages/publish.page"
 import {Page as List} from "./pages/list.page"
 import {Page as Market} from "./pages/market.page"
+import {Page as MintPanel} from "./pages/mint"
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -45,6 +48,9 @@ ReactDOM.render(
           </Route>
           <Route exact path="/market">
             <Market />
+          </Route>
+          <Route exact path="/mintpanel">
+            <MintPanel />
           </Route>
           <Route exact path="/">
             <Root />

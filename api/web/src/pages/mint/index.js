@@ -119,7 +119,7 @@ export function Page() {
   })
   const [address, setAddress] = useState("");
   const [count, setCount] = useState(0);
-  const history = useHistory();
+  const history = useHistory();d
   const [user] = useCurrentUser()
 
   const handleChange = (e) => {
@@ -132,7 +132,6 @@ export function Page() {
   const handleList = (e) => {
 
     if (state.txtAddress.length != 18) {
-      alert("Enter Address Corretly!");
       return;
     }
 

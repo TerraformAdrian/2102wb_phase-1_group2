@@ -1,50 +1,24 @@
+import React from "react"
 
-import {IDLE} from "../global/constants"
-import {useCurrentUser} from "../hooks/use-current-user.hook"
-import {useAccountItems} from "../hooks/use-account-items.hook"
-import {Suspense, useState} from "react"
-import {Redirect, useHistory} from "react-router-dom"
-import AccountItemsCluster from '../comps/account-items'
-
-export function Page() {
-  const [state, setState] = useState({
-    txtAddress: ""
-  })
-  const [address, setAddress] = useState("");
-  const [count, setCount] = useState(0);
-  const history = useHistory();
-  const [user] = useCurrentUser()
-
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleList = (e) => {
-
-    if (state.txtAddress.length != 18) {
-      return;
-    }
-
-    setAddress(state.txtAddress);
-    setCount(1 - count);
-  }
-
-  const handleMint = (e) => {
-    e.preventDefault();
-    history.push("/publish");
-  }
-
-  const handleMarket = (e) => {
-    e.preventDefault();
-    history.push("/market");
-  }
+export function SideBar() {
 
   return (
-    <div>
-      
+    <div className="f3-left">
+      <h2>Mint Panel</h2>
+      <ul>
+        <li>
+          <a href="/mintpanel/">Collections</a>
+        </li>
+        <li>
+          <a href="/mintpanel/mintnft">Mint NFTs</a>
+        </li>
+        <li>
+          <a href="/mintpanel/assets">Assets</a>
+        </li>
+        <li>
+          <a href="/mintpanel/settings">Settings</a>
+        </li>
+      </ul>
     </div>
   )
 }

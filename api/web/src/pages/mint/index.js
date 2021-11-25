@@ -1,4 +1,5 @@
 
+import {useEffect, useRef} from "react"
 import {IDLE} from "../../global/constants"
 import {useCurrentUser} from "../../hooks/use-current-user.hook"
 import {useAccountItems} from "../../hooks/use-account-items.hook"
@@ -7,8 +8,13 @@ import {Redirect, useHistory} from "react-router-dom"
 import AccountItemsCluster from '../../comps/account-items'
 
 import { SideBar } from "./sidebar"
+import axios from "axios";
+import fs from "fs";
 
 import "./index.css"
+
+const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
+const PINATA_SECRET_API_KEY = "609ec3e0c1641f4b41c0c6370eed55e108cea9f9396b9e5a1d123061de07b99b";
 
 export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
@@ -27,21 +33,22 @@ export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
         });
 };
 
-export const pinFileToIPFS = (pinataApiKey, pinataSecretApiKey) => {
+export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) => {
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-  //we gather a local file for this example, but any valid readStream source will work here.
+  
+  console.log(imgData);
+
   let data = new FormData();
-  data.append('file', fs.createReadStream('./yourfile.png'));
-  //You'll need to make sure that the metadata is in the form of a JSON object that's been convered to a string
-  //metadata is optional
+  data.append('file', imgData.obj.files[0]);
+  
   const metadata = JSON.stringify({
-      name: 'testname',
+      name: imgData.name,
       keyvalues: {
-          exampleKey: 'exampleValue'
+        name: imgData.name
       }
   });
   data.append('pinataMetadata', metadata);
-  //pinataOptions are optional
+  
   const pinataOptions = JSON.stringify({
       cidVersion: 0,
       customPinPolicy: {
@@ -58,9 +65,10 @@ export const pinFileToIPFS = (pinataApiKey, pinataSecretApiKey) => {
       }
   });
   data.append('pinataOptions', pinataOptions);
+
   return axios
       .post(url, data, {
-          maxBodyLength: 'Infinity', //this is needed to prevent axios from erroring out with large files
+          maxBodyLength: 'Infinity',
           headers: {
               'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
               pinata_api_key: pinataApiKey,
@@ -68,7 +76,10 @@ export const pinFileToIPFS = (pinataApiKey, pinataSecretApiKey) => {
           }
       })
       .then(function (response) {
-          //handle response here
+          axios.post("http://localhost:3003/v1/assets/upload", {
+            name: imgData.name,
+            path: "https://cloudflare-ipfs.com/ipfs/" + response.data.IpfsHash
+          })
       })
       .catch(function (error) {
           //handle error here
@@ -76,6 +87,47 @@ export const pinFileToIPFS = (pinataApiKey, pinataSecretApiKey) => {
 };
 
 export function Assets() {
+  const [state, setState] = useState({
+    inFile: "",
+    inName: ""
+  })
+  const [asList, setList] = useState([]);
+  const [isDirty, setDirty] = useState(true);
+  const inputFile = useRef(null);
+
+  useEffect(async () => {
+    if (!isDirty) return;
+
+    const assetList = await axios.get("http://localhost:3003/v1/assets/list");
+    if (assetList.data.success != "true") return;
+
+    setDirty(false);
+    setList(assetList.data.result);
+  }, [isDirty])
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+
+    console.log(inputFile);
+
+    if (state.inFile.length == 0) return;
+
+    await pinFileToIPFS(
+      PINATA_API_KEY, 
+      PINATA_SECRET_API_KEY, {
+        name: state.inName,
+        path: state.inFile,
+        obj: inputFile.current
+      });
+    setDirty(true);
+  }
+
+  const handleChange = (e) => {
+    setState({
+      ...state, 
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
     <div>
@@ -88,17 +140,17 @@ export function Assets() {
             <label>Name</label>
           </div>
           <div>
-            <input id="inName" name="inName" />
+            <input id="inName" name="inName" value={state.inName} onChange={handleChange} />
           </div>
           <div></div>
           <div>
             <label>Browse for file: &nbsp;</label>
           </div>
           <div>
-            <input type="file" id="inFile" name="inFile" />
+            <input type="file" id="inFile" name="inFile" value={state.inFile} onChange={handleChange} ref={inputFile}/>
           </div>
           <div>
-            <button id="">UPLOAD</button>
+            <button id="" onClick={handleUpload}>UPLOAD</button>
           </div>
         </div>
       </div>
@@ -106,6 +158,25 @@ export function Assets() {
       <div style={{paddingLeft: "20px"}}>
         <div>
           <h3>Current Assets</h3>
+          {
+            asList.map(item => (
+              <div className="f3-current-asset">
+                <div>
+                  <img 
+                    src={item.img_url}
+                    width="78px"
+                    height="49px"
+                  />
+                </div>
+                <div>
+                  <span>{item.name}</span>
+                </div>
+                <div>
+                  <a href={item.img_url} target="_blank">{item.img_url}</a>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -119,7 +190,7 @@ export function Page() {
   })
   const [address, setAddress] = useState("");
   const [count, setCount] = useState(0);
-  const history = useHistory();d
+  const history = useHistory();
   const [user] = useCurrentUser()
 
   const handleChange = (e) => {

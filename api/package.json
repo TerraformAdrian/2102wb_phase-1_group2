@@ -23,6 +23,7 @@
     "express-validator": "^6.8.0",
     "http": "0.0.1-security",
     "knex": "^0.95.6",
+    "mongodb": "^4.2.0",
     "object-hash": "^2.1.1",
     "objection": "github:Vincit/objection.js#9a57081d41a7d65a9cc2ae909928ee3ca2c7c7b3",
     "pg": "^8.5.1",

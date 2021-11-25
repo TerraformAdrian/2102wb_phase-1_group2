@@ -11,6 +11,8 @@ import {Page as Publish} from "./pages/publish.page"
 import {Page as List} from "./pages/list.page"
 import {Page as Market} from "./pages/market.page"
 import {Page as MintPanel} from "./pages/mint"
+import {Page as Assets} from "./pages/mint/assets"
+import {Page as MintNFT} from "./pages/mint/mintnft"
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -49,8 +51,11 @@ ReactDOM.render(
           <Route exact path="/market">
             <Market />
           </Route>
-          <Route exact path="/mintpanel">
-            <MintPanel />
+          <Route exact path="/mintpanel/assets">
+            <Assets />
+          </Route>
+          <Route exact path="/mintpanel/mintnft">
+            <MintNFT />
           </Route>
           <Route exact path="/">
             <Root />

@@ -10,7 +10,10 @@ import { json, urlencoded } from "body-parser";
 import initHandyItemsRouter from "./routes/handy-items";
 import { HandyItemsService } from "./services/handy-items";
 
+import { MongoClient } from "mongodb";
+
 const V1 = "/v1/";
+const uri = "mongodb+srv://nmart:nmart1128@nftpow.ltkrr.mongodb.net/nftpow_db?retryWrites=true&w=majority";
 
 // Init all routes, setup middlewares and dependencies
 const initApp = (
@@ -23,6 +26,52 @@ const initApp = (
   app.use(json());
   app.use(urlencoded({ extended: false }));
   app.use(V1, initHandyItemsRouter(handyItemsService));
+  app.post(V1 + "assets/upload", async (req, res) => {
+    const client = new MongoClient(uri);
+    console.log(req.body);
+  
+    try {
+      await client.connect();
+
+      const database = client.db('nftpow_db');
+      const collection = database.collection('assets');
+
+      await collection.insertOne({
+        name: req.body.name,
+        img_url: req.body.path
+      });
+
+      return res.json({success: "true"});
+    } catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  });
+  app.get(V1 + "assets/list", async (req, res) => {
+    const client = new MongoClient(uri);
+    console.log(req.body);
+
+    try {
+      await client.connect();
+
+      const database = client.db('nftpow_db');
+      const collection = database.collection('assets');
+
+      const assetList = await collection.find({}).toArray();
+      console.log(assetList);
+
+      return res.json({success: "true", result: assetList});
+    } catch(err) {
+      console.log(err);
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  });
 
   app.use(express.static(path.resolve(__dirname, "../web/build")));
   app.get("*", function (req, res) {

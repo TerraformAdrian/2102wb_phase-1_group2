@@ -26,8 +26,12 @@ li a {
   line-height: 200%;
 }
 
-label, input {
+label, input, select {
   font-size: 18pt;
+}
+
+span {
+  font-size: 12pt;
 }
 
 .hline {
@@ -59,9 +63,48 @@ label, input {
   text-align: center;
 }
 
+.f3-panel-laytout {
+  padding-left: 20px;
+  line-height: 300%;
+}
+
 .f3-asset {
   display: grid;
   grid-template-columns: max-content max-content auto;
+}
+
+.f3-current-asset {
+  display: grid;
+  grid-template-columns: 78px 60px auto;
+  grid-column-gap: 10px;
+  align-items: center;
+}
+
+.f3-mintnft-head {
   padding-left: 20px;
+}
+
+.f3-mintnft-row {
+  display: grid;
+  grid-template-columns: 50% auto;
   line-height: 300%;
+}
+
+.f3-mintnft-item {
+  display: grid;
+  grid-template-columns: 30% auto;
+  grid-column-gap: 10px;
+}
+
+.f3-mintnft-item input {
+  width: 80%;
+}
+
+.f3-mintnft-item select {
+  width: 80%;
+}
+
+#inQuantity, #inSerial, #inPrice {
+  min-width: 100px;
+  max-width: 100px;
 }

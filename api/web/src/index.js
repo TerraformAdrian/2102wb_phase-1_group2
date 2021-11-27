@@ -13,6 +13,8 @@ import {Page as Market} from "./pages/market.page"
 import {Page as MintPanel} from "./pages/mint"
 import {Page as Assets} from "./pages/mint/assets"
 import {Page as MintNFT} from "./pages/mint/mintnft"
+import {Page as Series} from "./pages/storefront/series"
+import {WrappedPage as Purchase} from "./pages/storefront/purchase"
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -57,6 +59,12 @@ ReactDOM.render(
           <Route exact path="/mintpanel/mintnft">
             <MintNFT />
           </Route>
+          <Route exact path="/zeb-nolan">
+            <Suspense fallback={null}>
+              <Series />
+            </Suspense>
+          </Route>
+          <Route path="/zeb-nolan/:id" children={<Purchase />} />
           <Route exact path="/">
             <Root />
           </Route>

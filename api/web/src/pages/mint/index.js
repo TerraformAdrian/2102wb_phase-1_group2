@@ -76,7 +76,8 @@ export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) =
           }
       })
       .then(function (response) {
-          axios.post("http://localhost:3003/v1/assets/upload", {
+        axios.post(process.env.REACT_APP_API_URL +  "/v1/assets/upload", {
+          // axios.post("http://localhost:3003/v1/assets/upload", {
             name: imgData.name,
             path: "https://cloudflare-ipfs.com/ipfs/" + response.data.IpfsHash
           })
@@ -98,7 +99,8 @@ export function Assets() {
   useEffect(async () => {
     if (!isDirty) return;
 
-    const assetList = await axios.get("http://localhost:3003/v1/assets/list");
+    // const assetList = await axios.get("http://localhost:3003/v1/assets/list");
+    const assetList = await axios.get(process.env.REACT_APP_API_URL + "/v1/assets/list");
     if (assetList.data.success != "true") return;
 
     setDirty(false);

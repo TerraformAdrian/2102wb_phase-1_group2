@@ -20,6 +20,9 @@ export function useAccountItems(address) {
   const [items, setItems] = useRecoilState($state(address))
   const [status, setStatus] = useRecoilState($status(address))
 
+  console.log("B")
+  console.log(items)
+
   return {
     ids: items,
     status,

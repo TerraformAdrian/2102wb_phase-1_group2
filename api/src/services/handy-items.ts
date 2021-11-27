@@ -40,15 +40,14 @@ class HandyItemsService {
     });
   };
 
-  mint = async (recipient: string, name: string, 
-                tokenURI: string, color: string,
-                info: string) => {
+  mint = async (recipient: string, name: string, tokenURI: string, quantity: number,
+    isSerial: boolean, collection: number, price: number, series: number) => {
     const authorization = this.flowService.authorizeMinter();
 
     console.log(name);
     console.log(tokenURI);
-    console.log(color);
-    console.log(info);
+    console.log(series);
+    console.log(typeof series);
 
     const transaction = fs
       .readFileSync(
@@ -68,9 +67,13 @@ class HandyItemsService {
 
     return this.flowService.sendTx({
       transaction,
-      args: [fcl.arg(recipient, t.Address), fcl.arg(name, t.String), 
-            fcl.arg(tokenURI, t.String), fcl.arg(color, t.String),
-            fcl.arg(info, t.String)],
+      args: [fcl.arg(recipient, t.Address), fcl.arg(series, t.UInt32),
+            fcl.arg(quantity, t.UInt64), fcl.arg(price, t.UInt64),
+            fcl.arg(isSerial, t.Bool),
+            fcl.arg([
+              { key: "name", value: name },
+              { key: "img_url", value: tokenURI }
+            ], t.Dictionary({key: t.String, value: t.String})),],
       authorizations: [authorization],
       payer: authorization,
       proposer: authorization,

@@ -10,7 +10,7 @@ export function AccountItemCluster({address, id}) {
 
   if (address == null) return null
   if (id == null) return null
- 
+
   return (
     <div className="grid-list">
       <h3>Handy#{item.itemID}</h3>

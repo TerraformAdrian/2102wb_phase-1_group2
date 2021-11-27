@@ -10,30 +10,17 @@ pub struct AccountItem {
   pub let itemID: UInt64
   pub let name: String
   pub let tokenURI: String
-  pub let editionID: UInt32
-  pub let series: UInt32
-  pub let isSerial: Bool
-  pub let quantity: UInt64
-  pub let price: UInt64
-  pub var editionName: String
+  pub let color: String
+  pub let info: String
   pub let owner: Address
 
-  init(itemID: UInt64, name: String, tokenURI: String, editionID: UInt32, series: UInt32, isSerial: Bool,
-    quantity: UInt64, price: UInt64, owner: Address) {
+  init(itemID: UInt64, name: String, tokenURI: String, color: String, info: String, owner: Address) {
     self.itemID = itemID
     self.name = name
     self.tokenURI = tokenURI
-    self.editionID = editionID
-    self.series = series
-    self.isSerial = isSerial
-    self.quantity = quantity
-    self.price = price
-    self.editionName = ""
+    self.color = color
+    self.info = info
     self.owner = owner
-  }
-
-  pub fun set(editionName: String) {
-    self.editionName = editionName
   }
 }
 
@@ -41,8 +28,7 @@ pub fun fetch(address: Address, id: UInt64): AccountItem? {
   if let col = getAccount(address).getCapability<&HandyItems.Collection{NonFungibleToken.CollectionPublic, HandyItems.HandyItemsCollectionPublic}>(HandyItems.CollectionPublicPath).borrow() {
     if let item = col.borrowHandyItem(id: id) {
       return AccountItem(itemID: id, name: item.name, tokenURI: item.tokenURI, 
-        editionID: item.editionID, series: item.series, isSerial: item.isSerial,
-        quantity: item.quantity, price: item.price, owner: address)
+        color: item.color, info: item.info, owner: address)
     }
   }
 
@@ -50,22 +36,13 @@ pub fun fetch(address: Address, id: UInt64): AccountItem? {
 }
 
 pub fun main(keys: [String], addresses: [Address], ids: [UInt64]): {String: AccountItem?} {
-
-  var e: {UInt32: HandyItems.QueryEditionData} = {}
-
   let r: {String: AccountItem?} = {}
   var i = 0
-
-  e = HandyItems.getEditions()
-
   while i < keys.length {
     let key = keys[i]
     let address = addresses[i]
     let id = ids[i]
-    let rkey = fetch(address: address, id: id)
-
-    rkey!.set(editionName: e[rkey!.editionID]!.name)
-    r[key] = rkey;
+    r[key] = fetch(address: address, id: id)
     i = i + 1
   }
   return r

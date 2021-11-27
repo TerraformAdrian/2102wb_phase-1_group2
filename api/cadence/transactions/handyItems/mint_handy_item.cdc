@@ -6,7 +6,7 @@ import HandyItems from "../../contracts/HandyItems.cdc"
 // It must be run with the account that has the minter resource
 // stored at path /storage/NFTMinter.
 
-transaction(recipient: Address, name: String, tokenURI: String, color: String, info: String) {
+transaction(recipient: Address, edition: UInt32, quantity: UInt64, price: UInt64, isSerial: Bool, metadata: {String: String}) {
     
     // local variable for storing the minter reference
     let minter: &HandyItems.NFTMinter
@@ -29,6 +29,9 @@ transaction(recipient: Address, name: String, tokenURI: String, color: String, i
             ?? panic("Could not get receiver reference to the NFT Collection")
 
         // mint the NFT and deposit it to the recipient's collection
-        self.minter.mintNFT(recipient: receiver, name: name, tokenURI: tokenURI, color: color, info: info)
+        self.minter.mintNFT(recipient: receiver, edition: edition, 
+            quantity: quantity, price: price, isSerial: isSerial, 
+            metadata: metadata
+        )
     }
 }

@@ -14,8 +14,13 @@ import axios from "axios";
 
 export function MintNFT() {
   const [state, setState] = useState({
-    inFile: "",
-    inName: ""
+    inName: "",
+    inAsset: "",
+    inQuantity: "0",
+    inSerial: "yes",
+    inCollection: "0",
+    inPrice: "",
+    inSeries: "-1"
   })
   const items = useIpfsItems(); 
   const { editions } = useEditionList();
@@ -29,6 +34,30 @@ export function MintNFT() {
 
   const handleMint = (e) => {
     e.preventDefault();
+
+    mintItem({
+      name: state.inName,
+      tokenURI: items.assets[state.inAsset].img_url,
+      quantity: state.inQuantity,
+      isSerial: state.inSerial,
+      collection: state.inCollection,
+      price: state.inPrice,
+      series: state.inSeries
+    })
+
+  }
+
+  const mintItem = async (params) => {
+    console.log(params);
+
+    await fetch(process.env.REACT_APP_API_ITEM_MINT, {
+    // await fetch("http://localhost:3003/v1/handy-items/mint", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    })
   }
 
   const editionList = () => {
@@ -36,7 +65,7 @@ export function MintNFT() {
     console.log(editions);
     
     for (const prop in editions) {
-      res.push(<option key={prop} value={editions[prop].name}>{editions[prop].name}</option>)
+      res.push(<option key={prop} value={prop}>{editions[prop].name}</option>)
     }
 
     console.log(res);
@@ -69,7 +98,7 @@ export function MintNFT() {
                   <option value=""></option>
                   {
                     items.assets.map((item, index) => (
-                      <option key={index} value={item.name}>{item.name}</option>
+                      <option key={index} value={index}>{item.name}</option>
                     ))
                   }
                 </select>
@@ -131,6 +160,7 @@ export function MintNFT() {
               </div>
               <div>
                 <select id="inSeries" name="inSeries" value={state.inSeries} onChange={handleChange}>
+                  <option value="-1"></option>
                   { editionList() }
                 </select>
               </div>

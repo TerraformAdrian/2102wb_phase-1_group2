@@ -8,6 +8,11 @@
   overflow-y: hidden;
 }
 
+h1 {
+  font-size: 50pt;
+  font-weight: normal;
+}
+
 h2 {
   font-size: 25pt;
   font-weight: bold;
@@ -107,4 +112,38 @@ span {
 #inQuantity, #inSerial, #inPrice {
   min-width: 100px;
   max-width: 100px;
+}
+
+.f3-store-padding {
+  margin: 20px;
+}
+
+.f3-store-hline {
+  width: 60%;
+  height: 2px;
+  background-color: black;
+}
+
+.f3-store-h2 {
+  font-size: 30pt;
+  font-weight: normal;
+}
+
+.f3-store-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.f3-store-container > .f3-store-series-item {
+  width: 274px;
+  margin: 10px;
+}
+
+.f3-store-collection-item {
+  
+}
+
+.f3-store-collection-item img {
+  display: block;
+  margin: auto;
 }

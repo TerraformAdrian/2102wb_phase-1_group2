@@ -169,10 +169,12 @@ export function Assets() {
                   />
                 </div>
                 <div>
-                  <span>{item.name}</span>
-                </div>
-                <div>
-                  <a href={item.img_url} target="_blank">{item.img_url}</a>
+                  <div>
+                    <span>{item.name}</span>
+                  </div>
+                  <div>
+                    <a href={item.img_url} target="_blank">{item.img_url}</a>
+                  </div>
                 </div>
               </div>
             ))

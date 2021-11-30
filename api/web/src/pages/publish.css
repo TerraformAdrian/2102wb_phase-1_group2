@@ -44,3 +44,7 @@ button:hover {
 button:disabled {
   background-color: #f7b3b3;
 }
+
+.full-button {
+  width: 100%;
+}

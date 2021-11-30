@@ -68,7 +68,7 @@ span {
   text-align: center;
 }
 
-.f3-panel-laytout {
+.f3-panel-layout {
   padding-left: 20px;
   line-height: 300%;
 }
@@ -146,4 +146,22 @@ span {
 .f3-store-collection-item img {
   display: block;
   margin: auto;
+}
+
+.f3-collections-head {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  grid-row-gap: 20px;
+  grid-column-gap: 10px;
+}
+
+.f3-collections-hline {
+  height: 2px;
+  background-color: black;
+  grid-column: 1 / span 3;
+}
+
+.f3-collections-btn {
+  width: 50%;
 }

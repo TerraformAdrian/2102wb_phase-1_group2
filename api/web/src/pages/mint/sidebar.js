@@ -7,7 +7,7 @@ export function SideBar() {
       <h2>Mint Panel</h2>
       <ul>
         <li>
-          <a href="/mintpanel/collections">Collections</a>
+          <a href="/mintpanel/collections">Series</a>
         </li>
         <li>
           <a href="/mintpanel/mintnft">Mint NFTs</a>

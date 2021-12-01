@@ -140,6 +140,91 @@ class HandyItemsService {
 
     return this.flowService.executeScript<number>({ script, args: [] });
   };
+
+  createSeries = async (metadata) => {
+    const authorization = this.flowService.authorizeMinter();
+
+    const transaction = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../cadence/transactions/handyItems/create_series.cdc`
+        ),
+        "utf8"
+      )
+      .replace(
+        nonFungibleTokenPath,
+        fcl.withPrefix(this.nonFungibleTokenAddress)
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.sendTx({
+      transaction,
+      args: [fcl.arg(metadata, t.Dictionary({key: t.String, value: t.String})),],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    });
+  }
+
+  createSet = async (series: number, edition: number, quantity: number,
+                              price: number, isSerial: boolean, metadata) => {
+    const authorization = this.flowService.authorizeMinter();
+
+    const transaction = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../cadence/transactions/handyItems/create_set.cdc`
+        ),
+        "utf8"
+      )
+      .replace(
+        nonFungibleTokenPath,
+        fcl.withPrefix(this.nonFungibleTokenAddress)
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.sendTx({
+      transaction,
+      args: [fcl.arg(series, t.UInt32),
+        fcl.arg(edition, t.UInt32),
+        fcl.arg(quantity, t.UInt64),
+        fcl.arg(price, t.UFix64),
+        fcl.arg(isSerial, t.Bool),
+        fcl.arg([metadata], t.Dictionary({key: t.String, value: t.String})),],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    });
+  }
+
+  createEdition = async (series: number, metadata) => {
+    const authorization = this.flowService.authorizeMinter();
+
+    const transaction = fs
+      .readFileSync(
+        path.join(
+          __dirname,
+          `../../cadence/transactions/handyItems/create_edition.cdc`
+        ),
+        "utf8"
+      )
+      .replace(
+        nonFungibleTokenPath,
+        fcl.withPrefix(this.nonFungibleTokenAddress)
+      )
+      .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
+
+    return this.flowService.sendTx({
+      transaction,
+      args: [fcl.arg(series, t.UInt32),
+        fcl.arg(metadata, t.Dictionary({key: t.String, value: t.String})),],
+      authorizations: [authorization],
+      payer: authorization,
+      proposer: authorization,
+    });
+  }
 }
 
 export { HandyItemsService };

@@ -4,8 +4,7 @@ import { useAccountItem } from "../../hooks/use-account-item.hook";
 
 export function Page() {
   let { id } = useParams();
-  const item = useAccountItem("0xab5876435fbf2063", id)
-
+/*
   console.log(item);
 
   return (
@@ -28,6 +27,8 @@ export function Page() {
       </div>
     </div>
   )
+  */
+ return null;
 }
 
 export function WrappedPage(props) {

@@ -6,11 +6,11 @@ import NFTStorefront from 0xNFTStorefront
 import HandyItems from 0xHandyItems
 
 pub fun main(series: UInt32): {UInt32: HandyItems.QueryEditionData} {
-  return HandyItems.getEditions(series: series)
+  return HandyItems.getSets(series: series)
 }
 `
 
-export function getEditionList(series) {
+export function getSetList(series) {
   // prettier-ignore
   return send([
     script(CODE),

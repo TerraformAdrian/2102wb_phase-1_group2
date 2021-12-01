@@ -7,6 +7,8 @@ import {Suspense, useState} from "react"
 import {Redirect, useHistory} from "react-router-dom"
 import AccountItemsCluster from '../../comps/account-items'
 
+import { useSeriesList } from "../../hooks/use-series-list.hook"
+
 import { SideBar } from "./sidebar"
 import axios from "axios";
 import fs from "fs";
@@ -86,6 +88,7 @@ export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) =
       });
 };
 
+
 export function Assets() {
   const [state, setState] = useState({
     inFile: "",
@@ -93,7 +96,7 @@ export function Assets() {
   })
   const [asList, setList] = useState([]);
   const [isDirty, setDirty] = useState(true);
-  const inputFile = useRef(null);
+  const { series } = useSeriesList();
 
   useEffect(async () => {
     if (!isDirty) return;
@@ -105,23 +108,6 @@ export function Assets() {
     setList(assetList.data.result);
   }, [isDirty])
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-
-    console.log(inputFile);
-
-    if (state.inFile.length == 0) return;
-
-    await pinFileToIPFS(
-      PINATA_API_KEY, 
-      PINATA_SECRET_API_KEY, {
-        name: state.inName,
-        path: state.inFile,
-        obj: inputFile.current
-      });
-    setDirty(true);
-  }
-
   const handleChange = (e) => {
     setState({
       ...state, 
@@ -129,81 +115,132 @@ export function Assets() {
     })
   }
 
+  const handleCreateSeries = async (e) => {
+
+    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
+    await fetch("http://localhost:3003/v1/handy-items/create-series", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: state.inSeriesName,
+          image: asList[state.inSeriesImg].img_url
+        }),
+      })
+  }
+
+  const handleCreateEdition = async (e) => {
+
+    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
+    await fetch("http://localhost:3003/v1/handy-items/create-edition", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: state.inEditionName,
+        series: state.inEditionSeries,
+        image: asList[state.inEditionImg].img_url
+      }),
+    })
+  }
+
+  const getSeriesList = () => {
+    var res = [];
+
+    for (const prop in series) {
+      res.push(<option key={prop} value={prop}>{series[prop].name}</option>)
+    }
+
+    return res;
+  }
+
+  const getSeriesListFor = () => {
+    var res = [];
+
+    for (const prop in series) {
+      res.push(
+        <div>
+          <img src={series[prop].image} />
+        </div>
+      )
+    }
+
+    return res;
+  }
+
   return (
     <div>
       <div style={{paddingLeft: "20px"}}>
         <div>
-          <h3>::Collections</h3>
+          <h3>::Series</h3>
         </div>
         <div className="f3-panel-layout f3-collections-head">
           <div>
-            <label>Collection Name:</label>
+            <label>Series Name:</label>
           </div>
           <div>
-            <input id="inName" name="inName" value={state.inName} onChange={handleChange} />
+            <input id="inSeriesName" name="inSeriesName" value={state.inSeriesName} onChange={handleChange} />
           </div>
           <div></div>
           <div>
-            <label>Collection Image: &nbsp;</label>
+            <label>Series Image: &nbsp;</label>
           </div>
           <div>
-            <input type="file" id="inFile" name="inFile" value={state.inFile} onChange={handleChange} ref={inputFile}/>
+            <select id="inSeriesImg" name="inSeriesImg" onChange={handleChange} value={state.inSeriesImg} >
+              <option value=""></option>
+              {
+                asList.map((item, index) => (
+                  <option key={index} value={index}>{item.name}</option>
+                ))
+              }
+            </select>
           </div>
           <div>
-            <button class="f3-collections-btn" id="" onClick={handleUpload}>CREATE COLLECTION</button>
+            <button class="f3-collections-btn" id="" onClick={handleCreateSeries}>CREATE SERIES</button>
           </div>
           <div className="f3-collections-hline">
           </div>
           <div>
-            <label>Collection:</label>
+            <label>Series:</label>
           </div>
           <div>
-            <input id="inName" name="inName" value={state.inName} onChange={handleChange} />
-          </div>
-          <div></div>
-          <div>
-            <label>Series Name: </label>
-          </div>
-          <div>
-            <input id="inName" name="inName" value={state.inName} onChange={handleChange} />
+            <select id="inEditionSeries" name="inEditionSeries" onChange={handleChange} value={state.inEditionSeries}>
+              <option value=""></option>
+              { getSeriesList() }
+            </select>
           </div>
           <div></div>
           <div>
-            <label>Series Image: </label>
+            <label>Edition Name: </label>
           </div>
           <div>
-            <input type="file" id="inFile" name="inFile" value={state.inFile} onChange={handleChange} ref={inputFile}/>
+            <input id="inEditionName" name="inEditionName" value={state.inEditionName} onChange={handleChange} />
+          </div>
+          <div></div>
+          <div>
+            <label>Edition Image: </label>
           </div>
           <div>
-            <button class="f3-collections-btn" id="" onClick={handleUpload}>CREATE SERIES</button>
+            <select id="inEditionImg" name="inEditionImg" onChange={handleChange} value={state.inEditionImg} >
+              <option value=""></option>
+              {
+                asList.map((item, index) => (
+                  <option key={index} value={index}>{item.name}</option>
+                ))
+              }
+            </select>
+          </div>
+          <div>
+            <button class="f3-collections-btn" id="" onClick={handleCreateEdition}>CREATE EDITION</button>
           </div>
         </div>
       </div>
       <div className="hline" />
       <div style={{paddingLeft: "20px"}}>
         <div>
-          <h3>Current Collections</h3>
-          {
-            asList.map(item => (
-              <div className="f3-current-asset">
-                <div>
-                  <img 
-                    src={item.img_url}
-                    width="78px"
-                    height="49px"
-                  />
-                </div>
-                <div>
-                  <div>
-                    <span>{item.name}</span>
-                  </div>
-                  <div>
-                    <a href={item.img_url} target="_blank">{item.img_url}</a>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
+          <h3>Current Series</h3>
         </div>
       </div>
     </div>

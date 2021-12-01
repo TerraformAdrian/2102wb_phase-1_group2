@@ -1,19 +1,20 @@
 import { useState, Suspense } from "react";
-import { MarketItemsCluster } from "../../comps/market-items";
+import { useParams } from "react-router";
 import { useAccountItem } from "../../hooks/use-account-item.hook";
 import { useAccountItems } from "../../hooks/use-account-items.hook";
-import { useSeriesList } from "../../hooks/use-series-list.hook";
+import { useEditionList } from "../../hooks/use-edition-list.hook";
+import { useSeriesItem } from "../../hooks/use-series-item.hook";
+import { useSetList } from "../../hooks/use-set-list.hook";
 
-export function Item({meta}) {
-
-  console.log(meta);
+export function Item({series, meta}) {
 
   return (
-    <div className="f3-store-collection-item">
+    <div className="f3-store-series-item">
       <img src={meta.image} width="274px" height="172px" />
-      <a href={"/series/" + meta.id}>{meta.name}</a>
+      <a href={"/editions/" + meta.id}>{meta.name} Edition</a>
     </div>
   )
+
 }
 
 export function WrappedItem(props) {
@@ -26,13 +27,16 @@ export function WrappedItem(props) {
 
 export function Page() {
 
-  const { series } = useSeriesList();
+  const { id } = useParams();
+  const { item } = useSeriesItem(id);
+  const { editions } = useEditionList(id);
+  const { sets } = useSetList(id);
 
   const getList = () => {
     var res = [];
     
-    for (const prop in series) {
-      res.push(<WrappedItem meta={series[prop]} />)
+    for (const prop in sets) {
+      res.push(<WrappedItem series={id} meta={sets[prop]} />)
     }
 
     return res;
@@ -46,7 +50,7 @@ export function Page() {
       </div>
       <div className="f3-store-padding">
         <div>
-          <h2 className="f3-store-h2">Available Series</h2>
+          <h2 className="f3-store-h2">{item.name} Series - Current Editions</h2>
         </div>
         <div className="f3-store-container">
           { getList() }

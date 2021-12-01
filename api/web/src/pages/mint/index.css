@@ -140,7 +140,7 @@ span {
 }
 
 .f3-store-collection-item {
-  
+  text-align: center;
 }
 
 .f3-store-collection-item img {
@@ -164,4 +164,8 @@ span {
 
 .f3-collections-btn {
   width: 50%;
+}
+
+.f3-collections-head select {
+  width: 100%;
 }

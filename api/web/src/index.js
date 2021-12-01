@@ -15,6 +15,7 @@ import {Page as Assets} from "./pages/mint/assets"
 import {Page as MintNFT} from "./pages/mint/mintnft"
 import {Page as Collections} from "./pages/mint/collections"
 import {Page as Series} from "./pages/storefront/series"
+import {Page as Edition} from "./pages/storefront/edition"
 import {WrappedPage as Purchase} from "./pages/storefront/purchase"
 import {Page as NotFound} from "./pages/not-found.page"
 
@@ -63,14 +64,16 @@ ReactDOM.render(
           <Route exact path="/mintpanel/collections">
             <Collections />
           </Route>
-          <Route exact path="/zeb-nolan">
+          <Route exact path="/series/:id">
+            <Suspense fallback={null}>
+              <Edition />
+            </Suspense>
+          </Route>
+          <Route path="/editions/:id" children={<Purchase />} />
+          <Route exact path="/">
             <Suspense fallback={null}>
               <Series />
             </Suspense>
-          </Route>
-          <Route path="/zeb-nolan/:id" children={<Purchase />} />
-          <Route exact path="/">
-            <Root />
           </Route>
           <Route>
             <NotFound />

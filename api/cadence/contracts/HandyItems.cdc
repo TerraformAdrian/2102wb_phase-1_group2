@@ -12,6 +12,7 @@ pub contract HandyItems: NonFungibleToken {
     pub event Minted(id: UInt64, name: String,
     				 tokenURI: String, color: String, info: String)
     pub event NewSeriesStarted(newCurrentSeries: UInt32)
+    pub event SeriesCreated(id: UInt32, name: String)
     pub event EditionCreated(id: UInt32, name: String)
 
     // Named Paths
@@ -29,29 +30,78 @@ pub contract HandyItems: NonFungibleToken {
     //
     pub var currentSeries: UInt32
 
+    pub var nextSeriesID: UInt32
+
     // Indicates next edition's ID. 
     // 
     pub var nextEditionID: UInt32
 
+    pub var nextSetID: UInt32
+
+    // seriesList
+    // Holds data about each series
+    //
+    access(self) var seriesList: {UInt32: SeriesData}
+
     // editionList
     // Holds data about each edition
+    //
     access(self) var editionList: {UInt32: EditionData}
+
+    access(self) var sets: @{UInt32: Set}
+
+    pub struct SeriesData {
+        // Series's ID
+        //
+        pub let id: UInt32
+
+        // Holds metadata about series
+        //
+        pub let metadata: {String: String}
+
+        init(metadata: {String: String}) {
+            pre {
+                metadata.length != 0: "New Series metadata cannot be empty"
+            }
+            self.id = HandyItems.nextSeriesID
+            self.metadata = metadata
+        }
+    }
 
     pub struct EditionData {
         // Edition's ID
         //
         pub let id: UInt32
 
+        pub let series: UInt32
+
         // Holds metadata about edition
         //
         pub let metadata: {String: String}
 
-        init(metadata: {String: String}) {
+        init(series: UInt32, metadata: {String: String}) {
             pre {
                 metadata.length != 0: "New Edition metadata cannot be empty"
             }
             self.id = HandyItems.nextEditionID
+            self.series = series
             self.metadata = metadata
+        }
+    }
+
+    pub struct QuerySeriesData {
+        pub let id: UInt32
+
+        pub let name: String
+
+        pub let image: String
+
+        init(id: UInt32) {
+            var series = HandyItems.seriesList[id]!
+
+            self.id = id
+            self.name = series.metadata["name"] ?? ""
+            self.image = series.metadata["image"] ?? ""
         }
     }
 
@@ -60,9 +110,50 @@ pub contract HandyItems: NonFungibleToken {
 
         pub let name: String
 
-        init(id: UInt32, name: String) {
+        pub let image: String
+
+        init(id: UInt32) {
+            var edition = HandyItems.editionList[id]!
+
             self.id = id
-            self.name = name
+            self.name = edition.metadata["name"] ?? ""
+            self.image = edition.metadata["image"] ?? ""
+        }
+    }
+
+    pub struct QuerySetData {
+
+        pub let id: UInt32
+
+        pub let seriesID: UInt32
+
+        pub let editionID: UInt32
+
+        pub let quantity: UInt32
+
+        pub let price: UFix64
+
+        pub let isSerial: Bool
+
+        pub var metadata: {String: String}
+
+        pub var numberMinted: UInt32
+
+        init(setID: UInt32) {
+            pre {
+                HandyItems.sets[setID] != nil: "The set with the provided ID does not exist"
+            }
+
+            let set = &HandyItems.sets[setID] as &Set
+
+            self.id = setID
+            self.seriesID = set.seriesID
+            self.editionID = set.editionID
+            self.quantity = set.quantity
+            self.price = set.price
+            self.isSerial = set.isSerial
+            self.metadata = set.metadata
+            self.numberMinted = set.numberMinted
         }
     }
 
@@ -74,46 +165,63 @@ pub contract HandyItems: NonFungibleToken {
         //
         pub let id: UInt64
 
-        pub let editionID: UInt32
-
-        pub let series: UInt32
-
-        pub var metadata: {String: String}
-
-        pub let isSerial: Bool
-
-        pub let quantity: UInt64
-
-        pub let price: UInt64
-
-        // The token's name
-        pub let name: String
-        // The token's url
-        pub let tokenURI: String
-        // The token's color
-        pub let color: String
-        // The token's info
-        pub let info: String
+        pub let serialID: UInt32
 
         // initializer
         //
-        init(initID: UInt64, initEditionID: UInt32, initQuantity: UInt64,
-            initPrice: UInt64, isSerial: Bool, initName: String,
-        	initUrl: String, initColor: String, initInfo: String) {
-            self.id = initID
-            self.name = initName
-            self.tokenURI = initUrl
-            self.color = initColor
-            self.info = initInfo
+        init(setID: UInt32, serialID: UInt32) {
+            // Increment the global Moment IDs
+            HandyItems.totalSupply = HandyItems.totalSupply + UInt64(1)
 
-            self.editionID = initEditionID
-            self.series = HandyItems.currentSeries
-            self.isSerial = isSerial
-            self.quantity = initQuantity
-            self.price = initPrice
-
-            self.metadata = {}
+            self.id = HandyItems.totalSupply
+            self.serialID = serialID
         }
+    }
+
+    pub resource Set {
+
+        pub let id: UInt32
+
+        pub let seriesID: UInt32
+
+        pub let editionID: UInt32
+
+        pub let quantity: UInt32
+
+        pub let price: UFix64
+
+        pub let isSerial: Bool
+
+        pub var metadata: {String: String}
+
+        pub var numberMinted: UInt32
+
+        init(seriesID: UInt32, editionID: UInt32, quantity: UInt32, 
+                    price: UFix64, isSerial: Bool, metadata: {String: String}) {
+            self.id = HandyItems.nextSetID
+
+            self.seriesID = seriesID
+
+            self.editionID = editionID
+
+            self.quantity = quantity
+
+            self.price = price
+
+            self.isSerial = isSerial
+
+            self.metadata = metadata
+
+            self.numberMinted = 0
+        }
+
+        pub fun mintNFT(recipient: &{NonFungibleToken.CollectionPublic}) {
+
+			// deposit it in the recipient's account using their reference
+			recipient.deposit(token: <-create HandyItems.NFT(setID: self.id, serialID: 1))
+
+            self.numberMinted = self.numberMinted + 1 as UInt32
+		}
     }
 
     // This is the interface that users can cast their HandyItems Collection as
@@ -224,9 +332,24 @@ pub contract HandyItems: NonFungibleToken {
     //
 	pub resource NFTMinter {
 
-        pub fun createEdition(name: String): UInt32 {
+        pub fun createSeries(metadata: {String: String}): UInt32 {
+            // Create the new series
+            var newSeries = SeriesData(metadata: metadata)
+
+            let newID = newSeries.id;
+
+            HandyItems.nextSeriesID = HandyItems.nextSeriesID + UInt32(1)
+
+            HandyItems.seriesList[newID] = newSeries
+
+            // emit SeriesCreated(id: newID, name: name)
+
+            return newID
+        }
+
+        pub fun createEdition(series: UInt32, metadata: {String: String}): UInt32 {
             // Create the new edition
-            var newEdition = EditionData(metadata: {"name": name})
+            var newEdition = EditionData(series: series, metadata: metadata)
 
             let newID = newEdition.id;
 
@@ -234,9 +357,35 @@ pub contract HandyItems: NonFungibleToken {
 
             HandyItems.editionList[newID] = newEdition
 
-            emit EditionCreated(id: newID, name: name)
+            // emit EditionCreated(id: newID, name: name)
 
             return newID
+        }
+
+        pub fun createSet(series: UInt32, edition: UInt32, quantity: UInt32, 
+            price: UFix64, isSerial: Bool, metadata: {String: String}): UInt32 {
+
+			// Create the new Set
+            var newSet <- create Set(seriesID: series, editionID: edition, 
+                quantity: quantity, price: price, isSerial: isSerial, metadata: metadata)
+
+            // Increment the setID so that it isn't used again
+            HandyItems.nextSetID = HandyItems.nextSetID + UInt32(1)
+
+            let newID = newSet.id
+
+            // Store it in the sets mapping field
+            HandyItems.sets[newID] <-! newSet
+
+            return newID
+		}
+
+        pub fun borrowSet(setID: UInt32): &Set {
+            pre {
+                HandyItems.sets[setID] != nil: "Cannot borrow Set: The Set doesn't exist"
+            }
+
+            return &HandyItems.sets[setID] as &Set
         }
 
 		// mintNFT
@@ -256,12 +405,12 @@ pub contract HandyItems: NonFungibleToken {
         pub fun mintNFT(recipient: &{NonFungibleToken.CollectionPublic}, 
 			edition: UInt32, quantity: UInt64, price: UInt64, isSerial: Bool, metadata: {String: String}) {
             // emit Minted(id: HandyItems.totalSupply, name: name, tokenURI: tokenURI, color: color, info: info)
-
+/*
 			// deposit it in the recipient's account using their reference
 			recipient.deposit(token: <-create HandyItems.NFT(initID: HandyItems.totalSupply, 
                 initEditionID: edition, initQuantity: quantity, initPrice: price,
                 isSerial: isSerial, initName: metadata["name"]!, initUrl: metadata["img_url"]!, initColor: "", initInfo: ""))
-
+*/
             HandyItems.totalSupply = HandyItems.totalSupply + (1 as UInt64)
 		}
 	}
@@ -282,20 +431,68 @@ pub contract HandyItems: NonFungibleToken {
         return collection.borrowHandyItem(id: itemID)
     }
 
-    // getEditions
-    // Get 
+    // 
+    // 
     //
-
-    pub fun getEditions(): {UInt32: QueryEditionData} {
-        var res:{UInt32: QueryEditionData} = {}
+    pub fun getSeries(): {UInt32: QuerySeriesData} {
+        var ret: {UInt32: QuerySeriesData} = {}
         var i: UInt32 = 0
-
-        while i < self.nextEditionID {
-            res[i] = QueryEditionData(id: self.editionList[i]!.id, name: self.editionList[i]!.metadata["name"] ?? "")
+        
+        while i < self.nextSeriesID {
+            ret[i] = QuerySeriesData(id: i)
             i = i + UInt32(1)
         }
 
-        return res
+        return ret
+    }
+
+    pub fun getSeriesData(series: UInt32): QuerySeriesData? {
+        if HandyItems.seriesList[series] == nil {
+            return nil
+        } else {
+            return QuerySeriesData(id: series)
+        }
+    }
+
+    // getEditions
+    // 
+    //
+    pub fun getEditions(series: UInt32): {UInt32: QueryEditionData} {
+        var ret: {UInt32: QueryEditionData} = {}
+        var i: UInt32 = 0
+
+        while i < self.nextEditionID {
+            if self.editionList[i]!.id == series {
+                ret[i] = QueryEditionData(id: i)
+            }
+            i = i + UInt32(1)
+        }
+
+        return ret
+    }
+
+
+    // 
+    pub fun getSets(series: UInt32): {UInt32: QueryEditionData} {
+        var ret: {UInt32: QueryEditionData} = {}
+        var i: UInt32 = 0
+
+        while i < self.nextSetID {
+            if self.sets[i]?.seriesID == series {
+                ret[i] = QueryEditionData(id: self.sets[i]?.editionID!)
+            }
+            i = i + UInt32(1)
+        }
+
+        return ret
+    }
+
+    pub fun getSetData(setID: UInt32): QuerySetData? {
+        if HandyItems.sets[setID] == nil {
+            return nil
+        } else {
+            return QuerySetData(setID: setID)
+        }
     }
 
     // initializer
@@ -310,8 +507,13 @@ pub contract HandyItems: NonFungibleToken {
         self.totalSupply = 0
 
         self.currentSeries = 0
-        self.editionList = {}
+        self.nextSeriesID = 0
         self.nextEditionID = 0
+        self.nextSetID = 0
+
+        self.seriesList = {}
+        self.editionList = {}
+        self.sets <- {}
 
         // Create a Minter resource and save it to storage
         let minter <- create NFTMinter()

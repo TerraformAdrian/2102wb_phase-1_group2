@@ -5,12 +5,12 @@ const CODE = cdc`
 import NFTStorefront from 0xNFTStorefront
 import HandyItems from 0xHandyItems
 
-pub fun main(series: UInt32): {UInt32: HandyItems.QueryEditionData} {
-  return HandyItems.getEditions(series: series)
+pub fun main(id: UInt32): HandyItems.QuerySeriesData? {
+  return HandyItems.getSeriesData(series: id)
 }
 `
 
-export function getEditionList(series) {
+export function getSeriesItem(series) {
   // prettier-ignore
   return send([
     script(CODE),

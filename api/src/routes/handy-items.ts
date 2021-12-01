@@ -59,6 +59,40 @@ function initHandyItemsRouter(handyItemsService: HandyItemsService): Router {
     });
   });
 
+  router.post("/handy-items/create-series", async (req: Request, res: Response) => {
+    const { name, image } = req.body;
+    const transaction = await handyItemsService.createSeries([
+      {key: "name", value: name},
+      {key: "image", value: image}
+    ]);
+    return res.send({
+      transaction,
+    });
+  });
+
+  router.post("/handy-items/create-edition", async (req: Request, res: Response) => {
+    const { series, name, image } = req.body;
+    const transaction = await handyItemsService.createEdition(Number(series), [
+      {key: "name", value: name},
+      {key: "image", value: image},
+    ]);
+    return res.send({
+      transaction,
+    });
+  });
+
+  router.post("/handy-items/create-set", async (req: Request, res: Response) => {
+    const { name, desc, thumb, quantity, isSerial, series, price, edition } = req.body;
+    const transaction = await handyItemsService.createSet(series, edition, quantity, price, isSerial,[
+      { key: "name", value: name },
+      { key: "thumb_image", value: thumb },
+      { key: "description", value: desc },
+    ]);
+    return res.send({
+      transaction,
+    });
+  });
+
   return router;
 }
 

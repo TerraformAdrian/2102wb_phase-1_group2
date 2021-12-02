@@ -6,7 +6,7 @@ import { useEditionList } from "../../hooks/use-edition-list.hook";
 import { useSeriesItem } from "../../hooks/use-series-item.hook";
 import { useSetList } from "../../hooks/use-set-list.hook";
 
-export function Item({series, meta}) {
+export function Item({meta}) {
 
   return (
     <div className="f3-store-series-item">
@@ -28,15 +28,15 @@ export function WrappedItem(props) {
 export function Page() {
 
   const { id } = useParams();
-  const { item } = useSeriesItem(id);
-  const { editions } = useEditionList(id);
+  const { series } = useSeriesItem(id);
+  // const { editions } = useEditionList(id);/
   const { sets } = useSetList(id);
 
   const getList = () => {
     var res = [];
     
     for (const prop in sets) {
-      res.push(<WrappedItem series={id} meta={sets[prop]} />)
+      res.push(<WrappedItem meta={sets[prop]} />)
     }
 
     return res;
@@ -50,7 +50,7 @@ export function Page() {
       </div>
       <div className="f3-store-padding">
         <div>
-          <h2 className="f3-store-h2">{item.name} Series - Current Editions</h2>
+          <h2 className="f3-store-h2">{series.name} Series - Current Editions</h2>
         </div>
         <div className="f3-store-container">
           { getList() }

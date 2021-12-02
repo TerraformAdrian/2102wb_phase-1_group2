@@ -5,6 +5,7 @@ import {useCurrentUser} from "../../hooks/use-current-user.hook"
 import {useAccountItems} from "../../hooks/use-account-items.hook"
 import { useIpfsItems } from "../../hooks/use-ipfs-items.hook"
 import { useEditionList } from "../../hooks/use-edition-list.hook"
+import { useSeriesList } from "../../hooks/use-series-list.hook"
 import {Suspense, useState} from "react"
 import {Redirect, useHistory} from "react-router-dom"
 import AccountItemsCluster from '../../comps/account-items'
@@ -18,12 +19,13 @@ export function MintNFT() {
     inAsset: "",
     inQuantity: "0",
     inSerial: "yes",
-    inCollection: "0",
+    inSeries: "",
     inPrice: "",
-    inSeries: "-1"
+    inEdition: "-1"
   })
-  const items = useIpfsItems(); 
-  const { editions } = useEditionList();
+  const items = useIpfsItems();
+  const { series } = useSeriesList();
+  const { editions } = useEditionList(state.inSeries);
 
   const handleChange = (e) => {
     setState({
@@ -34,17 +36,27 @@ export function MintNFT() {
 
   const handleMint = (e) => {
     e.preventDefault();
-
+/*
     mintItem({
       name: state.inName,
       tokenURI: items.assets[state.inAsset].img_url,
       quantity: state.inQuantity,
       isSerial: state.inSerial,
-      collection: state.inCollection,
+      collection: state.inSeries,
       price: state.inPrice,
-      series: state.inSeries
+      series: state.inEdition
     })
-
+*/
+    createSet({
+      name: state.inName,
+      desc: state.inDescription,
+      thumb: items.assets[state.inThumb].img_url,
+      quantity: state.inQuantity,
+      isSerial: state.inSerial,
+      series: state.inSeries,
+      price: state.inPrice,
+      edition: state.inEdition
+    })
   }
 
   const mintItem = async (params) => {
@@ -60,15 +72,34 @@ export function MintNFT() {
     })
   }
 
+  const createSet = async (params) => {
+    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-set", {
+      await fetch("http://localhost:3003/v1/handy-items/create-set", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    })
+  }
+
   const editionList = () => {
     var res = [];
-    console.log(editions);
     
     for (const prop in editions) {
       res.push(<option key={prop} value={prop}>{editions[prop].name}</option>)
     }
 
-    console.log(res);
+    return res;
+  }
+
+  const seriesList = () => {
+    var res = [];
+    
+    for (const prop in series) {
+      res.push(<option key={prop} value={prop}>{series[prop].name}</option>)
+    }
+
     return res;
   }
 
@@ -91,7 +122,34 @@ export function MintNFT() {
             </div>
             <div className="f3-mintnft-item">
               <div>
-                <label>Asset(IPFS): </label>
+                <label>NFT Thumbnail: </label>
+              </div>
+              <div>
+                <select id="inThumb" name="inThumb" onChange={handleChange} value={state.inThumb} >
+                  <option value=""></option>
+                  {
+                    items.assets.map((item, index) => (
+                      <option key={index} value={index}>{item.name}</option>
+                    ))
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* First Row: Name and Asset(IPFS) */}
+          <div className="f3-mintnft-row">
+            <div className="f3-mintnft-item">
+              <div>
+                <label>Description: </label>
+              </div>
+              <div>
+                <input id="inDescription" name="inDescription" value={state.inDescription} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="f3-mintnft-item">
+              <div>
+                <label>NFT Asset: </label>
               </div>
               <div>
                 <select id="inAsset" name="inAsset" onChange={handleChange} value={state.inAsset} >
@@ -130,15 +188,16 @@ export function MintNFT() {
             </div>
           </div>
 
-          {/* Third Row: Collection and Price */}
+          {/* Third Row: Series and Price */}
           <div className="f3-mintnft-row">
             <div className="f3-mintnft-item">
               <div>
-                <label>Collection: </label>
+                <label>Series: </label>
               </div>
               <div>
-                <select id="inCollection" name="inCollection" value={state.inCollection} onChange={handleChange}>
-                  <option value="A">Zeb Nolan Interview</option>
+                <select id="inSeries" name="inSeries" value={state.inSeries} onChange={handleChange}>
+                  <option value=""></option>
+                  { seriesList() }
                 </select>
               </div>
             </div>
@@ -152,14 +211,14 @@ export function MintNFT() {
             </div>
           </div>
 
-          {/* Fourth Row: Series and Mint Button */}
+          {/* Fourth Row: Edition and Mint Button */}
           <div className="f3-mintnft-row">
             <div className="f3-mintnft-item">
               <div>
-                <label>Series: </label>
+                <label>Edition: </label>
               </div>
               <div>
-                <select id="inSeries" name="inSeries" value={state.inSeries} onChange={handleChange}>
+                <select id="inEdition" name="inEdition" value={state.inEdition} onChange={handleChange}>
                   <option value="-1"></option>
                   { editionList() }
                 </select>

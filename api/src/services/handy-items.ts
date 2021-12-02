@@ -185,14 +185,16 @@ class HandyItemsService {
       )
       .replace(handyItemsPath, fcl.withPrefix(this.handyItemsAddress));
 
+    console.log(isSerial);
+
     return this.flowService.sendTx({
       transaction,
-      args: [fcl.arg(series, t.UInt32),
-        fcl.arg(edition, t.UInt32),
-        fcl.arg(quantity, t.UInt64),
+      args: [fcl.arg(Number(series), t.UInt32),
+        fcl.arg(Number(edition), t.UInt32),
+        fcl.arg(Number(quantity), t.UInt32),
         fcl.arg(price, t.UFix64),
-        fcl.arg(isSerial, t.Bool),
-        fcl.arg([metadata], t.Dictionary({key: t.String, value: t.String})),],
+        fcl.arg(Boolean(isSerial), t.Bool),
+        fcl.arg(metadata, t.Dictionary({key: t.String, value: t.String})),],
       authorizations: [authorization],
       payer: authorization,
       proposer: authorization,

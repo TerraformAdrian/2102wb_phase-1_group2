@@ -7,6 +7,11 @@ export function useEditionList(series) {
   const [items, setItems] = useState({});
 
   useEffect(async () => {
+    if (series == "") {
+      setItems({});
+      return;
+    }
+
     const editions = await getEditionList(series);
 
     console.log(editions);
@@ -15,7 +20,7 @@ export function useEditionList(series) {
       console.log(editions[prop]);
 
     setItems(editions);
-  }, []);
+  }, [series]);
 
   return {
     editions: items

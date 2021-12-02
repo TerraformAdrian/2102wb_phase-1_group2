@@ -14,10 +14,10 @@ export function useSeriesItem(id) {
     for (const prop in series)
       console.log(series[prop]);
 
-      setItem(series);
-  }, []);
+    setItem(series);
+  }, [id]);
 
   return {
-    item: item
+    series: item
   }
 }

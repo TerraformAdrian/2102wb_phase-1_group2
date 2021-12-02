@@ -1,4 +1,6 @@
 import NonFungibleToken from "./NonFungibleToken.cdc"
+import FungibleToken from 0x9a0766d93b6608b7
+import FUSD from 0xe223d8a629e49c68
 
 // HandyItems
 //
@@ -121,6 +123,25 @@ pub contract HandyItems: NonFungibleToken {
         }
     }
 
+    pub struct QuerySetEditionData {
+        pub let id: UInt32
+
+        pub let editionID: UInt32
+
+        pub let name: String
+
+        pub let image: String
+
+        init(id: UInt32) {
+            self.editionID = HandyItems.sets[id]?.editionID!
+            var edition = HandyItems.editionList[self.editionID]!
+
+            self.id = id
+            self.name = edition.metadata["name"] ?? ""
+            self.image = edition.metadata["image"] ?? ""
+        }
+    }
+
     pub struct QuerySetData {
 
         pub let id: UInt32
@@ -215,12 +236,28 @@ pub contract HandyItems: NonFungibleToken {
             self.numberMinted = 0
         }
 
-        pub fun mintNFT(recipient: &{NonFungibleToken.CollectionPublic}) {
+        pub fun mintNFT(payment: @FungibleToken.Vault): @NonFungibleToken.NFT {
+
+            pre {
+                self.numberMinted < self.quantity: "no nft left"
+                // payment.isInstance(self.details.salePaymentVaultType): "payment vault is not requested fungible token"
+                // payment.balance == self.price: "payment vault does not contain requested price"
+            }
 
 			// deposit it in the recipient's account using their reference
-			recipient.deposit(token: <-create HandyItems.NFT(setID: self.id, serialID: 1))
+			// recipient.deposit(token: <-create HandyItems.NFT(setID: self.id, serialID: 1))
+
+            let mainFUSDVault = self.owner!.getCapability(/public/fusdReceiver)
+                .borrow<&{FungibleToken.Receiver}>()
+                ?? panic("Could not borrow receiver reference to the recipient's Vault")
+
+            mainFUSDVault.deposit(from: <- payment)
+
+            let token <- create HandyItems.NFT(setID: self.id, serialID: 1)
 
             self.numberMinted = self.numberMinted + 1 as UInt32
+
+            return <- token
 		}
     }
 
@@ -471,15 +508,22 @@ pub contract HandyItems: NonFungibleToken {
         return ret
     }
 
+    pub fun getEditionData(id: UInt32): QueryEditionData? {
+        if HandyItems.editionList[id] == nil {
+            return nil
+        } else {
+            return QueryEditionData(id: id)
+        }
+    }
 
     // 
-    pub fun getSets(series: UInt32): {UInt32: QueryEditionData} {
-        var ret: {UInt32: QueryEditionData} = {}
+    pub fun getSets(series: UInt32): {UInt32: QuerySetEditionData} {
+        var ret: {UInt32: QuerySetEditionData} = {}
         var i: UInt32 = 0
 
         while i < self.nextSetID {
             if self.sets[i]?.seriesID == series {
-                ret[i] = QueryEditionData(id: self.sets[i]?.editionID!)
+                ret[i] = QuerySetEditionData(id: i)
             }
             i = i + UInt32(1)
         }
@@ -493,6 +537,16 @@ pub contract HandyItems: NonFungibleToken {
         } else {
             return QuerySetData(setID: setID)
         }
+    }
+
+    pub fun borrowSet(setID: UInt32): &Set {
+        pre {
+            HandyItems.sets[setID] != nil: "Cannot borrow Set: The Set doesn't exist"
+        }
+        
+        // Get a reference to the Set and return it
+        // use `&` to indicate the reference to the object and type
+        return &HandyItems.sets[setID] as &Set
     }
 
     // initializer

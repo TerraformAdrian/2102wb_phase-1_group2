@@ -117,8 +117,8 @@ export function Assets() {
 
   const handleCreateSeries = async (e) => {
 
-    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
-    await fetch("http://localhost:3003/v1/handy-items/create-series", {
+    await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
+    //await fetch("http://localhost:3003/v1/handy-items/create-series", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,8 +132,8 @@ export function Assets() {
 
   const handleCreateEdition = async (e) => {
 
-    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
-    await fetch("http://localhost:3003/v1/handy-items/create-edition", {
+    await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-edition", {
+    //await fetch("http://localhost:3003/v1/handy-items/create-edition", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

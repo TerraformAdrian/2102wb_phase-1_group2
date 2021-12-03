@@ -16,7 +16,9 @@ import {Page as MintNFT} from "./pages/mint/mintnft"
 import {Page as Collections} from "./pages/mint/collections"
 import {Page as Series} from "./pages/storefront/series"
 import {Page as Edition} from "./pages/storefront/edition"
+import {Page as InitAcc} from "./pages/storefront/initacc"
 import {WrappedPage as Purchase} from "./pages/storefront/purchase"
+import {WrappedPage as MyWallet} from './pages/storefront/mywallet'
 import {Page as NotFound} from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
@@ -64,6 +66,12 @@ ReactDOM.render(
           </Route>
           <Route exact path="/mintpanel/collections">
             <Collections />
+          </Route>
+          <Route exact path="/mywallet">
+            <MyWallet />
+          </Route>
+          <Route exact path="/init">
+            <InitAcc />
           </Route>
           <Route exact path="/series/:id">
             <Suspense fallback={null}>

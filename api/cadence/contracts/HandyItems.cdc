@@ -186,6 +186,8 @@ pub contract HandyItems: NonFungibleToken {
         //
         pub let id: UInt64
 
+        pub let setID: UInt32
+
         pub let serialID: UInt32
 
         // initializer
@@ -195,6 +197,7 @@ pub contract HandyItems: NonFungibleToken {
             HandyItems.totalSupply = HandyItems.totalSupply + UInt64(1)
 
             self.id = HandyItems.totalSupply
+            self.setID = setID
             self.serialID = serialID
         }
     }
@@ -253,7 +256,8 @@ pub contract HandyItems: NonFungibleToken {
 
             mainFUSDVault.deposit(from: <- payment)
 
-            let token <- create HandyItems.NFT(setID: self.id, serialID: 1)
+            let token <- create HandyItems.NFT(setID: self.id, 
+                serialID: UInt32(unsafeRandom() % UInt64(self.quantity) + 1))
 
             self.numberMinted = self.numberMinted + 1 as UInt32
 
@@ -499,7 +503,7 @@ pub contract HandyItems: NonFungibleToken {
         var i: UInt32 = 0
 
         while i < self.nextEditionID {
-            if self.editionList[i]!.id == series {
+            if self.editionList[i]!.series == series {
                 ret[i] = QueryEditionData(id: i)
             }
             i = i + UInt32(1)

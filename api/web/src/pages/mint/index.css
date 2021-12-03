@@ -31,7 +31,8 @@ li a {
   line-height: 200%;
 }
 
-label, input, select {
+label, input, select, textarea {
+  font-family: Roboto;
   font-size: 18pt;
 }
 
@@ -109,6 +110,10 @@ span {
   width: 80%;
 }
 
+.f3-mintnft-item textarea {
+  width: 80%;
+}
+
 #inQuantity, #inSerial, #inPrice {
   min-width: 100px;
   max-width: 100px;
@@ -168,4 +173,10 @@ span {
 
 .f3-collections-head select {
   width: 100%;
+}
+
+.f3-mywallet-container {
+  display: grid;
+  grid-template-columns: 30% auto;
+  align-items: center;
 }

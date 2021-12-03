@@ -73,8 +73,8 @@ export function MintNFT() {
   }
 
   const createSet = async (params) => {
-    //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-set", {
-      await fetch("http://localhost:3003/v1/handy-items/create-set", {
+      await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-set", {
+      //await fetch("http://localhost:3003/v1/handy-items/create-set", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -144,7 +144,9 @@ export function MintNFT() {
                 <label>Description: </label>
               </div>
               <div>
-                <input id="inDescription" name="inDescription" value={state.inDescription} onChange={handleChange} />
+                <textarea id="inDescription" name="inDescription" value={state.inDescription} onChange={handleChange}>
+                  &nbsp;
+                </textarea>
               </div>
             </div>
             <div className="f3-mintnft-item">

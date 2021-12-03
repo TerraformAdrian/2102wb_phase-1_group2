@@ -52,10 +52,10 @@ export function Page() {
         </div>
         <div>
           <img src={item.metadata["thumb_image"]} />
-          <p>Description: {item.metadata["description"]}</p>
+          <p>{item.metadata["description"]}</p>
           <p>Player: {item.metadata["name"]}</p>
           <p>Edition: {edition.name}</p>
-          <p>Available: {item.quantity}</p>
+          <p>Available: {item.quantity - item.numberMinted}</p>
           <p>Price: ${item.price}</p>
         </div>
         <button onClick={handlePurchase}>Purchase</button>

@@ -10,7 +10,7 @@ export function Item({meta}) {
 
   return (
     <div className="f3-store-collection-item">
-      <img src={meta.image} width="274px" height="172px" />
+      <img src={meta.image} />
       <a href={"/series/" + meta.id}>{meta.name}</a>
     </div>
   )

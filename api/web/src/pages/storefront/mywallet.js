@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { useAccountItem } from "../../hooks/use-account-item.hook";
 import { useAccountItems } from "../../hooks/use-account-items.hook";
 import { useCurrentUser } from "../../hooks/use-current-user.hook";
+import { Page as Navbar} from "../navbar"
 
 export function Item({addr, id}) {
   const item = useAccountItem(addr, id);
@@ -13,6 +14,7 @@ export function Item({addr, id}) {
         <div>
           <p>{item.set.metadata["name"]}</p>
           <img src={item.set.metadata["thumb_image"]} />
+          <video src={process.env.REACT_APP_API_URL + "/video/" + item.edition.name + ".mp4"} />
           <p>{item.edition.name} Edition</p>
           <p>#{item.item.serialID} / {item.set.quantity}</p>
         </div>
@@ -60,6 +62,7 @@ export function Page() {
 export function WrappedPage(props) {
   return (
     <Suspense fallback={null}>
+      <Navbar />
       <Page {...props} />
     </Suspense>
   )

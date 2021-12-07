@@ -11,6 +11,9 @@ import { SideBar } from "./sidebar"
 import axios from "axios";
 import fs from "fs";
 
+import Loader from "react-loader-spinner";
+import { toast } from "react-toast"
+
 import "./index.css"
 
 const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
@@ -33,59 +36,6 @@ export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
         });
 };
 
-export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) => {
-  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-  
-  console.log(imgData);
-
-  let data = new FormData();
-  data.append('file', imgData.obj.files[0]);
-  
-  const metadata = JSON.stringify({
-      name: imgData.name,
-      keyvalues: {
-        name: imgData.name
-      }
-  });
-  data.append('pinataMetadata', metadata);
-  
-  const pinataOptions = JSON.stringify({
-      cidVersion: 0,
-      customPinPolicy: {
-          regions: [
-              {
-                  id: 'FRA1',
-                  desiredReplicationCount: 1
-              },
-              {
-                  id: 'NYC1',
-                  desiredReplicationCount: 2
-              }
-          ]
-      }
-  });
-  data.append('pinataOptions', pinataOptions);
-
-  return axios
-      .post(url, data, {
-          maxBodyLength: 'Infinity',
-          headers: {
-              'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-              pinata_api_key: pinataApiKey,
-              pinata_secret_api_key: pinataSecretApiKey
-          }
-      })
-      .then(function (response) {
-          axios.post(process.env.REACT_APP_API_URL + "/v1/assets/upload", {
-            name: imgData.name,
-            path: "https://cloudflare-ipfs.com/ipfs/" + response.data.IpfsHash
-          })
-      })
-      .catch(function (error) {
-          //handle error here
-      });
-};
-
 export function Assets() {
   const [state, setState] = useState({
     inFile: "",
@@ -93,16 +43,29 @@ export function Assets() {
   })
   const [asList, setList] = useState([]);
   const [isDirty, setDirty] = useState(true);
+  const [listingStatus, setListingStatus] = useState(0);  // 0: Loading, 1: Success, 2: Error.
+  const [uploadStatus, setUploadStatus] = useState(0);  // 0: Success, 1: Uploading to IPFS, 2: Uploading to DB
+                                                        // 3: IPFS Failed, 4: DB Failed
   const inputFile = useRef(null);
 
   useEffect(async () => {
     if (!isDirty) return;
 
-    const assetList = await axios.get(process.env.REACT_APP_API_URL + "/v1/assets/list");
-    if (assetList.data.success != "true") return;
+    console.log("use effect hello");
 
-    setDirty(false);
-    setList(assetList.data.result);
+    try {
+      const assetList = await axios.get(process.env.REACT_APP_API_URL + "/v1/assets/list");
+      if (assetList.data.success != "true") {
+        setListingStatus(2);
+        return;
+      }
+
+      setDirty(false);
+      setListingStatus(1);
+      setList(assetList.data.result);
+    } catch(e) {
+      setListingStatus(2);
+    }
   }, [isDirty])
 
   const handleUpload = async (e) => {
@@ -112,14 +75,19 @@ export function Assets() {
 
     if (state.inFile.length == 0) return;
 
-    await pinFileToIPFS(
-      PINATA_API_KEY, 
-      PINATA_SECRET_API_KEY, {
-        name: state.inName,
-        path: state.inFile,
-        obj: inputFile.current
-      });
-    setDirty(true);
+    try {
+      await pinFileToIPFS(
+        PINATA_API_KEY, 
+        PINATA_SECRET_API_KEY, {
+          name: state.inName,
+          path: state.inFile,
+          obj: inputFile.current
+        });
+      
+      setDirty(true);
+    } catch (e) {
+
+    }
   }
 
   const handleChange = (e) => {
@@ -128,6 +96,72 @@ export function Assets() {
       [e.target.name]: e.target.value
     })
   }
+
+  const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) => {
+    const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+    
+    console.log(imgData);
+  
+    let data = new FormData();
+    data.append('file', imgData.obj.files[0]);
+    
+    const metadata = JSON.stringify({
+        name: imgData.name,
+        keyvalues: {
+          name: imgData.name
+        }
+    });
+    data.append('pinataMetadata', metadata);
+    
+    const pinataOptions = JSON.stringify({
+        cidVersion: 0,
+        customPinPolicy: {
+            regions: [
+                {
+                    id: 'FRA1',
+                    desiredReplicationCount: 1
+                },
+                {
+                    id: 'NYC1',
+                    desiredReplicationCount: 2
+                }
+            ]
+        }
+    });
+    data.append('pinataOptions', pinataOptions);
+  
+    setUploadStatus(1);
+
+    return axios
+        .post(url, data, {
+            maxBodyLength: 'Infinity',
+            headers: {
+                'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+                pinata_api_key: pinataApiKey,
+                pinata_secret_api_key: pinataSecretApiKey
+            }
+        })
+        .then(function (response) {
+            setUploadStatus(2);
+            return axios
+            .post(process.env.REACT_APP_API_URL + "/v1/assets/upload", {
+              name: imgData.name,
+              path: "https://cloudflare-ipfs.com/ipfs/" + response.data.IpfsHash
+            })
+            .then(function (response) {
+              setUploadStatus(0);
+              toast.success("Upload Succeed.");
+            })
+            .catch(function (error) {
+              setUploadStatus(4);
+              toast.error("Unexpected error occured while uploading.");
+            })
+        })
+        .catch(function (error) {
+            setUploadStatus(3);
+            toast.error("Unexpected error occured while uploading.");
+        });
+  };
 
   return (
     <div>
@@ -150,7 +184,13 @@ export function Assets() {
             <input type="file" id="inFile" name="inFile" value={state.inFile} onChange={handleChange} ref={inputFile}/>
           </div>
           <div>
-            <button id="" onClick={handleUpload}>UPLOAD</button>
+            <button id="" onClick={handleUpload} disabled={uploadStatus == 1 || uploadStatus == 2}>
+              {
+                (uploadStatus == 1 || uploadStatus == 2) &&
+                <Loader type="Puff" color="#00BFFF" height={20} width={20} className="f3-inline" />
+              }
+              UPLOAD
+            </button>
           </div>
         </div>
       </div>
@@ -158,26 +198,29 @@ export function Assets() {
       <div style={{paddingLeft: "20px"}}>
         <div>
           <h3>Current Assets</h3>
+          { listingStatus == 0 && <Loader type="Oval" color="#1f1f1f" height={80} width={80} className="f3-center" /> }
           {
-            asList.map(item => (
-              <div className="f3-current-asset">
-                <div>
-                  <img 
-                    src={item.img_url}
-                    width="78px"
-                    height="49px"
-                  />
-                </div>
-                <div>
+            listingStatus == 1 &&
+              asList.map(item => (
+                <div className="f3-current-asset">
                   <div>
-                    <span>{item.name}</span>
+                    <img src={item.img_url} />
                   </div>
                   <div>
-                    <a href={item.img_url} target="_blank">{item.img_url}</a>
+                    <div>
+                      <span>{item.name}</span>
+                    </div>
+                    <div>
+                      <a href={item.img_url} target="_blank">{item.img_url}</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ))
+          }
+          {
+            listingStatus == 2 && (
+              <p className="f3-center">Unexpected error occured!</p>
+            )
           }
         </div>
       </div>

@@ -520,6 +520,18 @@ pub contract HandyItems: NonFungibleToken {
         }
     }
 
+    pub fun getAllSets(): {UInt32: QuerySetEditionData} {
+        var ret: {UInt32: QuerySetEditionData} = {}
+        var i: UInt32 = 0
+
+        while i < self.nextSetID {
+            ret[i] = QuerySetEditionData(id: i)
+            i = i + UInt32(1)
+        }
+
+        return ret
+    }
+
     // 
     pub fun getSets(series: UInt32): {UInt32: QuerySetEditionData} {
         var ret: {UInt32: QuerySetEditionData} = {}

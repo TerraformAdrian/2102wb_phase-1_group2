@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import {RecoilRoot} from "recoil"
 import reportWebVitals from './reportWebVitals'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import { ToastContainer, toast } from 'react-toast'
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import './index.css';
 
 import {Page as Root} from "./pages/root.page"
@@ -17,6 +19,7 @@ import {Page as Collections} from "./pages/mint/collections"
 import {Page as Series} from "./pages/storefront/series"
 import {Page as Edition} from "./pages/storefront/edition"
 import {Page as InitAcc} from "./pages/storefront/initacc"
+import {Page as Navbar} from "./pages/navbar"
 import {WrappedPage as Purchase} from "./pages/storefront/purchase"
 import {WrappedPage as MyWallet} from './pages/storefront/mywallet'
 import {Page as NotFound} from "./pages/not-found.page"
@@ -58,6 +61,9 @@ ReactDOM.render(
           <Route exact path="/market">
             <Market />
           </Route>
+          <Route exact path="/mintpanel">
+            <Collections />
+          </Route>
           <Route exact path="/mintpanel/assets">
             <Assets />
           </Route>
@@ -81,6 +87,7 @@ ReactDOM.render(
           <Route path="/editions/:id" children={<Purchase />} />
           <Route exact path="/">
             <Suspense fallback={null}>
+              <Navbar />
               <Series />
             </Suspense>
           </Route>
@@ -89,6 +96,7 @@ ReactDOM.render(
           </Route>
         </Switch>
       </Router>
+      <ToastContainer position="top-right" delay="5000" />
     </RecoilRoot>
   </React.StrictMode>
   ,

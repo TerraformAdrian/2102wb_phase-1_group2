@@ -6,6 +6,8 @@ import {useAccountItems} from "../../hooks/use-account-items.hook"
 import { useIpfsItems } from "../../hooks/use-ipfs-items.hook"
 import { useEditionList } from "../../hooks/use-edition-list.hook"
 import { useSeriesList } from "../../hooks/use-series-list.hook"
+import { useSetAllList } from "../../hooks/use-set-all.hook"
+import { useSetItem } from "../../hooks/use-set-item.hook"
 import {Suspense, useState} from "react"
 import {Redirect, useHistory} from "react-router-dom"
 import AccountItemsCluster from '../../comps/account-items'
@@ -13,11 +15,34 @@ import AccountItemsCluster from '../../comps/account-items'
 import { SideBar } from "./sidebar"
 import axios from "axios";
 
+export function Item({meta}) {
+  const item = useSetItem(meta["id"]);
+
+  console.log(meta["id"]);
+  console.log(item);
+
+  return (
+    <div className="f3-store-series-item">
+      <img src={meta.image} /> <br />
+      <a href={"/editions/" + meta.id}>{meta.name} Edition</a>
+    </div>
+  )
+
+}
+
+export function WrappedItem(props) {
+  return (
+    <Suspense fallback={null}>
+      <Item {...props} />
+    </Suspense>
+  )
+}
+
 export function MintNFT() {
   const [state, setState] = useState({
     inName: "",
     inAsset: "",
-    inQuantity: "0",
+    inQuantity: "0",  
     inSerial: "yes",
     inSeries: "",
     inPrice: "",
@@ -26,6 +51,7 @@ export function MintNFT() {
   const items = useIpfsItems();
   const { series } = useSeriesList();
   const { editions } = useEditionList(state.inSeries);
+  const { sets } = useSetAllList();
 
   const handleChange = (e) => {
     setState({
@@ -98,6 +124,16 @@ export function MintNFT() {
     
     for (const prop in series) {
       res.push(<option key={prop} value={prop}>{series[prop].name}</option>)
+    }
+
+    return res;
+  }
+
+  const setList = () => {
+    var res = [];
+    
+    for (const prop in sets) {
+      res.push(<WrappedItem key={prop} meta={sets[prop]} />)
     }
 
     return res;
@@ -240,7 +276,8 @@ export function MintNFT() {
       <div className="hline" />
         <div style={{paddingLeft: "20px"}}>
           <div>
-            <h3>Current Series</h3>
+            <h3>Current NFTs</h3>
+            { setList() }
           </div>
         </div>
     </div>

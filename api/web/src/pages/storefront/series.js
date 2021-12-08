@@ -26,7 +26,7 @@ export function WrappedItem(props) {
 
 export function Page() {
 
-  const { series } = useSeriesList();
+  const { series } = useSeriesList(true);
 
   const getList = () => {
     var res = [];

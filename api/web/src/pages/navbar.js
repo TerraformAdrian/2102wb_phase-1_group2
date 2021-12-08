@@ -38,7 +38,7 @@ export function Page() {
               <div>
                 {
                   init.isInitialized == true ? (
-                    <span className="f3-nav-addr">{user.addr}</span>
+                    <span className="f3-nav-addr">Account Connected:&nbsp; {user.addr}</span>
                   ): (
                     <a href="#" onClick={handleInitializeWallet}>Initialize Wallet</a>
                   )

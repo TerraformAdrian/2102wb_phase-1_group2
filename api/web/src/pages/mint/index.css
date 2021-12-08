@@ -146,17 +146,20 @@ span {
 }
 
 .f3-store-container > .f3-store-series-item {
-  width: 274px;
   margin: 10px;
 }
 
 .f3-store-collection-item {
   text-align: center;
+  padding: 10px;
 }
 
 .f3-store-collection-item img {
   display: block;
   margin: auto;
+  width: 200px;
+  height: 250px;
+  object-fit: contain;
 }
 
 .f3-collections-head {
@@ -203,8 +206,18 @@ span {
 
 .f3-mywallet-container {
   display: grid;
-  grid-template-columns: 30% auto;
+  grid-template-columns: max-content auto;
   align-items: center;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  grid-column-gap: 20px;
+}
+
+.f3-mywallet-container img {
+  width: 120px;
+  object-fit: contain;
 }
 
 .navbar ul {

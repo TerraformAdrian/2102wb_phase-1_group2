@@ -19,8 +19,8 @@ const CODE = fcl.cdc`
     prepare(account: AuthAccount) {
       self.set = HandyItems.borrowSet(setID: setID)
       
-      // let price: UFix64 = self.set.price
-      let price: UFix64 = 3.0
+      let price: UFix64 = self.set.price
+      // let price: UFix64 = 3.0
 
       let mainFUSDVault = account.borrow<&FUSD.Vault>(from: /storage/fusdVault)
         ?? panic("Cannot borrow FUSD vault from account storage")

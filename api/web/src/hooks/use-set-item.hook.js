@@ -6,6 +6,12 @@ import { getSetItem } from "../flow/sc.get-set-item";
 export function useSetItem(id) {
   const [item, setItem] = useState({});
 
+  async function reload() {
+    const set = await getSetItem(id)
+
+    setItem(set);
+  }
+
   useEffect(async () => {
     const set = await getSetItem(id)
 
@@ -18,6 +24,7 @@ export function useSetItem(id) {
   }, []);
 
   return {
-    item: item
+    item: item,
+    reload: reload
   }
 }

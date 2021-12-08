@@ -10,14 +10,28 @@ export function Item({addr, id}) {
   console.log(item);
 
   return (
-      item.item && 
-        <div>
-          <p>{item.set.metadata["name"]}</p>
-          <img src={item.set.metadata["thumb_image"]} />
-          <video src={process.env.REACT_APP_API_URL + "/video/" + item.edition.name + ".mp4"} />
-          <p>{item.edition.name} Edition</p>
-          <p>#{item.item.serialID} / {item.set.quantity}</p>
+      item.item ? (
+        <div className="f3-mywallet-container">
+          <div className="f3-center">
+            <div>{item.set.metadata["name"]}</div>
+            <img src={item.set.metadata["thumb_image"]} />
+            <div>{item.edition.name} Edition</div>
+            <div>#{item.item.serialID} / {item.set.quantity}</div>
+          </div>
+          <div>
+            {/*src={process.env.REACT_APP_API_URL + "/video/" + item.edition.name + ".mp4"}*/}
+            {/*"http://nft.ikonicc.ca" + "/video/" + item.edition.name + ".mp4"*/}
+            <video
+              width="auto"
+              height="150px"
+              src={process.env.REACT_APP_API_URL + "/video/" + item.edition.name + ".mp4"}
+              controls="controls"
+            />
+          </div>
         </div>
+      ) : (
+        <div></div>
+      )
   )
 }
 
@@ -41,19 +55,9 @@ export function Page() {
         <div>
           <h2 className="f3-store-h2">My Wallet NFTs</h2>
         </div>
-        <div className="f3-mywallet-container">
-          <div>
-            {
-              ids.map(item => (
-                <Item addr={user.addr} id={item} />
-              ))
-            }
-          </div>
+        <div>
+          { ids.map(item => <Item addr={user.addr} id={item} />) }
         </div>
-
-        { !loggedIn &&
-          <button onClick={handleLogin}>Log In</button>
-        }
       </div>
     </div>
   )

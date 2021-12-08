@@ -81,10 +81,13 @@ ReactDOM.render(
           </Route>
           <Route exact path="/series/:id">
             <Suspense fallback={null}>
+              <Navbar />
               <Edition />
             </Suspense>
           </Route>
-          <Route path="/editions/:id" children={<Purchase />} />
+          <Route path="/editions/:id">
+            <Purchase />
+          </Route>
           <Route exact path="/">
             <Suspense fallback={null}>
               <Navbar />

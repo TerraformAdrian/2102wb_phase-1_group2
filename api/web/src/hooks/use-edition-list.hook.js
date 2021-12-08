@@ -3,11 +3,12 @@ import axios from "axios";
 
 import { getEditionList } from "../flow/sc.get-edition-list";
 
-export function useEditionList(series) {
+export function useEditionList(series, bReload) {
   const [items, setItems] = useState({});
 
   useEffect(async () => {
-    if (series == "") {
+    if (series === "") {
+      console.log("Empty");
       setItems({});
       return;
     }

@@ -5,7 +5,7 @@ import {tx} from "./util/tx"
 
 const CODE = cdc`
   import FungibleToken from 0xFungibleToken
-  import FlowToken from 0xFlowToken
+  import FUSD from 0xFUSD
   import NonFungibleToken from 0xNonFungibleToken
   import HandyItems from 0xHandyItems
   import NFTStorefront from 0xNFTStorefront
@@ -16,13 +16,13 @@ const CODE = cdc`
       .check()
   }
 
-  pub fun hasFLOW(_ address: Address): Bool {
+  pub fun hasFUSD(_ address: Address): Bool {
     let receiver = getAccount(address)
-      .getCapability<&FlowToken.Vault{FungibleToken.Receiver}>(/public/flowReceiver)
+      .getCapability<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver)
       .check()
 
     let balance = getAccount(address)
-      .getCapability<&FlowToken.Vault{FungibleToken.Balance}>(/public/flowBalance)
+      .getCapability<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance)
       .check()
 
     return receiver && balance
@@ -36,6 +36,15 @@ const CODE = cdc`
 
   transaction {
     prepare(acct: AuthAccount) {
+      if !hasFUSD(acct.address) {
+        if acct.borrow<&FUSD.Vault>(from: /storage/fusdVault) == nil {
+          acct.save(<-FUSD.createEmptyVault(), to: /storage/fusdVault)
+        }
+        acct.unlink(/public/fusdReceiver)
+        acct.unlink(/public/fusdBalance)
+        acct.link<&FUSD.Vault{FungibleToken.Receiver}>(/public/fusdReceiver, target: /storage/fusdVault)
+        acct.link<&FUSD.Vault{FungibleToken.Balance}>(/public/fusdBalance, target: /storage/fusdVault)
+      }
 
       if !hasItems(acct.address) {
         if acct.borrow<&HandyItems.Collection>(from: HandyItems.CollectionStoragePath) == nil {

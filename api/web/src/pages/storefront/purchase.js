@@ -6,6 +6,7 @@ import { useSeriesItem } from "../../hooks/use-series-item.hook";
 import { useEditionItem } from "../../hooks/use-edition-item.hook";
 import { purchaseHandyItem } from "../../flow/tx.purchase-handy-item";
 import { useCurrentUser } from "../../hooks/use-current-user.hook";
+import { Page as Navbar } from "../navbar"
 
 export function Page() {
   let { id } = useParams();
@@ -41,6 +42,8 @@ export function Page() {
   }
 
   return (Object.keys(item).length != 0) ? (
+    <div>
+      <Navbar />
     <div className="f3-store-padding">
       <div>
         <h1 style={{margin: "10px 0px"}}>NFT Storefront</h1>
@@ -64,8 +67,9 @@ export function Page() {
         }
       </div>
     </div>
+    </div>
   ) : (
-    <div></div>
+    <div><Navbar /></div>
   )
 }
 

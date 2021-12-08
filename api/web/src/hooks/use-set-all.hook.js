@@ -8,6 +8,7 @@ export function useSetAllList() {
   // const [items, setItems] = useState({});
 
   useEffect(async () => {
+    return;
     const sets = await getSetAllList()
 
     console.log(sets);

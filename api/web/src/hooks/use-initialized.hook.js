@@ -39,17 +39,15 @@ export const $computedInit = selectorFamily({
     address =>
     async ({get}) => {
       const all = get($init(address))
-      return all.HandyItems || all.HandyItemsMarket
+      return all.FUSD && all.HandyItems && all.HandyItemsMarket
     },
 })
 
-export function useInitialized(addr) {
-  const [address, setAddr] = useRecoilState($address(addr))
+export function useInitialized(address) {
+  // const [address, setAddr] = useRecoilState($address(addr))
   const [init, setInit] = useRecoilState($init(address))
   const isInitialized = useRecoilValue($computedInit(address))
   const [status, setStatus] = useRecoilState($status(address))
-
-  console.log(address)
 
   function recheck() {
     isAccountInitialized(address).then(setInit)
@@ -81,8 +79,8 @@ export function useInitialized(addr) {
     async isSpecificInitialized(address) {
       const all = await isAccountInitialized(address)
       console.log(all)
-      setAddr(address)
-      return all.HandyItems || all.HandyItemsMarket
+      // setAddr(address)
+      return all.FUSD && all.HandyItems && all.HandyItemsMarket
     }
   }
 }

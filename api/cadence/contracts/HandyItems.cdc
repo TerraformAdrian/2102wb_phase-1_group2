@@ -244,7 +244,7 @@ pub contract HandyItems: NonFungibleToken {
             pre {
                 self.numberMinted < self.quantity: "no nft left"
                 // payment.isInstance(self.details.salePaymentVaultType): "payment vault is not requested fungible token"
-                // payment.balance == self.price: "payment vault does not contain requested price"
+                payment.balance == self.price: "payment vault does not contain requested price"
             }
 
 			// deposit it in the recipient's account using their reference
@@ -520,12 +520,12 @@ pub contract HandyItems: NonFungibleToken {
         }
     }
 
-    pub fun getAllSets(): {UInt32: QuerySetEditionData} {
-        var ret: {UInt32: QuerySetEditionData} = {}
+    pub fun getAllSets(): {UInt32: QuerySetData} {
+        var ret: {UInt32: QuerySetData} = {}
         var i: UInt32 = 0
 
         while i < self.nextSetID {
-            ret[i] = QuerySetEditionData(id: i)
+            ret[i] = QuerySetData(setID: i)
             i = i + UInt32(1)
         }
 

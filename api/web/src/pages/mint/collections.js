@@ -13,7 +13,11 @@ import { SideBar } from "./sidebar"
 import axios from "axios";
 import fs from "fs";
 
+import Loader from "react-loader-spinner";
+import { toast } from "react-toast"
+
 import "./index.css"
+import { useEditionList } from "../../hooks/use-edition-list.hook"
 
 const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
 const PINATA_SECRET_API_KEY = "609ec3e0c1641f4b41c0c6370eed55e108cea9f9396b9e5a1d123061de07b99b";
@@ -88,6 +92,48 @@ export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) =
       });
 };
 
+function Item({meta}) {
+  return (
+    <div className="f3-collections-body-item f3-center">
+      <img src={meta.image} width="100px" />
+      {meta.name}
+    </div>
+  )
+}
+
+export function SeriesCluster({meta, reload}) {
+  console.log(typeof meta.id);
+  const { editions } = useEditionList(meta.id, reload);
+
+  const getEditionList = () => {
+    var res = [];
+
+    for (const prop in editions) {
+      res.push(
+        <Item meta={editions[prop]} />
+      )
+    }
+
+    return res;
+  }
+
+  return (
+    <div className="f3-collections-body">
+      <div>
+        <div className="f3-center" style={{paddingRight: "20px"}}>
+          { meta.name }
+          <img src={meta.image} width="100px" height="auto" />
+        </div>
+      </div>
+      <div>
+        Editions&nbsp;
+      </div>
+      <div>
+        { getEditionList() }
+      </div>
+    </div>
+  )
+}
 
 export function Assets() {
   const [state, setState] = useState({
@@ -96,7 +142,9 @@ export function Assets() {
   })
   const [asList, setList] = useState([]);
   const [isDirty, setDirty] = useState(true);
-  const { series } = useSeriesList();
+  const [upSeriesStatus, setSeriesStatus] = useState(0);  // 0: Success, 1: Creating, 2: Error
+  const [upEditionStatus, setEditionStatus] = useState(0);
+  const { series } = useSeriesList(isDirty);
 
   useEffect(async () => {
     if (!isDirty) return;
@@ -108,6 +156,11 @@ export function Assets() {
     setList(assetList.data.result);
   }, [isDirty])
 
+  useEffect(() => {
+    console.log("3. Clear Dirty");
+    setDirty(false);
+  }, [isDirty])
+
   const handleChange = (e) => {
     setState({
       ...state, 
@@ -117,33 +170,52 @@ export function Assets() {
 
   const handleCreateSeries = async (e) => {
 
-    await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
-    //await fetch("http://localhost:3003/v1/handy-items/create-series", {
+    try {
+      setSeriesStatus(1);
+      //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
+      await fetch("http://localhost:3003/v1/handy-items/create-series", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: state.inSeriesName,
+            image: asList[state.inSeriesImg].img_url
+          }),
+        })
+      setSeriesStatus(0);
+      setDirty(true);
+
+      toast.success("Series created successfully!");
+    } catch (e) {
+      setSeriesStatus(2);
+      toast.error("Unexpected error occured while creating series!");
+    }
+  }
+
+  const handleCreateEdition = async (e) => {
+
+    try {
+      setEditionStatus(1);
+      //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-edition", {
+      await fetch("http://localhost:3003/v1/handy-items/create-edition", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: state.inSeriesName,
-          image: asList[state.inSeriesImg].img_url
+          name: state.inEditionName,
+          series: state.inEditionSeries,
+          image: asList[state.inEditionImg].img_url
         }),
       })
-  }
-
-  const handleCreateEdition = async (e) => {
-
-    await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-edition", {
-    //await fetch("http://localhost:3003/v1/handy-items/create-edition", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: state.inEditionName,
-        series: state.inEditionSeries,
-        image: asList[state.inEditionImg].img_url
-      }),
-    })
+      setEditionStatus(0);
+      setDirty(true);
+      toast.success("Edition created successfully!");
+    } catch (e) {
+      setEditionStatus(2);
+      toast.error("Unexpected error occured while creating edition!");
+    }
   }
 
   const getSeriesList = () => {
@@ -156,14 +228,15 @@ export function Assets() {
     return res;
   }
 
-  const getSeriesListFor = () => {
+  const getCurrentSeries = () => {
     var res = [];
 
+    console.log(series);
+
     for (const prop in series) {
+      console.log(series[prop]);
       res.push(
-        <div>
-          <img src={series[prop].image} />
-        </div>
+        <SeriesCluster meta={series[prop]} reload={isDirty} />
       )
     }
 
@@ -198,7 +271,13 @@ export function Assets() {
             </select>
           </div>
           <div>
-            <button class="f3-collections-btn" id="" onClick={handleCreateSeries}>CREATE SERIES</button>
+            <button class="f3-collections-btn" id="" onClick={handleCreateSeries} disabled={upSeriesStatus === 1}>
+              { 
+                upSeriesStatus == 1 && 
+                  <Loader type="Puff" color="#00BFFF" height={20} width={20} className="f3-inline" />
+              }
+              CREATE SERIES
+            </button>
           </div>
           <div className="f3-collections-hline">
           </div>
@@ -233,7 +312,13 @@ export function Assets() {
             </select>
           </div>
           <div>
-            <button class="f3-collections-btn" id="" onClick={handleCreateEdition}>CREATE EDITION</button>
+            <button class="f3-collections-btn" id="" onClick={handleCreateEdition} disabled={upEditionStatus === 1}>
+              { 
+                upEditionStatus == 1 && 
+                  <Loader type="Puff" color="#00BFFF" height={20} width={20} className="f3-inline" />
+              }
+              CREATE EDITION
+            </button>
           </div>
         </div>
       </div>
@@ -241,6 +326,9 @@ export function Assets() {
       <div style={{paddingLeft: "20px"}}>
         <div>
           <h3>Current Series</h3>
+        </div>
+        <div>
+          { getCurrentSeries() }
         </div>
       </div>
     </div>

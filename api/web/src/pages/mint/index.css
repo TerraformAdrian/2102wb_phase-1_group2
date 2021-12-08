@@ -181,6 +181,26 @@ span {
   width: 100%;
 }
 
+.f3-collections-body {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #e5e5e5;
+}
+
+.f3-collections-body img {
+  display: block;
+  object-fit: contain;
+  border: 1px solid black;
+}
+
+.f3-collections-body-item {
+  float: left;
+  padding-right: 20px;
+}
+
 .f3-mywallet-container {
   display: grid;
   grid-template-columns: 30% auto;

@@ -51,8 +51,6 @@ export function Assets() {
   useEffect(async () => {
     if (!isDirty) return;
 
-    console.log("use effect hello");
-
     try {
       const assetList = await axios.get(process.env.REACT_APP_API_URL + "/v1/assets/list");
       if (assetList.data.success != "true") {

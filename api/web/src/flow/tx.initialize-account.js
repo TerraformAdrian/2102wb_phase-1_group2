@@ -53,14 +53,14 @@ const CODE = cdc`
         acct.unlink(HandyItems.CollectionPublicPath)
         acct.link<&HandyItems.Collection{NonFungibleToken.CollectionPublic, HandyItems.HandyItemsCollectionPublic}>(HandyItems.CollectionPublicPath, target: HandyItems.CollectionStoragePath)
       }
-
+/*
       if !hasStorefront(acct.address) {
         if acct.borrow<&NFTStorefront.Storefront>(from: NFTStorefront.StorefrontStoragePath) == nil {
           acct.save(<-NFTStorefront.createStorefront(), to: NFTStorefront.StorefrontStoragePath)
         }
         acct.unlink(NFTStorefront.StorefrontPublicPath)
         acct.link<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath, target: NFTStorefront.StorefrontStoragePath)
-      }
+      } */
     }
   }
 `

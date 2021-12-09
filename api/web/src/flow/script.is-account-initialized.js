@@ -36,7 +36,7 @@ const CODE = cdc`
     let ret: {String: Bool} = {}
     ret["FUSD"] = hasFUSD(address)
     ret["HandyItems"] = hasItems(address)
-    ret["HandyItemsMarket"] = hasStorefront(address)
+    ret["HandyItemsMarket"] = true
     return ret
   }
 `

@@ -38,6 +38,40 @@ export function WrappedItem(props) {
   )
 }
 
+export function SeriesCluster({meta, reload}) {
+  console.log(typeof meta.id);
+  const { editions } = useEditionList(meta.id, reload);
+
+  const getEditionList = () => {
+    var res = [];
+
+    for (const prop in editions) {
+      res.push(
+        <Item meta={editions[prop]} />
+      )
+    }
+
+    return res;
+  }
+
+  return (
+    <div className="f3-collections-body">
+      <div>
+        <div className="f3-center" style={{paddingRight: "20px"}}>
+          { meta.name }
+          <img src={meta.image} width="100px" height="auto" />
+        </div>
+      </div>
+      <div>
+        Editions&nbsp;
+      </div>
+      <div>
+        { getEditionList() }
+      </div>
+    </div>
+  )
+}
+
 export function MintNFT() {
   const [state, setState] = useState({
     inName: "",

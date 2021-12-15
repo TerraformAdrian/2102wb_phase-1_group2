@@ -15,6 +15,59 @@ import AccountItemsCluster from '../../comps/account-items'
 import { SideBar } from "./sidebar"
 import axios from "axios";
 
+export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) => {
+  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+  
+  console.log(imgData);
+
+  let data = new FormData();
+  data.append('file', imgData.obj.files[0]);
+  
+  const metadata = JSON.stringify({
+      name: imgData.name,
+      keyvalues: {
+        name: imgData.name
+      }
+  });
+  data.append('pinataMetadata', metadata);
+  
+  const pinataOptions = JSON.stringify({
+      cidVersion: 0,
+      customPinPolicy: {
+          regions: [
+              {
+                  id: 'FRA1',
+                  desiredReplicationCount: 1
+              },
+              {
+                  id: 'NYC1',
+                  desiredReplicationCount: 2
+              }
+          ]
+      }
+  });
+  data.append('pinataOptions', pinataOptions);
+
+  return axios
+      .post(url, data, {
+          maxBodyLength: 'Infinity',
+          headers: {
+              'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+              pinata_api_key: pinataApiKey,
+              pinata_secret_api_key: pinataSecretApiKey
+          }
+      })
+      .then(function (response) {
+          axios.post(process.env.REACT_APP_API_URL + "/v1/assets/upload", {
+            name: imgData.name,
+            path: "https://cloudflare-ipfs.com/ipfs/" + response.data.IpfsHash
+          })
+      })
+      .catch(function (error) {
+          //handle error here
+      });
+};
+
 export function Item({meta}) {
   const item = useSetItem(meta["id"]);
 

@@ -9,6 +9,21 @@ export function Item({addr, id}) {
 
   console.log(item);
 
+  const getVideoPath = (ename) => {
+    var path = "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/";
+    https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4
+    if(ename == "Gold")
+      path += "ZebNoland_Partx_Gold_Edition.mp4";
+    else if(ename == "Prism")
+      path += "ZebNoland_Part4_Prism_Edition.mp4";
+    else if(ename == "Orange")
+      path += "ZebNoland_Part3_Orange_Edition.mp4";
+    else if(ename == "Pink")
+      path += "ZebNoland_Part2_Pink_Edition.mp4";
+    else if(ename == "White")
+      path += "ZebNoland_Part1_White_Edition.mp4";
+  }
+
   return (
       item.item ? (
         <div className="f3-mywallet-container">
@@ -24,7 +39,7 @@ export function Item({addr, id}) {
             <video
               width="auto"
               height="150px"
-              src={process.env.REACT_APP_API_URL + "/video/" + item.edition.name + ".mp4"}
+              src={ getVideoPath(item.edition.name) }
               controls="controls"
             />
           </div>

@@ -136,7 +136,7 @@ export function MintNFT() {
     inEdition: "-1"
   })
   const items = useIpfsItems();
-  const { series } = useSeriesList();
+  const { series } = useSeriesList(true);
   const { editions } = useEditionList(state.inSeries);
   const { sets } = useSetAllList();
 
@@ -186,8 +186,8 @@ export function MintNFT() {
   }
 
   const createSet = async (params) => {
-      await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-set", {
-      //await fetch("http://localhost:3003/v1/handy-items/create-set", {
+      //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-set", {
+      await fetch("http://localhost:3003/v1/handy-items/create-set", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

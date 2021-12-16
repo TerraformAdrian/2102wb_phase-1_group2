@@ -220,6 +220,8 @@ pub contract HandyItems: NonFungibleToken {
 
         pub var numberMinted: UInt32
 
+        pub let leftIDs: {UInt32: UInt32}
+
         init(seriesID: UInt32, editionID: UInt32, quantity: UInt32, 
                     price: UFix64, isSerial: Bool, metadata: {String: String}) {
             self.id = HandyItems.nextSetID
@@ -237,6 +239,15 @@ pub contract HandyItems: NonFungibleToken {
             self.metadata = metadata
 
             self.numberMinted = 0
+
+            self.leftIDs = {}
+/*
+            var i: UInt32 = 1
+
+            while i <= quantity {
+                self.leftIDs[i] = i
+                i = i + UInt32(1)
+            } */
         }
 
         pub fun mintNFT(payment: @FungibleToken.Vault): @NonFungibleToken.NFT {
@@ -256,8 +267,15 @@ pub contract HandyItems: NonFungibleToken {
 
             mainFUSDVault.deposit(from: <- payment)
 
+            let numberLeft = self.quantity - self.numberMinted
+
+            let randID = UInt32(unsafeRandom() % UInt64(numberLeft) + 1)
+
             let token <- create HandyItems.NFT(setID: self.id, 
+//                serialID: self.leftIDs[randID]!)
                 serialID: UInt32(unsafeRandom() % UInt64(self.quantity) + 1))
+
+//            self.leftIDs[randID] = self.leftIDs[numberLeft]!
 
             self.numberMinted = self.numberMinted + 1 as UInt32
 

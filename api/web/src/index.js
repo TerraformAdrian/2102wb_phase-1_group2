@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toast'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import './index.css';
 
+import {Page as MintNFT2} from "./pages/mint/mintnft2"
+
 import {Page as Root} from "./pages/root.page"
 import {Page as Publish} from "./pages/publish.page"
 import {Page as List} from "./pages/list.page"
@@ -50,6 +52,11 @@ ReactDOM.render(
     <RecoilRoot>
       <Router>
         <Switch>
+
+          <Route exact path="/mintpanel/mintnft2">
+            <MintNFT2 />
+          </Route>
+
           <Route exact path="/publish">
             <Suspense fallback={null}>
               <Publish />

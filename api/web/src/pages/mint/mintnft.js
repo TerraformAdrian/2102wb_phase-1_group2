@@ -12,7 +12,7 @@ import {Suspense, useState} from "react"
 import {Redirect, useHistory} from "react-router-dom"
 import AccountItemsCluster from '../../comps/account-items'
 
-import { SideBar } from "./sidebar"
+import { SideBar } from "./side_bar"
 import axios from "axios";
 
 export const pinFileToIPFS = async (pinataApiKey, pinataSecretApiKey, imgData) => {

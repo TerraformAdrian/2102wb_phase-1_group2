@@ -9,7 +9,7 @@ import AccountItemsCluster from '../../comps/account-items'
 
 import { useSeriesList } from "../../hooks/use-series-list.hook"
 
-import { SideBar } from "./sidebar"
+import { SideBar } from "./side_bar"
 import axios from "axios";
 import fs from "fs";
 

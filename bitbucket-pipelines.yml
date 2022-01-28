@@ -13,17 +13,17 @@ pipelines:
         name: "Zip Only"
         script:
           - echo "Zip Only"
-          - zip -r 2102WB-phase1_group2.zip *          
+          - zip -r demo-nft-sportscast-net.zip *          
         
         # Define an artifact to pass the zip file to the next step
         artifacts: 
-          - 2102WB-phase1_group2.zip
+          - demo-nft-sportscast-net.zip
     - step:
-        name: "Deploy to 2102WB - Ikonicc (Group 2)"
+        name: "Deploy to: demo-nft-sportscast-net"
         # Track staging environments builds using deployments.
         deployment: staging
         script:
-        - echo "Deploy to 2102WB - Ikonicc (Group 2)"
+        - echo "Deploy to: demo-nft-sportscast-net"
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
           variables:
             DEBUG: 'TRUE'
@@ -33,7 +33,7 @@ pipelines:
             AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
             AWS_DEFAULT_REGION: 'us-west-2'
             APPLICATION_NAME: '2102WB - Ikonicc'
-            ENVIRONMENT_NAME: '2102wbikonicc-group-2'
-            ZIP_FILE: '2102WB-phase1_group2.zip'
+            ENVIRONMENT_NAME: 'demo-nft-sportscast-net2'
+            ZIP_FILE: 'demo-nft-sportscast-net.zip'
             S3_BUCKET: 'elasticbeanstalk-us-west-2-870923424064'
             VERSION_LABEL: 'Accounts(Group 2): ${BITBUCKET_COMMIT:0:8}'

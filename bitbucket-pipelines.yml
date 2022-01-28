@@ -29,8 +29,8 @@ pipelines:
             DEBUG: 'TRUE'
             # upload-only is upload to S3 only, but dont deploy to beanstalk
             # COMMAND: 'upload-only'
-            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            AWS_ACCESS_KEY_ID: $AWS_KEYID__demo_nft
+            AWS_SECRET_ACCESS_KEY: $AWS_KEYSECRET__demo_nft
             AWS_DEFAULT_REGION: 'us-west-2'
             APPLICATION_NAME: '2102WB - Ikonicc'
             ENVIRONMENT_NAME: 'demo-nft-sportscast-net2'

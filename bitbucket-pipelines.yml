@@ -19,11 +19,11 @@ pipelines:
         artifacts: 
           - demo-nft-sportscast-net.zip
     - step:
-        name: "Deploy to: demo-nft-sportscast-net"
+        name: "Deploy to demo-nft-sportscast-net"
         # Track staging environments builds using deployments.
         deployment: production
         script:
-        - echo "Deploy to: demo-nft-sportscast-net"
+        - echo "Deploy to demo-nft-sportscast-net"
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
           variables:
             DEBUG: 'TRUE'

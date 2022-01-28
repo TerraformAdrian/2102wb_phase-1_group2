@@ -35,5 +35,5 @@ pipelines:
             APPLICATION_NAME: 'demo.nft.sportscast.net'
             ENVIRONMENT_NAME: 'Demonftsportscastnet-env'
             ZIP_FILE: 'demo-nft-sportscast-net.zip'
-            S3_BUCKET: 'elasticbeanstalk-us-west-2-870923424064'
+            S3_BUCKET: 'elasticbeanstalk-us-west-2-461953590500'
             VERSION_LABEL: 'demo-nft-sportscast-net: ${BITBUCKET_COMMIT:0:8}'

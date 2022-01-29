@@ -13,7 +13,7 @@ pipelines:
         name: "Zip Only"
         script:
           - echo "Zip Only"
-          - zip -r demo-nft-sportscast-net.zip *          
+          - zip -r demo-nft-sportscast-net.zip * .[^.]*       
         
         # Define an artifact to pass the zip file to the next step
         artifacts: 

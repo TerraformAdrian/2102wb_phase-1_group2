@@ -27,11 +27,27 @@ export function Page() {
     logOut();
   }
 
+  const handleDeposit = (e) => {
+    e.preventDefault();
+    // live :"https://buy.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
+    // test :"https://buy-sandbox.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
+    window.open("https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd", "deposit", "width=600,height=400");
+    // window.open("https://buy-sandbox.moonpay.com?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM", "deposit", "width=600,height=400");
+  }
+
+  let btnDeposit;
+  if (loggedIn && init.isInitialized) {
+    btnDeposit = <li><a href="/deposit"  onClick={handleDeposit}>Deposit</a></li>;
+  }
+
   return (
     <div class="navbar">
       <ul>
         <li><a href="/">NFT Storefront</a></li>
         <li><a href="/mywallet">My Wallet</a></li>
+        {btnDeposit}
+        {/* <li><a href="/deposit"  onClick={handleDeposit}>Deposit</a></li> */}
+        
         <li style={{float: "right"}}>
           { 
             loggedIn ? (

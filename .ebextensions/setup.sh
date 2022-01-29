@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # change path
 cd /var/app/current/
 

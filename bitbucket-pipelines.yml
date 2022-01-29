@@ -36,4 +36,4 @@ pipelines:
             ENVIRONMENT_NAME: 'Demonftsportscastnet-env'
             ZIP_FILE: 'demo-nft-sportscast-net.zip'
             S3_BUCKET: 'elasticbeanstalk-us-west-2-461953590500'
-            VERSION_LABEL: '${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_(YYYY-mm-dd_HHMMSS)'
+            VERSION_LABEL: ${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_$(date +"%Y-%m-d_%H%M%S")

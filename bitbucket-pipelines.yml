@@ -15,6 +15,7 @@ pipelines:
           - echo "Zip Only"
           - ls -la
           - chmod u+x ./.ebextensions/setup.sh
+          - ls -la
           - zip -r demo-nft-sportscast-net.zip * .[^.]*       
         
         # Define an artifact to pass the zip file to the next step

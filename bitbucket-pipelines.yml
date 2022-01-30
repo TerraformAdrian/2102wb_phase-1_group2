@@ -14,7 +14,9 @@ pipelines:
         script:
           - echo "Zip Only"
           - ls -la
+          - rm -rf bitbucket-pipelines.yml
           - chmod u+x ./build-run.sh
+          - ls -la
           - zip -r demo-nft-sportscast-net.zip * .[^.]*       
         
         # Define an artifact to pass the zip file to the next step

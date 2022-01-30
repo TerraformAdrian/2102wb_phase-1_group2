@@ -15,7 +15,7 @@ pipelines:
           - echo "Zip Only"
           - ls -la
           - ls -la ./.ebextensions
-          - sudo chmod u+x ./.ebextensions/setup.sh
+          - chmod u+x ./.ebextensions/setup.sh
           - ls -la ./.ebextensions
           - zip -r demo-nft-sportscast-net.zip * .[^.]*       
         

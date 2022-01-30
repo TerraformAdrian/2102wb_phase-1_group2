@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# where am i
+pwd
+
 # sudo ls >> /home/ec2-user/dir.txt
 sudo date >> /home/ec2-user/date.txt
 

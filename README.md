@@ -1,5 +1,13 @@
 # README =)
 
+## Langauges & Plugins
+* node.js
+* React
+
+## Strucutre
+* /api : this runs the backend portion - javascript
+* /web : This is the front end - node, express, onflow, 
+
 ## Branches
 * / feature 
     * / uiux-design : used to implement front end design and graphics

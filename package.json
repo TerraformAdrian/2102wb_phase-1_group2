@@ -18,5 +18,8 @@
   "description": "",
   "dependencies": {
     "lerna": "^4.0.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.1.2"
   }
 }

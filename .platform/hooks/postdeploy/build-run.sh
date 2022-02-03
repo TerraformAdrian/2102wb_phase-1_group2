@@ -11,8 +11,8 @@ cd /var/app/current/
 
 # NPM make build
 wall /var/app/current/npm-run: building
-npm run build
+sudo -u webapp npm run build
 wall /var/app/current/npm-run: starting
-npm run start
+sudo -u webapp npm run start
 wall /var/app/current/npm-run: running....
 #npm run dev

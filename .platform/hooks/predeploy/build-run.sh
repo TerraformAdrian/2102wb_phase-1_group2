@@ -13,6 +13,6 @@ cd /var/app/current/
 wall /var/app/current/npm-run: building
 sudo -u webapp npm run build
 wall /var/app/current/npm-run: starting
-sudo -u webapp npm run start
-wall /var/app/current/npm-run: running....
+#sudo -u webapp npm run start
+#wall /var/app/current/npm-run: running....
 #npm run dev

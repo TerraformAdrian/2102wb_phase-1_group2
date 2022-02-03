@@ -1,1 +1,1 @@
-web: npm start
+web: /opt/elasticbeanstalk/node-install/node-v14.18.2-linux-x64/bin/pm2 start /var/app/current/api/dist/index.js

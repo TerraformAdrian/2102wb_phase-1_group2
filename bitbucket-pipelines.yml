@@ -26,7 +26,7 @@ pipelines:
     - step:
         name: "Deploy to demo-nft-sportscast-net"
         # Track staging environments builds using deployments.
-        deployment: production
+        deployment: staging
         script:
         - echo "Deploy to demo-nft-sportscast-net"
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
@@ -37,8 +37,8 @@ pipelines:
             AWS_ACCESS_KEY_ID: $AWS_KEYID__demo_nft
             AWS_SECRET_ACCESS_KEY: $AWS_KEYSECRET__demo_nft
             AWS_DEFAULT_REGION: 'us-west-2'
-            APPLICATION_NAME: 'demo.nft.sportscast.net'
-            ENVIRONMENT_NAME: 'Demonftsportscastnet-env'
+            APPLICATION_NAME: 'NFT Storefront'
+            ENVIRONMENT_NAME: 'demo-nft-sportscast-net'
             ZIP_FILE: 'demo-nft-sportscast-net.zip'
-            S3_BUCKET: 'elasticbeanstalk-us-west-2-461953590500'
+            S3_BUCKET: 'demo-nft-sportscast-net'
             VERSION_LABEL: '_$(date +%Y-%m-%d_%H:%M:%S)_${BITBUCKET_COMMIT:0:8}'

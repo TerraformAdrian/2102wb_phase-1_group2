@@ -8,7 +8,8 @@
 image: atlassian/default-image:2
 
 pipelines:
-  default:
+  branches:  # Pipelines that run automatically on a commit to a branch can also be triggered manually
+   release/demo-nft-sportscast-net:
     - step:
         name: "Zip Only"
         script:

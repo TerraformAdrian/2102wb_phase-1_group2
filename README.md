@@ -1,46 +1,48 @@
-<div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+# README
+
+## Langauges & Plugins
+* node.js
+* React
+
+## Strucutre
+* /api : this runs the backend portion - javascript
+* /web : This is the front end - node, express, onflow, 
+
+## Branches
+* / feature 
+    * / uiux-design : used to implement front end design and graphics
+    * / moonpay : used to implment Moonpay on front end
+    * / FlowSmartContracts : Lets keep the smart contracts just in this branch
+* / development : all approved pulls will come in here
+* / production : only approved development will be merged in here
+    * / demo-nft-sportscast-net : this is only for the demo.nft.sportscast.net
+
+## Install
+npm run start
+ To run this project you should build via lerna (monorepo tool)
+
+Run this commands:
+
+```
+npm install
+npm run build
+npm run start
+```
+
+if npm alias does not work for any problem on package.json
+
+```
+npm install
+npx lerna exec npm install && npx lerna exec npm run build
+node api/dist/index.js
+```
+
+## EXECUTE
+http://url.com:3003
+eg: http://demonftsportscastnet-env.eba-hvmrz7hu.us-west-2.elasticbeanstalk.com:3003
 
 
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-
-  <h3 align="center">Moonpay integration</h3>
-
-  <p align="center">
-    Method of Moonpay integration
-  </p>
-</div>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
+## MoonPay
 
 1. create moonpay account with business email by following link
 		https://share.hsforms.com/1NFGIjk8zSy2wcL78W9izSA8mobe
@@ -75,7 +77,7 @@
 		You can use test visa card for test. VISA Card No : 4242 4242 4242 4242
 
 4. purchasing test the NFT item
-	1) open https://nft.ikonicc.ca/
+	1) open https://demo.nft.sportscast.net
 	2) connect wallet
 	3) select your preferred item, and touch "purchase" button
 
@@ -85,37 +87,3 @@
 		https://share.hsforms.com/1NC0xe6fgTEehfASP2dArRA8mobe
 	After your account has been enabled, your live widget URL will appear here in the following format:
 		https://buy.moonpay.com?apiKey={{yourLiveApiKey}}
-
-	
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-=======
-# README =)
-
-## Langauges & Plugins
-* node.js
-* React
-
-## Strucutre
-* /api : this runs the backend portion - javascript
-* /web : This is the front end - node, express, onflow, 
-
-## Branches
-* / feature 
-    * / uiux-design : used to implement front end design and graphics
-    * / moonpay : used to implment Moonpay on front end
-        * / purchase crypto
-        * / purchase NFT direct
-    * / FlowSmartContracts : Lets keep the smart contracts just in this branch
-    * / development : all approved pulls will come in here
-    * / production : only approved development will be merged in here
-    * / demo-nft-sportscast-net : this is only for the demo.nft.sportscast.net
-
-## Install
-npm run build
-npm run start
-
-## EXECUTE
-http://url.com:3003
-eg: http://demonftsportscastnet-env.eba-hvmrz7hu.us-west-2.elasticbeanstalk.com:3003

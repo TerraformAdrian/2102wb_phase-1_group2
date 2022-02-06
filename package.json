@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node api2/dist/index.js",
+    "start": "pm2 start api/dist/index.js",
     "build": "npx lerna exec npm install && npx lerna exec npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +18,8 @@
   "description": "",
   "dependencies": {
     "lerna": "^4.0.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.1.2"
   }
 }

@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import {RecoilRoot} from "recoil"
+import { RecoilRoot } from "recoil"
 import reportWebVitals from './reportWebVitals'
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-import {Page as Root} from "./pages/root.page"
-import {Page as Publish} from "./pages/publish.page"
-import {Page as List} from "./pages/list.page"
-import {Page as NotFound} from "./pages/not-found.page"
+import { Page as Root } from "./pages/root.page"
+import { Page as Publish } from "./pages/publish.page"
+import { Page as List } from "./pages/list.page"
+import { Page as NotFound } from "./pages/not-found.page"
 
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"

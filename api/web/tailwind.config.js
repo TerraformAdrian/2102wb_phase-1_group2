@@ -1,0 +1,95 @@
+module.exports = {
+    mode: "jit",
+    purge: {
+        content: ["./src/**/**/*.js", "./src/**/*.js"],
+    },
+    theme: {
+        colors: {
+            primary: "#01021F",
+            secondary: "#ECEBFE",
+            transparent: "transparent",
+            current: "currentColor",
+            white: "#ffffff",
+            blue: "#383BFE",
+            "blue-dark": "#0E0F32",
+            "blue-light": "#82839D",
+            purple: "#902CF2",
+            "purply-blue": "#2A263F",
+        },
+
+        fontFamily: {
+            sans: ["Roboto", "sans-serif"],
+            oswald: ["Oswald", "sans-serif"],
+        },
+        borderRadius: {
+            none: "0",
+            8: "0.5rem",
+            "2.25rem": "2.25rem",
+            16: "1rem",
+            19.5: "1.219rem",
+            full: "9999px",
+        },
+        extend: {
+            fontSize: {
+                "base ": "1rem",
+                "18px": "1.125rem",
+                "20px": "1.25rem",
+                "30px": "1.875rem",
+                "24px": "24px",
+                "40px": "2.5rem",
+                "48px": "3rem",
+                "64px": "4rem",
+            },
+            width: {
+                14: "14px",
+                39: "2.438rem",
+                "95px": "95px",
+                458: "28.625rem",
+                550: "34.375rem",
+                558: "34.875rem",
+                585: "36.563rem",
+                1232: "77rem",
+            },
+            height: {
+                39: "2.438rem",
+            },
+            lineHeight: {
+                14: "0.875rem",
+                17: "1.063",
+                19: "1.188rem",
+                29: "1.813rem",
+                24: "1.5rem",
+                36: "2.25rem",
+                48: "3rem",
+                58: "3.625rem",
+                64: "4rem",
+            },
+            margin: {
+                "26px": "26px",
+                "42px": "2.625rem",
+                "77px": "4.813rem",
+            },
+            spacing: {
+                "30px": "30px",
+                "108px": "108px",
+            },
+            padding: {
+                "22.5px": "1.406rem",
+                "50px": "3.125rem",
+                "60px": "3.75rem",
+                "68px": "4.25rem",
+                "99px": "6.188rem",
+                "100px": "6.25rem",
+                "138px": "8.625rem",
+                "140px": "8.75rem",
+            },
+            minHeight: {
+                48: "48px",
+            },
+            backgroundImage: {
+                "hero-pattern": "url('/src/assets/images/hero_banner_cs.png')",
+            },
+        },
+    },
+    plugins: [require("@tailwindcss/typography")],
+};

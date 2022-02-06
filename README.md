@@ -77,7 +77,7 @@ eg: http://demonftsportscastnet-env.eba-hvmrz7hu.us-west-2.elasticbeanstalk.com:
 		You can use test visa card for test. VISA Card No : 4242 4242 4242 4242
 
 4. purchasing test the NFT item
-	1) open https://nft.ikonicc.ca/
+	1) open https://demo.nft.sportscast.net
 	2) connect wallet
 	3) select your preferred item, and touch "purchase" button
 

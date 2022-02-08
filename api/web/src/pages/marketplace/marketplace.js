@@ -20,10 +20,7 @@ export function MarketPlace() {
                             coming soon
                         </p>
                         <p className="text-base not-italic font-normal text-center sc_series_cs_content text-secondary leading-24 md:px-26px">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Accumsan tempor mi et nunc non dolor nulla.
-                            Amet porttitor sed aliquam, dictum magna pretium.
-                            Amet ut ut justo scelerisque aliquam, velit.
+                            Sell, Trade, & Buy SportsCast NFTs from  other collectors here.
                         </p>
                     </div>
                 </div>

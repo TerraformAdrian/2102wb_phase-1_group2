@@ -103,13 +103,13 @@ export function Page() {
                             </div>
                             <ul className="mlist navbar-list flex flex-col justify-center lg:h-[auto] lg:block ">
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 mb-[24px] lg:mb-[0px] font-normal">
-                                    <Link
+                                    <a
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        hre="/"
+                                        href="http://www.sportscast.net/"
                                     >
                                         Home
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <a
@@ -135,9 +135,10 @@ export function Page() {
                                         className="block nav-link text-secondary"
                                         to="#"
                                     >
-                                        DEPOSIT
+                                        Deposit
                                     </Link>
                                 </li>
+                                {loggedIn && 
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <Link
                                         onClick={closeMenu}
@@ -146,7 +147,8 @@ export function Page() {
                                     >
                                         My Wallet
                                     </Link>
-                                </li>
+                                    </li>
+                                }
 
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <Link
@@ -158,13 +160,13 @@ export function Page() {
                                     </Link>
                                 </li>
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
+                                    <a
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="/marketplace"
+                                        href="https://sportscast.net/contact/"
                                     >
                                         Contact
-                                    </Link>
+                                    </a>
                                 </li>
 
                                 {loggedIn ? (

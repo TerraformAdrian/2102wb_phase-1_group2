@@ -14,7 +14,7 @@ export function MarketPlace() {
                     </span>
                     <div className="max-w-full m-auto space-y-4 sc_series_coming_info md:space-y-5 lg:space-y-22px w-585">
                         <h2 className="not-italic font-semibold text-center text-white uppercase cs_title text-24px leading-29 md:text-30px md:leading-36 lg:text-48px lg:leading-58 xl:text-64px xl:leading-60 font-oswald">
-                            Market Place
+                            Marketplace
                         </h2>
                         <p className="coming_soon text-bg-822FF4 text-20px leading-24 md:text-28px md:leading-34 lg:text-4xl uppercase not-italic font-semibold text-center lg:leading-37 text-[#822FF4]">
                             coming soon

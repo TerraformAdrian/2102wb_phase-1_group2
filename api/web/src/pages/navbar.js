@@ -52,7 +52,7 @@ export function Page() {
     return (
         <header className="">
             {init.isInitialized == true ? (
-               <div className="top-bar bg-purple py-2 text-center">     
+               <div className="py-2 text-center top-bar bg-purple">     
                     <span className="text-white f3-nav-addr text-[12px] leading-[14px] block">
                         Account Connected:&nbsp;{" "}
                         {user.addr}
@@ -62,7 +62,7 @@ export function Page() {
                     <span></span>
                 )}
 
-            <nav className="navbar py-6">
+            <nav className="py-6 navbar">
                 <div className="container max-w-full px-4 m-auto w-1232">
                     <div className="flex items-center justify-between header-info">
                         <div className="site-logo">
@@ -106,25 +106,25 @@ export function Page() {
                                     <Link
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="http://sportscast.net/"
+                                        hre="/"
                                     >
                                         Home
                                     </Link>
                                 </li>
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
+                                    <a
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="https://sportscast.net/about/"
+                                        href="https://sportscast.net/about/"
                                     >
                                         About
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <Link
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="http://demo.nft.sportscast.net/"
+                                        to="/"
                                     >
                                         Storefront
                                     </Link>
@@ -142,7 +142,7 @@ export function Page() {
                                     <Link
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="http://demo.nft.sportscast.net/mywallet"
+                                        to="/mywallet"
                                     >
                                         My Wallet
                                     </Link>
@@ -152,7 +152,7 @@ export function Page() {
                                     <Link
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="http://demo.nft.sportscast.net/marketplace"
+                                        to="/marketplace"
                                     >
                                         Marketplace
                                     </Link>
@@ -161,7 +161,7 @@ export function Page() {
                                     <Link
                                         onClick={closeMenu}
                                         className="block nav-link text-secondary"
-                                        to="http://demo.nft.sportscast.net/marketplace"
+                                        to="/marketplace"
                                     >
                                         Contact
                                     </Link>

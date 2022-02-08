@@ -9,8 +9,9 @@ import { SeriesEntryHeader } from "../series/entryHeader";
 import { Link } from "react-router-dom";
 
 export function Item({ meta }) {
+    console.log(meta);
     return (
-        <div className="group transition-all px-3 py-6 border border-solid sa_series_nft_card_wrapper md:p-6 border-purply-blue rounded-16 hover:border-purple hover:bg-blue-dark">
+        <div className="px-3 py-6 transition-all border border-solid group sa_series_nft_card_wrapper md:p-6 border-purply-blue rounded-16 hover:border-purple hover:bg-blue-dark">
             <div className="sa_series_nft_card_details">
                 <img src={meta.image} alt={meta.name} className="w-full" />
             </div>
@@ -22,7 +23,7 @@ export function Item({ meta }) {
                     </p>
                     <Link
                         to={"/editions/" + meta.id}
-                        className="block mb-4 text-lg not-italic font-medium text-white capitalize  sa_nft_title leading-24 font-oswald"
+                        className="block mb-4 text-lg not-italic font-medium text-white capitalize sa_nft_title leading-24 font-oswald"
                     >
                         {meta.seriesname} - {meta.name} Edition
                         <span className="float-right">$50</span>
@@ -62,7 +63,7 @@ export function Page() {
 
         for (const prop in sets) {
             var data = sets[prop];
-
+ 
             var parameter = { ...data, seriesname: series.name };
 
             res.push(<WrappedItem meta={parameter} />);

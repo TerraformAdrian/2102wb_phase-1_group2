@@ -60,6 +60,7 @@ pipelines:
         - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
           variables:
             DEBUG: 'TRUE'
+            COMMAND: 'upload-only'
             AWS_ACCESS_KEY_ID: $AWS_KEYID__demo_nft
             AWS_SECRET_ACCESS_KEY: $AWS_KEYSECRET__demo_nft
             AWS_DEFAULT_REGION: 'us-west-2'

@@ -27,8 +27,8 @@ export function Footer() {
                                 </Link>
                             </li>
                             <li className="text-base not-italic font-normal copyright-text text-secondary leading-24">
-                                Copyright © 2022 SportsCast. Please view
-                                Disclaimers.
+                                Copyright © 2022 SportsCast. Please view { ' '}
+                                <a href="https://sportscast.net/disclaimer/">Disclaimers</a>.
                             </li>
                         </ul>
                     </div>
@@ -36,61 +36,61 @@ export function Footer() {
                         <div className="mr-4 footer-menu-info">
                             <ul className="footer-menu space-x-9">
                                 <li className="inline-block text-base not-italic font-normal capitalize leading-19">
-                                    <Link to="#" className="text-secondary">
+                                    <a href="https://sportscast.net/" className="text-secondary">
                                         Home
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="inline-block text-base not-italic font-normal capitalize leading-19">
-                                    <Link to="#" className="text-secondary">
+                                    <a href="https://sportscast.net/about/" className="text-secondary">
                                         about
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="inline-block text-base not-italic font-normal capitalize leading-19">
-                                    <Link to="#" className="text-secondary">
+                                    <a href="https://sportscast.net/contact/" className="text-secondary">
                                         Contact
-                                    </Link>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                         <div className="mt-5 social_media_info md:mt-42px md:float-right">
                             <ul className="flex space-x-4 social_list">
                                 <li className="inline-block facebook ">
-                                    <Link
+                                    <a
                                         target="_blank"
-                                        to="#"
-                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25  flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
+                                        href="https://www.facebook.com/SportsCastPros"
+                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25  flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
                                         <span class="block">
                                             {" "}
                                             <Facebook />
                                         </span>
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="inline-block linkedin">
-                                    <Link
+                                    <a
                                         target="_blank"
-                                        to="#"
-                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
+                                        href="https://www.linkedin.com/company/sportscast"
+                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
                                         <span class="block">
                                             {" "}
                                             <Linkedin />
                                         </span>
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li className="inline-block twitter">
-                                    <Link
+                                    <a
                                         target="_blank"
-                                        to="#"
-                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
+                                        href="https://twitter.com/SportsCastPros"
+                                        className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
                                         <span class="block ">
                                             {" "}
                                             <Twitter />
                                         </span>
-                                    </Link>
+                                    </a>
                                 </li>
-                                <li className="inline-block instagram">
+                                {/* <li className="inline-block instagram">
                                     <Link
                                         target="_blank"
                                         to="#"
@@ -101,7 +101,7 @@ export function Footer() {
                                             <Instagram />
                                         </span>
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

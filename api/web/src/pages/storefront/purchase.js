@@ -103,17 +103,17 @@ export function Page() {
                                 </p>
 
                                 <div className="mb-4 cart_player_info md:mb-6 lg:mb-8">
-                                    <ul className="md:flex space-y-2.5 md:space-y-0 md:space-x-2.5">
-                                        <li className="player_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
+                                    <ul className="md:flex space-y-2.5 md:space-y-0 md:space-x-2.5 justify-start">
+                                        {/* <li className="player_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase player text-blue-light leading-17">
                                                 Player
                                             </span>
-                                            <img src={Player} alt="Player" />
+                                            <div className="w-8 h-8 bg-center bg-[length:150%] rounded-full"  style={{backgroundImage:`url(${item.metadata["thumb_image"]})`}}  ></div>
                                             <h6 className="text-base not-italic font-medium capitalize player_name text-secondary leading-19 font-oswald">
                                                 {item.metadata["name"]}
                                             </h6>
-                                        </li>
-                                        <li className="edition_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
+                                        </li> */}
+                                        <li className="edition_info flex space-x-2 items-center sm:justify-start sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase text-blue-light leading-17">
                                                 Edition
                                             </span>
@@ -122,7 +122,7 @@ export function Page() {
                                                 {edition.name}
                                             </h6>
                                         </li>
-                                        <li className="amount_info flex items-center space-x-3 sm:justify-center sm:w-[179px] w-full">
+                                        <li className="amount_info flex items-center space-x-3 sm:justify-start sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase text-blue-light leading-17">
                                                 Available
                                             </span>

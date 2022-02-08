@@ -6,11 +6,11 @@ import terraform from "../../assets/images/terraform.svg";
 export function Partners() {
     return (
         <div className="sc_series_logo_section py-50px md:py-66px border-t-[1px] border-b-[1px] border-solid border-white border-opacity-25">
-            <div className="container w-1232 m-auto px-4 max-w-full">
+            <div className="container max-w-full px-4 m-auto w-1232">
                 <div className="sc_series_logo_wrapper lg:flex lg:justify-between lg:items-center ">
                     <div className="sc_series_logo_title w-187px ">
-                        <h3 className="text-white text-2xl leading-29 font-semibold font-oswald capitalize not-italic">
-                            In partnership with
+                        <h3 className="text-2xl not-italic font-semibold text-white capitalize leading-29 font-oswald">
+                            In Partnership With IKONICC
                         </h3>
                     </div>
                     <div className="flex flex-wrap sc_series_logo mt-5 lg:mt-0 space-x-[30px] md:space-x-[30px] lg:space-x-[60px]">

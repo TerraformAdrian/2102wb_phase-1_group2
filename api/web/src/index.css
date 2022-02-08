@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.15 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.18 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -623,6 +623,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[32px\] {
   height: 32px;
 }
+.h-8 {
+  height: 2rem;
+}
 .h-full {
   height: 100%;
 }
@@ -665,14 +668,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[100\%\] {
   width: 100%;
 }
-.w-\[117px\] {
-  width: 117px;
-}
 .w-auto {
   width: auto;
 }
 .w-\[538px\] {
   width: 538px;
+}
+.w-8 {
+  width: 2rem;
 }
 .max-w-full {
   max-width: 100%;
@@ -683,10 +686,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .translate-y-\[-50\%\] {
   --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.translate-y-\[-1px\] {
-  --tw-translate-y: -1px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .translate-y-\[-2px\] {
@@ -710,6 +709,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .items-center {
   align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
 }
 .justify-center {
   justify-content: center;
@@ -857,6 +859,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .bg-cover {
   background-size: cover;
+}
+.bg-contain {
+  background-size: contain;
+}
+.bg-\[length\:110\%\] {
+  background-size: 110%;
+}
+.bg-\[length\:130\%\] {
+  background-size: 130%;
+}
+.bg-\[length\:150\%\] {
+  background-size: 150%;
 }
 .bg-fixed {
   background-attachment: fixed;
@@ -1219,6 +1233,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 179px;
   }
 
+  .sm\:justify-start {
+    justify-content: flex-start;
+  }
+
   .sm\:justify-center {
     justify-content: center;
   }
@@ -1565,11 +1583,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     background-color: transparent;
   }
 
-  .lg\:px-11 {
-    padding-left: 2.75rem;
-    padding-right: 2.75rem;
-  }
-
   .lg\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -1629,11 +1642,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .xl\:gap-30px {
     gap: 30px;
-  }
-
-  .xl\:px-11 {
-    padding-left: 2.75rem;
-    padding-right: 2.75rem;
   }
 
   .xl\:px-3 {

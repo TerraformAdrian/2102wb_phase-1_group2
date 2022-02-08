@@ -29,7 +29,16 @@ export function Page() {
         setActive(!isActive);
         logOut();
     };
+    
+ const handleDeposit = (e) => {
+   e.preventDefault();
+   // live :"https://buy.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
+   // test :"https://buy-sandbox.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
+   window.open("https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd", "deposit", "width=800,height=600")
+   // window.open("https://buy-sandbox.moonpay.com?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM", "deposit", "width=600,height=400");
+ }
 
+ 
     const handleSlideToggle = (e) => {
         e.preventDefault();
     };
@@ -129,15 +138,16 @@ export function Page() {
                                         Storefront
                                     </Link>
                                 </li>
+                                {loggedIn && init.isInitialized && 
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <Link
-                                        onClick={closeMenu}
+                                        onClick={handleDeposit}
                                         className="block nav-link text-secondary"
                                         to="#"
                                     >
                                         Deposit
                                     </Link>
-                                </li>
+                                </li>}
                                 {loggedIn && 
                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                                     <Link

@@ -22,13 +22,13 @@ export function Success() {
                                 pending
                             </span>
                         </div>
-                        <h2 className="mt-2 mb-3 not-italic font-semibold text-center text-white capitalize sa_series_title font-oswald text-24px md:mb-6 md:text-30px lg:text-48px leading-29 md:leading-36 lg:leading-58 ">
+                        <h2 className="mt-2 mb-6 not-italic font-semibold text-center text-white capitalize sa_series_title font-oswald text-24px md:mb-6 md:text-30px lg:text-48px leading-29 md:leading-36 lg:leading-58 ">
                             We're processing your order.
                         </h2>
-                        <p className="px-0 mb-6 text-base not-italic font-normal text-center sc_series_pur_content text-secondary leading-24 md:px-52px ">
+                        {/* <p className="px-0 mb-6 text-base not-italic font-normal text-center sc_series_pur_content text-secondary leading-24 md:px-52px ">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Accumsan tempor mi et nunc non dolor nulla.{" "}
-                        </p>
+                        </p> */}
                         <Link
                             to="#"
                             className="transection text-secondary text-base leading-[16px] font-semibold not-italic text-center underline uppercase block tracking-widest "

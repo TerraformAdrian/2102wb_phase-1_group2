@@ -60,6 +60,11 @@ export function Item({ addr, id }) {
                                 alt={item.edition.name}
                                 class="w-full"
                             />
+
+                            
+
+
+                
                             <div class="sa_pur_button mt-4 mb-5 lg:mb-0 lg:mt-6  grid grid-cols-2 gap-4 ">
                                 <Link
                                     to="#"
@@ -69,9 +74,11 @@ export function Item({ addr, id }) {
                                         Coming Soon
                                     </span>
                                     <span className="block group-hover:hidden">
-                                        Buy
+                                        Sell
                                     </span>
                                 </Link>
+
+                                
                                 <Link
                                     to="#"
                                     class="w-full sc_trade_button text-blue-light py-4 text-center inline-block px-3 xl:px-3 border border-solid border-blue-light rounded-2.25rem box-border text-sm leading-19 font-normal not-italic group whitespace-nowrap"

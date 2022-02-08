@@ -28,9 +28,9 @@ export function Item({ meta }) {
                         {meta.seriesname} - {meta.name} Edition
                         <span className="float-right">$50</span>
                     </Link>
-                    <p className="text-base not-italic font-normal sa_nft_text text-blue-light leading-24 min-h-48">
+                    {/* <p className="text-base not-italic font-normal sa_nft_text text-blue-light leading-24 min-h-48">
                         The early years.
-                    </p>
+                    </p> */}
                     <Link
                         to={"/editions/" + meta.id}
                         className="group-hover:bg-purple transition-all text-white text-sm leading-4 font-normal not-italic capitalize py-3.5 block border border-solid border-purple rounded-2.25rem text-center mt-6"

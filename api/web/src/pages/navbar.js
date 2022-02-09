@@ -101,25 +101,25 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="http://sportscast.net/"
+                    to="/"
                   >
                     Home
                   </Link>
                 </li>
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                  <Link
+                  <a
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="https://sportscast.net/about/"
+                    href="https://sportscast.net/about/"
                   >
                     About
-                  </Link>
+                  </a>
                 </li>
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="http://demo.nft.sportscast.net/"
+                    to="/"
                   >
                     Storefront
                   </Link>
@@ -137,7 +137,7 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="http://demo.nft.sportscast.net/mywallet"
+                    to="/mywallet"
                   >
                     My Wallet
                   </Link>
@@ -147,19 +147,19 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="http://demo.nft.sportscast.net/marketplace"
+                    to="/marketplace"
                   >
                     Marketplace
                   </Link>
                 </li>
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
-                  <Link
+                  <a
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="http://demo.nft.sportscast.net/marketplace"
+                    href="https://sportscast.net/contact/"
                   >
                     Contact
-                  </Link>
+                  </a>
                 </li>
 
                 {loggedIn ? (

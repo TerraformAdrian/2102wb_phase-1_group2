@@ -5,7 +5,7 @@ import Item from './market-item'
 export function MarketItemsCluster() {
   const {items} = useMarketItems("0x048ac6df55e9c6e6");
 
-  if (items.length == 0)
+  if (items.length === 0)
     return (
       <p>No items listed for sale</p>
     )

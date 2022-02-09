@@ -1,10 +1,10 @@
 
-import {IDLE} from "../global/constants"
-import {useCurrentUser} from "../hooks/use-current-user.hook"
-import {useAccountItems} from "../hooks/use-account-items.hook"
+import { IDLE } from "../global/constants"
+import { useCurrentUser } from "../hooks/use-current-user.hook"
+import { useAccountItems } from "../hooks/use-account-items.hook"
 import { useInitialized } from "../hooks/use-initialized.hook"
-import {Suspense, useState} from "react"
-import {Redirect, useHistory} from "react-router-dom"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
 
 import './publish.css'
 
@@ -12,7 +12,7 @@ export function Page() {
   const [state, setState] = useState({
     txtAddress: "",
     txtName: "",
-    txtImageURL: "", 
+    txtImageURL: "",
     txtColor: "",
     txtInfo: "",
     txtQuantity: ""
@@ -31,7 +31,7 @@ export function Page() {
 
   const handleChange = (e) => {
     setState({
-      ...state, 
+      ...state,
       [e.target.name]: e.target.value
     })
   }
@@ -44,7 +44,7 @@ export function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (state.txtAddress.length != 18) {
+    if (state.txtAddress.length !== 18) {
       alert("Enter Address Corretly!");
       return;
     }
@@ -55,15 +55,15 @@ export function Page() {
     }
 
     items.mint(
-      state.txtAddress, 
-      state.txtName, 
-      state.txtImageURL, 
-      state.txtColor, 
-      state.txtInfo, 
+      state.txtAddress,
+      state.txtName,
+      state.txtImageURL,
+      state.txtColor,
+      state.txtInfo,
       state.txtQuantity
-      )
+    )
 
-      console.log(items.ids.length);
+    console.log(items.ids.length);
   }
 
   const handleMarket = (e) => {
@@ -77,20 +77,20 @@ export function Page() {
       <h1>Publish a NFT</h1>
       <form>
         <div className="grid-container">
-          <label htmlFor="txtName">Name</label> 
+          <label htmlFor="txtName">Name</label>
           <input name="txtName" id="txtName" onChange={handleChange} />
-          <label htmlFor="txtAddress">Address</label> 
+          <label htmlFor="txtAddress">Address</label>
           <input name="txtAddress" id="txtAddress" onChange={handleChange} />
-          <label>Image URL</label> 
+          <label>Image URL</label>
           <input name="txtImageURL" id="txtImageURL" onChange={handleChange} />
-          <label>Color</label> 
+          <label>Color</label>
           <input name="txtColor" id="txtColor" onChange={handleChange} />
-          <label>Info</label> 
+          <label>Info</label>
           <input name="txtInfo" id="txtInfo" onChange={handleChange} />
-          {1 == 0 && <><label>Quantity</label> 
-          <input name="txtQuantity" id="txtQuantity" onChange={handleChange} />
+          {1 == 0 && <><label>Quantity</label>
+            <input name="txtQuantity" id="txtQuantity" onChange={handleChange} />
           </>}
-          <label>Series</label> 
+          <label>Series</label>
           <input name="txtSeries" id="txtSeries" onChange={handleChange} />
           <button disabled={user.addr !== state.txtAddress} onClick={handleInit}>
             Initialize

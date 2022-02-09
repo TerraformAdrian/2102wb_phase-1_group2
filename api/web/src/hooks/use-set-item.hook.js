@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import { getSetItem } from "../flow/sc.get-set-item";
 
 export function useSetItem(id) {
@@ -12,16 +10,19 @@ export function useSetItem(id) {
     setItem(set);
   }
 
-  useEffect(async () => {
-    const set = await getSetItem(id)
+  useEffect(() => {
+    async function fetchData() {
+      const set = await getSetItem(id)
 
-    console.log(set);
+      console.log(set);
 
-    for (const prop in set)
-      console.log(set[prop]);
+      for (const prop in set)
+        console.log(set[prop]);
 
-    setItem(set);
-  }, []);
+      setItem(set);
+    }
+    fetchData()
+  }, [id]);
 
   return {
     item: item,

@@ -1,15 +1,14 @@
-import { useState, Suspense } from "react";
-import {useCurrentUser} from "../hooks/use-current-user.hook"
-import {Redirect, useHistory} from "react-router-dom"
+import { Suspense } from "react";
+import { useCurrentUser } from "../hooks/use-current-user.hook"
+import { Redirect } from "react-router-dom"
 
 export function Item() {
   return (
     <div className="f3-store-collection-item">
-      <img src="zeb.png" width="127px" height="127px" />
+      <img alt="zeb.png" src="zeb.png" width="127px" height="127px" />
       <a href="/zeb-nolan">Zeb Nolan Interview</a>
     </div>
   )
-
 }
 
 export function WrappedItem(props) {
@@ -21,20 +20,14 @@ export function WrappedItem(props) {
 }
 
 export function Page() {
-  const [user, loggedIn, {signUp, logIn}] = useCurrentUser()
-  const history = useHistory();
+  const [loggedIn] = useCurrentUser()
 
   if (loggedIn) return <Redirect to={"/publish"} />
-
-  const handleMint = (e) => {
-    e.preventDefault();
-    history.push("/publish");
-  }
 
   return (
     <div className="f3-store-padding">
       <div>
-        <h1 style={{margin: "10px 0px"}}>NFT Storefront</h1>
+        <h1 style={{ margin: "10px 0px" }}>NFT Storefront</h1>
         <div className="f3-store-hline"></div>
       </div>
       <div className="f3-store-padding">

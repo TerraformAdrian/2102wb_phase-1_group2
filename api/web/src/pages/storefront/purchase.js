@@ -1,6 +1,5 @@
 import { Suspense, useState } from "react";
 import { useParams, useHistory } from "react-router";
-import { useAccountItem } from "../../hooks/use-account-item.hook";
 import { useSetItem } from "../../hooks/use-set-item.hook";
 import { useSeriesItem } from "../../hooks/use-series-item.hook";
 import { useEditionItem } from "../../hooks/use-edition-item.hook";
@@ -8,7 +7,6 @@ import { purchaseHandyItem } from "../../flow/tx.purchase-handy-item";
 import { useCurrentUser } from "../../hooks/use-current-user.hook";
 import { useInitialized } from "../../hooks/use-initialized.hook";
 import { Page as Navbar } from "../navbar";
-import { Link } from "react-router-dom";
 import Player from "../../assets/images/player.png";
 import Fileearmark from "../../assets/images/fileearmark.png";
 
@@ -21,13 +19,13 @@ export function Page() {
     let { id } = useParams();
     const { item, reload } = useSetItem(id);
 
-    const [user, loggedIn, { signUp, logIn }] = useCurrentUser();
+    const [user, loggedIn, { logIn }] = useCurrentUser();
 
     const { series } = useSeriesItem(
-        Object.keys(item).length != 0 ? item.seriesID : ""
+        Object.keys(item).length !== 0 ? item.seriesID : ""
     );
     const { edition } = useEditionItem(
-        Object.keys(item).length != 0 ? item.editionID : ""
+        Object.keys(item).length !== 0 ? item.editionID : ""
     );
     const init = useInitialized(user.addr);
     const [buyingState, setBuyingState] = useState(0); // 0: Normal, 1: Buying, 2: Error
@@ -75,7 +73,7 @@ export function Page() {
 
     var price = (Math.round(item.price * 100) / 100).toFixed(2);
 
-    return Object.keys(item).length != 0 ? (
+    return Object.keys(item).length !== 0 ? (
         <div>
             <Navbar />
             <div className="f3-store-padding">
@@ -103,17 +101,17 @@ export function Page() {
                                 </p>
 
                                 <div className="mb-4 cart_player_info md:mb-6 lg:mb-8">
-                                    <ul className="md:flex space-y-2.5 md:space-y-0 md:space-x-2.5">
-                                        <li className="player_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
+                                    <ul className="md:flex space-y-2.5 md:space-y-0 md:space-x-2.5 justify-start">
+                                        {/* <li className="player_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase player text-blue-light leading-17">
                                                 Player
                                             </span>
-                                            <img src={Player} alt="Player" />
+                                            <div className="w-8 h-8 bg-center bg-[length:150%] rounded-full"  style={{backgroundImage:`url(${item.metadata["thumb_image"]})`}}  ></div>
                                             <h6 className="text-base not-italic font-medium capitalize player_name text-secondary leading-19 font-oswald">
                                                 {item.metadata["name"]}
                                             </h6>
-                                        </li>
-                                        <li className="edition_info flex space-x-2 items-center sm:justify-center sm:w-[179px] w-full">
+                                        </li> */}
+                                        <li className="edition_info flex space-x-2 items-center sm:justify-start sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase text-blue-light leading-17">
                                                 Edition
                                             </span>
@@ -122,7 +120,7 @@ export function Page() {
                                                 {edition.name}
                                             </h6>
                                         </li>
-                                        <li className="amount_info flex items-center space-x-3 sm:justify-center sm:w-[179px] w-full">
+                                        <li className="amount_info flex items-center space-x-3 sm:justify-start sm:w-[179px] w-full">
                                             <span className="text-sm not-italic font-normal uppercase text-blue-light leading-17">
                                                 Available
                                             </span>
@@ -137,7 +135,7 @@ export function Page() {
 
                                 <div className="relative cart_button">
                                     <div className="single_cart_button ">
-                                        {loggedIn != true ? (
+                                        {loggedIn !== true ? (
                                             <button
                                                 type="button"
                                                 className="single_cart_button py-4 md:py-22.5px pr-7 pl-9 md:pl-99px bg-white rounded-2.25rem md:h-16 block md:inline-block lg:block text-center md:text-current w-full hover:bg-white  max-w-full text-purple text-base leading-19 font-semibold not-italic text-center"
@@ -148,14 +146,14 @@ export function Page() {
                                                 </span>
                                                 Connect Wallet
                                             </button>
-                                        ) : init.isInitialized == true ? (
+                                        ) : init.isInitialized === true ? (
                                             <button
                                                 type="button"
                                                 className="single_cart_button py-4 md:py-22.5px pr-7 pl-9 md:pl-99px bg-white rounded-2.25rem md:h-16 block md:inline-block lg:block text-center md:text-current w-full hover:bg-white  max-w-full text-purple text-base leading-19 font-semibold not-italic text-center"
                                                 onClick={handlePurchase}
-                                                disabled={buyingState == 1}
+                                                disabled={buyingState === 1}
                                             >
-                                                {buyingState == 1 && (
+                                                {buyingState === 1 && (
                                                     <Loader
                                                         type="Oval"
                                                         color="#902CF2"

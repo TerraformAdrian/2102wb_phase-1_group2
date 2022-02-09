@@ -12,8 +12,6 @@ import { ReactComponent as VideoIcon } from "../../assets/images/video_icon.svg"
 export function Item({ addr, id }) {
     const item = useAccountItem(addr, id);
 
-    console.log(item);
-
     const getVideoPath = (ename) => {
         var path = "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/";
         //s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4
@@ -23,6 +21,7 @@ export function Item({ addr, id }) {
             path += "ZebNoland_Part3_Orange_Edition.mp4";
         else if (ename == "Pink") path += "ZebNoland_Part2_Pink_Edition.mp4";
         else if (ename == "White") path += "ZebNoland_Part1_White_Edition.mp4";
+        return path
     };
 
     return item.item ? (
@@ -108,8 +107,6 @@ export function Item({ addr, id }) {
 export function Page() {
     const [user, loggedIn, { signUp, logIn }] = useCurrentUser();
     const { ids } = useAccountItems(user.addr);
-
-    console.log(ids);
 
     const handleLogin = (e) => {
         logIn();

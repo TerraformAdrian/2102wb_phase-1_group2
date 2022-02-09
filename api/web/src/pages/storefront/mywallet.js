@@ -51,7 +51,7 @@ export function Item({ addr, id }) {
                                     Owner Address :{" "}
                                 </span>
                                 <span class="uppercase">
-                                    0x79e97f4053c70da8
+                                    {item.item.owner}
                                 </span>
                             </p>
                             <img

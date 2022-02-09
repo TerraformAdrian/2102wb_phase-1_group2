@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
-import { getSetAllList } from "../flow/sc.get-set-all";
 
 export function useSetAllList() {
-  const [items, setItems] = useState({});
   // const [items, setItems] = useState({});
+  const items = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     return;
-    const sets = await getSetAllList()
+    // const sets = await getSetAllList()
 
-    console.log(sets);
+    // console.log(sets);
 
-    for (const prop in sets)
-      console.log(sets[prop]);
+    // for (const prop in sets)
+    //   console.log(sets[prop]);
 
-    setItems(sets);
+    // setItems(sets);
   }, []);
 
   return {

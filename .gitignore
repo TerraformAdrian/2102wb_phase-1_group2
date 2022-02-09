@@ -6,8 +6,9 @@
 # Node artifact files
 node_modules/
 dist/
+build/
 package-lock.json
-api/web/build/
+yarn.lock
 
 # Compiled Java class files
 *.class

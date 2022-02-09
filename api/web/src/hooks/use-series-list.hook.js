@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import { getSeriesList } from "../flow/sc.get-series-list";
 
 export function useSeriesList(isDirty) {
   const [items, setItems] = useState({});
   const [state, setState] = useState(true);
 
-  console.log("2. Use Series List");
-  console.log(isDirty);
+  useEffect(() => {
+    async function fetchData() {
+      if (state !== true && isDirty !== true)
+        return;
 
-  useEffect(async () => {
-    if (state != true && isDirty != true)
-      return;
+      const series = await getSeriesList();
 
-    const series = await getSeriesList();
-
-    console.log(series);
-
-    for (const prop in series)
-      console.log(series[prop]);
-
-    setState(false);
-    setItems(series);
+      setState(false);
+      setItems(series);
+    }
+    fetchData()
   }, [state, isDirty]);
 
   return {

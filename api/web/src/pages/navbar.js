@@ -9,7 +9,7 @@ import "../index.css";
 import "./mint/index.css";
 
 export function Page() {
-  const [user, loggedIn, { signUp, logIn, logOut }] = useCurrentUser();
+  const [user, loggedIn, { logIn, logOut }] = useCurrentUser();
 
   const init = useInitialized(user.addr);
 
@@ -31,22 +31,7 @@ export function Page() {
     logOut();
   };
 
-  const handleSlideToggle = (e) => {
-    e.preventDefault();
-  };
-  const handleDeposit = (e) => {
-    e.preventDefault();
-    // live :"https://buy.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
-    // test :"https://buy-sandbox.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
-    window.open("https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd", "deposit", "width=600,height=400");
-    // window.open("https://buy-sandbox.moonpay.com?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM", "deposit", "width=600,height=400");
-  }
-  
   const [isActive, setActive] = useState("false");
-
-  const handleToggle = () => {
-    setActive(!isActive);
-  };
 
   const closeMenu = () => {
     setActive(!isActive);
@@ -59,7 +44,7 @@ export function Page() {
 
   return (
     <header className="">
-      {init.isInitialized == true ? (
+      {init.isInitialized === true ? (
         <div className="top-bar bg-purple py-2 text-center">
           <span className="text-white f3-nav-addr text-[12px] leading-[14px] block">
             Account Connected:&nbsp;{" "}
@@ -113,7 +98,7 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="/"
+                    to="http://sportscast.net/"
                   >
                     Home
                   </Link>
@@ -122,7 +107,7 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="#"
+                    to="https://sportscast.net/about/"
                   >
                     About
                   </Link>
@@ -131,34 +116,53 @@ export function Page() {
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="/mywallet"
+                    to="http://demo.nft.sportscast.net/"
                   >
-                    My Wallet
+                    Storefront
                   </Link>
                 </li>
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                   <Link
                     onClick={closeMenu}
                     className="block nav-link text-secondary"
-                    to="/mywallet"
+                    to="#"
+                  >
+                    DEPOSIT
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="http://demo.nft.sportscast.net/mywallet"
                   >
                     My Wallet
                   </Link>
                 </li>
-                {(loggedIn && init.isInitialized) ? (
-                  <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
-                    <Link
-                      onClick={handleDeposit}
-                      className="block nav-link text-secondary"
-                      to="/deposit"
-                    >
-                      Deposit
-                    </Link>
-                  </li>) : (<span></span>)}
+
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="http://demo.nft.sportscast.net/marketplace"
+                  >
+                    Marketplace
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="http://demo.nft.sportscast.net/marketplace"
+                  >
+                    Contact
+                  </Link>
+                </li>
+
                 {loggedIn ? (
                   <li className="inline-block text-base font-normal nav-menu leading-19">
                     <ul className="flex flex-col lg:block">
-                      {init.isInitialized == true ? (
+                      {init.isInitialized === true ? (
                         <span></span>
                       ) : (
                         <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">

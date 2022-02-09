@@ -1,12 +1,8 @@
-import React, {useEffect, useState, Suspense} from "react"
-import {useAccountItem} from "../hooks/use-account-item.hook"
-import {useCurrentUser} from "../hooks/use-current-user.hook"
-import {IDLE} from "../global/constants"
+import React, { Suspense } from "react"
+import { useAccountItem } from "../hooks/use-account-item.hook"
 
-export function AccountItemCluster({address, id}) {
+export function AccountItemCluster({ address, id }) {
   const item = useAccountItem(address, id)
-
-  const BUSY = item.status !== IDLE
 
   if (address == null) return null
   if (id == null) return null
@@ -19,7 +15,7 @@ export function AccountItemCluster({address, id}) {
       <p>{item.tokenURI}</p>
       <p>{item.color}</p>
       <p>{item.info}</p>
-      <button 
+      <button
         onClick={() => item.sell("5.0")}
       >
         Sell

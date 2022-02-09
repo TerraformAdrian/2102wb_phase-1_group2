@@ -1,15 +1,9 @@
-import { useEffect, useRef } from "react";
-import { IDLE } from "../../global/constants";
-import { useCurrentUser } from "../../hooks/use-current-user.hook";
-import { useAccountItems } from "../../hooks/use-account-items.hook";
 import { useIpfsItems } from "../../hooks/use-ipfs-items.hook";
 import { useEditionList } from "../../hooks/use-edition-list.hook";
 import { useSeriesList } from "../../hooks/use-series-list.hook";
 import { useSetAllList } from "../../hooks/use-set-all.hook";
 import { useSetItem } from "../../hooks/use-set-item.hook";
 import { Suspense, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import AccountItemsCluster from "../../comps/account-items";
 
 import { SideBar } from "./side_bar";
 import axios from "axios";
@@ -81,7 +75,7 @@ export function Item({ meta }) {
 
     return (
         <div className="f3-store-series-item">
-            <img src={meta.image} /> <br />
+            <img alt="meta" src={meta.image} /> <br />
             <a href={"/editions/" + meta.id}>{meta.name} Edition</a>
         </div>
     );
@@ -114,7 +108,7 @@ export function SeriesCluster({ meta, reload }) {
             <div>
                 <div className="f3-center" style={{ paddingRight: "20px" }}>
                     {meta.name}
-                    <img src={meta.image} width="100px" height="auto" />
+                    <img alt="meta" src={meta.image} width="100px" height="auto" />
                 </div>
             </div>
             <div>Editions&nbsp;</div>
@@ -167,19 +161,6 @@ export function MintNFT() {
             series: state.inSeries,
             price: state.inPrice,
             edition: state.inEdition,
-        });
-    };
-
-    const mintItem = async (params) => {
-        console.log(params);
-
-        await fetch(process.env.REACT_APP_API_ITEM_MINT, {
-            // await fetch("http://localhost:3003/v1/handy-items/mint", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(params),
         });
     };
 

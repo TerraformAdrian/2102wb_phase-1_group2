@@ -42,7 +42,7 @@ const CODE = cdc`
 `
 
 export function isAccountInitialized(address) {
-  if (address == null || address == "")
+  if (address === null || address === "")
     return Promise.resolve(false)
 
   // prettier-ignore

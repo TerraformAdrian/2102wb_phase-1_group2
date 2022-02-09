@@ -1,7 +1,6 @@
 import * as fcl from "@onflow/fcl"
 import * as t from "@onflow/types"
 import {tx} from "./util/tx"
-import {invariant} from "@onflow/util-invariant"
 
 const CODE = fcl.cdc`
   import FungibleToken from 0xFungibleToken

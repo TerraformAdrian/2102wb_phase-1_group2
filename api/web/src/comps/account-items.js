@@ -1,11 +1,9 @@
 import {Suspense} from "react"
 import {useAccountItems} from "../hooks/use-account-items.hook"
-import {useCurrentUser} from "../hooks/use-current-user.hook"
 import Item from "./account-item"
 
 export function AccountItemsCluster({address}) {
   const items = useAccountItems(address)
-  const [cu] = useCurrentUser()
 
   if (address == null) return null
 

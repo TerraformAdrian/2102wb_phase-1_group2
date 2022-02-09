@@ -54,7 +54,7 @@ eg: http://demonftsportscastnet-env.eba-hvmrz7hu.us-west-2.elasticbeanstalk.com:
 
 3. test moonpay Integration with Flow Network
 
-	creat and link Flow wallet with your email.
+	creat and link Flow wallet with your email
 		open https://nft.ikonicc.ca/
 		and touch "Connect" button, then touch "Blocto Testnet"
 		create flow wallet with your own email

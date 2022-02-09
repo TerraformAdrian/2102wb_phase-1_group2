@@ -60,7 +60,7 @@ export function Footer() {
                                         to="#"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25  flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Facebook />
                                         </span>
@@ -72,7 +72,7 @@ export function Footer() {
                                         to="#"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Linkedin />
                                         </span>
@@ -84,7 +84,7 @@ export function Footer() {
                                         to="#"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
                                     >
-                                        <span class="block ">
+                                        <span className="block ">
                                             {" "}
                                             <Twitter />
                                         </span>
@@ -96,7 +96,7 @@ export function Footer() {
                                         to="#"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Instagram />
                                         </span>

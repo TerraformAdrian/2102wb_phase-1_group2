@@ -279,7 +279,7 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            class="f3-collections-btn"
+                            className="f3-collections-btn"
                             id=""
                             onClick={handleCreateSeries}
                             disabled={upSeriesStatus === 1}
@@ -344,7 +344,7 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            class="f3-collections-btn"
+                            className="f3-collections-btn"
                             id=""
                             onClick={handleCreateEdition}
                             disabled={upEditionStatus === 1}

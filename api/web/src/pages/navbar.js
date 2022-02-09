@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "../index.css";
 
 export function Page() {
-    const [user, loggedIn, { signUp, logIn, logOut }] = useCurrentUser();
+    const [user, loggedIn, { logIn, logOut }] = useCurrentUser();
 
     const init = useInitialized(user.addr);
 
@@ -30,10 +30,6 @@ export function Page() {
         logOut();
     };
 
-    const handleSlideToggle = (e) => {
-        e.preventDefault();
-    };
-
     const [isActive, setActive] = useState("false");
 
     const handleToggle = () => {
@@ -51,16 +47,16 @@ export function Page() {
 
     return (
         <header className="">
-            {init.isInitialized == true ? (
-               <div className="top-bar bg-purple py-2 text-center">     
+            {init.isInitialized === true ? (
+                <div className="top-bar bg-purple py-2 text-center">
                     <span className="text-white f3-nav-addr text-[12px] leading-[14px] block">
                         Account Connected:&nbsp;{" "}
                         {user.addr}
                     </span>
                 </div>
-                ) : (
-                    <span></span>
-                )}
+            ) : (
+                <span></span>
+            )}
 
             <nav className="navbar py-6">
                 <div className="container max-w-full px-4 m-auto w-1232">
@@ -81,9 +77,8 @@ export function Page() {
                         </div>
 
                         <div
-                            className={`bg-primary lg:bg-transparent navbar-info mobile_menu lg:relative ${
-                                isActive ? "" : "menu_active"
-                            }`}
+                            className={`bg-primary lg:bg-transparent navbar-info mobile_menu lg:relative ${isActive ? "" : "menu_active"
+                                }`}
                         >
                             <div className="flex items-center justify-between header-info lg:hidden">
                                 <div className="site-logo">
@@ -170,7 +165,7 @@ export function Page() {
                                 {loggedIn ? (
                                     <li className="inline-block text-base font-normal nav-menu leading-19">
                                         <ul className="flex flex-col lg:block">
-                                            {init.isInitialized == true ? (
+                                            {init.isInitialized === true ? (
                                                 <span></span>
                                             ) : (
                                                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">

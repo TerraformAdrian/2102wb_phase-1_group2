@@ -10,7 +10,6 @@ import {
   PROCESSING,
   SUCCESS,
   ERROR,
-  IDLE_DELAY,
 } from "../global/constants"
 import {isAccountInitialized} from "../flow/script.is-account-initialized"
 import {initializeAccount} from "../flow/tx.initialize-account"

@@ -1,7 +1,4 @@
-import { useState, Suspense } from "react";
-import { MarketItemsCluster } from "../../comps/market-items";
-import { useAccountItem } from "../../hooks/use-account-item.hook";
-import { useAccountItems } from "../../hooks/use-account-items.hook";
+import { Suspense } from "react";
 import { useSeriesList } from "../../hooks/use-series-list.hook";
 
 import { Link } from "react-router-dom";

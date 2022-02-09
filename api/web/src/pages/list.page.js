@@ -1,9 +1,6 @@
 
-import {IDLE} from "../global/constants"
-import {useCurrentUser} from "../hooks/use-current-user.hook"
-import {useAccountItems} from "../hooks/use-account-items.hook"
-import {Suspense, useState} from "react"
-import {Redirect, useHistory} from "react-router-dom"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
 import AccountItemsCluster from '../comps/account-items'
 
 import './list.css'
@@ -15,7 +12,6 @@ export function Page() {
   const [address, setAddress] = useState("");
   const [count, setCount] = useState(0);
   const history = useHistory();
-  const [user] = useCurrentUser()
 
   // if (user.addr == null) return <Redirect to={"/"} />
 
@@ -28,7 +24,7 @@ export function Page() {
 
   const handleList = (e) => {
 
-    if (state.txtAddress.length != 18) {
+    if (state.txtAddress.length !== 18) {
       alert("Enter Address Corretly!");
       return;
     }
@@ -50,16 +46,16 @@ export function Page() {
   return (
     <div>
       <h1>NFT Listings</h1>
-	    <div>
+      <div>
         <label>Address: </label>
-        <input name="txtAddress" id="txtAddress" onChange={handleChange}/>&nbsp;
+        <input name="txtAddress" id="txtAddress" onChange={handleChange} />&nbsp;
         <button onClick={handleList}>List NFTs</button>
         &nbsp;<button onClick={handleMint}>Mint an NFT</button>
         &nbsp;<button onClick={handleMarket}>View Marketplace</button>
         {
-          address != "" && <AccountItemsCluster address={address} />
+          address !== "" && <AccountItemsCluster address={address} />
         }
-	    </div>
+      </div>
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { useAccountItem } from "../../hooks/use-account-item.hook";
 import { useAccountItems } from "../../hooks/use-account-items.hook";
 import { useCurrentUser } from "../../hooks/use-current-user.hook";
-import { Footer } from "../common/footer";
 import { Page as Navbar } from "../navbar";
 import { MyWalletHeader } from "../mywallet/mywallet";
 import { Link } from "react-router-dom";
@@ -15,12 +14,12 @@ export function Item({ addr, id }) {
     const getVideoPath = (ename) => {
         var path = "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/";
         //s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4
-        if (ename == "Gold") path += "ZebNoland_Partx_Gold_Edition.mp4";
-        else if (ename == "Prism") path += "ZebNoland_Part4_Prism_Edition.mp4";
-        else if (ename == "Orange")
+        if (ename === "Gold") path += "ZebNoland_Partx_Gold_Edition.mp4";
+        else if (ename === "Prism") path += "ZebNoland_Part4_Prism_Edition.mp4";
+        else if (ename === "Orange")
             path += "ZebNoland_Part3_Orange_Edition.mp4";
-        else if (ename == "Pink") path += "ZebNoland_Part2_Pink_Edition.mp4";
-        else if (ename == "White") path += "ZebNoland_Part1_White_Edition.mp4";
+        else if (ename === "Pink") path += "ZebNoland_Part2_Pink_Edition.mp4";
+        else if (ename === "White") path += "ZebNoland_Part1_White_Edition.mp4";
         return path
     };
 
@@ -105,12 +104,8 @@ export function Item({ addr, id }) {
 }
 
 export function Page() {
-    const [user, loggedIn, { signUp, logIn }] = useCurrentUser();
+    const [user] = useCurrentUser();
     const { ids } = useAccountItems(user.addr);
-
-    const handleLogin = (e) => {
-        logIn();
-    };
 
     return (
         <div className="f3-store-padding">

@@ -6,6 +6,7 @@ import axios from "axios";
 import Loader from "react-loader-spinner";
 import { toast } from "react-toast";
 import { useEditionList } from "../../hooks/use-edition-list.hook";
+import { Suspense } from "react";
 
 export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
@@ -89,14 +90,12 @@ function Item({ meta }) {
 }
 
 export function SeriesCluster({ meta, reload }) {
-    console.log(typeof meta.id);
     const { editions } = useEditionList(meta.id, reload);
 
     const getEditionList = () => {
         var res = [];
-
         for (const prop in editions) {
-            res.push(<Item meta={editions[prop]} />);
+            res.push(<Item key={editions[prop].id} meta={editions[prop]} />);
         }
 
         return res;
@@ -143,7 +142,6 @@ export function Assets() {
     }, [isDirty]);
 
     useEffect(() => {
-        console.log("3. Clear Dirty");
         setDirty(false);
     }, [isDirty]);
 
@@ -219,11 +217,8 @@ export function Assets() {
     const getCurrentSeries = () => {
         var res = [];
 
-        console.log(series);
-
         for (const prop in series) {
-            console.log(series[prop]);
-            res.push(<SeriesCluster meta={series[prop]} reload={isDirty} />);
+            res.push(<SeriesCluster key={prop} meta={series[prop]} reload={isDirty} />);
         }
 
         return res;
@@ -365,11 +360,11 @@ export function Assets() {
 
 export function Page() {
     return (
-        <div>
+        <Suspense fallback={null}>
             <SideBar />
             <div className="f3-main">
                 <Assets />
             </div>
-        </div>
+        </Suspense>
     );
 }

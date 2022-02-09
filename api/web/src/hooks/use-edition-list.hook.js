@@ -7,17 +7,11 @@ export function useEditionList(series, bReload) {
   useEffect(() => {
     async function fetchData() {
       if (series === "") {
-        console.log("Empty");
         setItems({});
         return;
       }
 
       const editions = await getEditionList(series);
-
-      console.log(editions);
-
-      for (const prop in editions)
-        console.log(editions[prop]);
 
       setItems(editions);
     }

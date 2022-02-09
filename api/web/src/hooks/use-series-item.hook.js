@@ -8,11 +8,6 @@ export function useSeriesItem(id) {
     async function fetchData() {
       const series = await getSeriesItem(id);
 
-      console.log(series);
-
-      for (const prop in series)
-        console.log(series[prop]);
-
       setItem(series);
     }
     fetchData()

@@ -7,7 +7,6 @@ import { purchaseHandyItem } from "../../flow/tx.purchase-handy-item";
 import { useCurrentUser } from "../../hooks/use-current-user.hook";
 import { useInitialized } from "../../hooks/use-initialized.hook";
 import { Page as Navbar } from "../navbar";
-import Player from "../../assets/images/player.png";
 import Fileearmark from "../../assets/images/fileearmark.png";
 
 import { toast } from "react-toast";

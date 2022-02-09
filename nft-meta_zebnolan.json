@@ -1,0 +1,14 @@
+{
+    "name": "WHITE",
+    "description": "In SportsCast - Zeb Noland White Edition Part 1, quarterback Zeb Noland dives into his childhood passion for football and explains how he drew inspiration from his coach and father, Travis Noland, to become a better player. Check out some of Noland's most insightful pieces of wisdom learned throughout his career.",
+    "quantity": 5000,
+    "sn": true,
+    "price": {
+        "staging": 1,
+        "production": 50
+    },
+    "thumbnail": "https://drive.google.com/file/d/1VpHc_L52P8xniqmHJ0m4sT50hPvAqTbf/view?usp=sharing",
+    "video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
+    "length": "18m 43s",
+    "video_length": "WHITE edition only has PART 1 of the interview.. This is only 18mins long"
+}

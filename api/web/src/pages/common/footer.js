@@ -1,7 +1,6 @@
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 import { ReactComponent as Facebook } from "../../assets/images/facebook.svg";
 import { ReactComponent as Twitter } from "../../assets/images/twitter.svg";
-import { ReactComponent as Instagram } from "../../assets/images/instagram.svg";
 import { ReactComponent as Linkedin } from "../../assets/images/linkedin.svg";
 import { Link } from "react-router-dom";
 import "../../index.css";

@@ -6,7 +6,6 @@ import { ReactComponent as Menuicon } from "../assets/images/menu_white.svg";
 import { ReactComponent as Closeicon } from "../assets/images/close_white.svg";
 import { Link } from "react-router-dom";
 import "../index.css";
-import "./mint/index.css";
 
 export function Page() {
   const [user, loggedIn, { logIn, logOut }] = useCurrentUser();
@@ -32,6 +31,10 @@ export function Page() {
   };
 
   const [isActive, setActive] = useState("false");
+
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
 
   const closeMenu = () => {
     setActive(!isActive);

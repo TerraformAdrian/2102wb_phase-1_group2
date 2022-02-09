@@ -9,11 +9,7 @@ export function MyWalletHeader() {
                         </h1>
                         <div className="max-w-full space-y-4 text-base not-italic font-normal sa_series_content md:w-550 text-secondary leading-24 md:space-y-6 lg:pl-68px">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Accumsan tempor mi et nunc non
-                                dolor nulla. Amet porttitor sed aliquam, dictum
-                                magna pretium. Amet ut ut justo scelerisque
-                                aliquam, velit.
+                                Connect your wallet to view what NFTs you have collected.
                             </p>
                         </div>
                     </div>

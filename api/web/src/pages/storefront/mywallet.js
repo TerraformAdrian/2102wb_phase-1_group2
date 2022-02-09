@@ -43,7 +43,7 @@ export function Item({ addr, id }) {
                                 <span className="text-blue-light">
                                     Purchase Date :{" "}
                                 </span>
-                                <span className="uppercase">Jan 3, 2022</span>
+                                <span className="uppercase">Jan 33333333333, 2022</span>
                             </p>
                             <p className="owner_address text-white text-xs leading-14 font-normal not-italic mb-6">
                                 <span className="text-blue-light">

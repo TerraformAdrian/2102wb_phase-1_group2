@@ -1,0 +1,16 @@
+{
+    "name": "SportsCast - Zeb Noland Prizm Edition",
+    "editon": "prizm",
+    "parent_series": "Zeb Nolan",
+    "description": "Join quarterback Zeb Noland as he reflects on some of his highest (and lowest) moments in the game, sources of inspiration, future career plans, and more in SportsCast – Zeb Noland Prism Edition Part 4.",
+    "quantity": 500,
+    "sn": true,
+    "price": {
+        "staging": 1.75,
+        "production": 500.00
+    },
+    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmc2sYN8tAQXvVYB57MfP5jUUWK4XnSPqsRQmfMpRpAa7t",
+    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part4_Prism_Edition.mp4",
+    "unlocked-content_video_duration": "00:15:22.00",
+    "unlocked-content_comments": "PRISM edition only has PART 4 of the interview.. This is only 15mins long"
+}

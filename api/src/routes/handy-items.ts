@@ -12,7 +12,7 @@ function initHandyItemsRouter(handyItemsService: HandyItemsService): Router {
     validateRequest,
     async (req: Request, res: Response) => {
       const { recipient, name, tokenURI, quantity, isSerial, collection, price, series } = req.body;
-      const tx = await handyItemsService.mint("0xab5876435fbf2063", name, tokenURI, 
+      const tx = await handyItemsService.mint("0xc1662d3e59d9060b", name, tokenURI, 
         Number(quantity), isSerial == "yes", Number(collection), Number(price), Number(series));
       return res.send({
         transaction: tx,

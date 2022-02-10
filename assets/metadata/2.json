@@ -1,0 +1,16 @@
+{
+    "name": "SportsCast - Zeb Noland Pink Edition",
+    "editon": "pink",
+    "parent_series": "Zeb Nolan",
+    "description": "Check out Zeb Noland's college football journey and some of the relationships he made along the way, like his friendship with quarterback Trey Lance. SportsCast – Zeb Noland Pink Edition Part 2 dives deep into some hard-hitting moments in his game so far and explores where he sees his career moving in the future.",
+    "quantity": 2500,
+    "sn": true,
+    "price": {
+        "staging": 1.25,
+        "production": 100.00
+    },
+    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQNhxjUhrs5GF31JeseRhrePQxZAduUHdvvVM7XAFLNb6",
+    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
+    "unlocked-content_video_duration": "00:16:38.00",
+    "unlocked-content_comments": "PINK edition only has PART 2 of the interview.. This is only 16mins long"
+}

@@ -12,8 +12,8 @@
     },
     "accounts": {
         "testnet-account": {
-            "address": "0xdbcfc90d16455eec",
-            "key": "19ac7adb0dc1a0b4c06ac790ee9689bba9510bf9fff753fd57b3e5565b81edc8"
+            "address": "0xc1662d3e59d9060b",
+            "key": "3e52cfc67b20ae4a184f978335e8e9723a94ac1a94d7db4962f7ac0e58575dec"
         },
         "emulator-account": {
             "address": "0xdbcfc90d16455eec",

@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-kms": "^3.50.0",
+    "@aws-sdk/credential-provider-ini": "^3.50.0",
     "@onflow/fcl": "0.0.73",
     "@onflow/types": "0.0.5",
     "api": "^3.4.1",

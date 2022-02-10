@@ -1,80 +1,82 @@
-{
-    "name": "SportsCast - Zeb Noland White Edition",
-    "editon": "white",
-    "parent_series": "Zeb Nolan",
-    "description": "In SportsCast - Zeb Noland White Edition Part 1, quarterback Zeb Noland dives into his childhood passion for football and explains how he drew inspiration from his coach and father, Travis Noland, to become a better player. Check out some of Noland's most insightful pieces of wisdom learned throughout his career.",
-    "quantity": 5000,
-    "sn": true,
-    "price": {
-        "staging": 1.00,
-        "production": 50.00
+[
+    {
+        "name": "SportsCast - Zeb Noland White Edition",
+        "editon": "white",
+        "parent_series": "Zeb Nolan",
+        "description": "In SportsCast - Zeb Noland White Edition Part 1, quarterback Zeb Noland dives into his childhood passion for football and explains how he drew inspiration from his coach and father, Travis Noland, to become a better player. Check out some of Noland's most insightful pieces of wisdom learned throughout his career.",
+        "quantity": 5000,
+        "sn": true,
+        "price": {
+            "staging": 1.00,
+            "production": 50.00
+        },
+        "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmbx1VALv4zTWWyfoRdo1DKrQa14B3DcScBizWx8oLLdAz",
+        "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
+        "unlocked-content_video_duration": "00:18:43.00",
+        "unlocked-content_comments": "WHITE edition only has PART 1 of the interview.. This is only 18mins long"
     },
-    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmbx1VALv4zTWWyfoRdo1DKrQa14B3DcScBizWx8oLLdAz",
-    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
-    "unlocked-content_video_duration": "00:18:43.00",
-    "unlocked-content_comments": "WHITE edition only has PART 1 of the interview.. This is only 18mins long"
-},
-{
-    "name": "SportsCast - Zeb Noland Pink Edition",
-    "editon": "pink",
-    "parent_series": "Zeb Nolan",
-    "description": "Check out Zeb Noland's college football journey and some of the relationships he made along the way, like his friendship with quarterback Trey Lance. SportsCast – Zeb Noland Pink Edition Part 2 dives deep into some hard-hitting moments in his game so far and explores where he sees his career moving in the future.",
-    "quantity": 2500,
-    "sn": true,
-    "price": {
-        "staging": 1.25,
-        "production": 100.00
+    {
+        "name": "SportsCast - Zeb Noland Pink Edition",
+        "editon": "pink",
+        "parent_series": "Zeb Nolan",
+        "description": "Check out Zeb Noland's college football journey and some of the relationships he made along the way, like his friendship with quarterback Trey Lance. SportsCast – Zeb Noland Pink Edition Part 2 dives deep into some hard-hitting moments in his game so far and explores where he sees his career moving in the future.",
+        "quantity": 2500,
+        "sn": true,
+        "price": {
+            "staging": 1.25,
+            "production": 100.00
+        },
+        "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQNhxjUhrs5GF31JeseRhrePQxZAduUHdvvVM7XAFLNb6",
+        "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
+        "unlocked-content_video_duration": "00:16:38.00",
+        "unlocked-content_comments": "PINK edition only has PART 2 of the interview.. This is only 16mins long"
     },
-    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQNhxjUhrs5GF31JeseRhrePQxZAduUHdvvVM7XAFLNb6",
-    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part1_White_Edition.mp4",
-    "unlocked-content_video_duration": "00:16:38.00",
-    "unlocked-content_comments": "PINK edition only has PART 2 of the interview.. This is only 16mins long"
-},
-{
-    "name": "SportsCast - Zeb Noland Orange Edition",
-    "editon": "orange",
-    "parent_series": "Zeb Nolan",
-    "description": "Zeb Noland discusses the sports industry's turmoil during COVID-19 and how he progressed as a team captain off the field. Check out some of his brightest moments of mentorship in SportsCast – Zeb Noland Orange Edition Part 3.",
-    "quantity": 1000,
-    "sn": true,
-    "price": {
-        "staging": 1.50,
-        "production": 250.00
+    {
+        "name": "SportsCast - Zeb Noland Orange Edition",
+        "editon": "orange",
+        "parent_series": "Zeb Nolan",
+        "description": "Zeb Noland discusses the sports industry's turmoil during COVID-19 and how he progressed as a team captain off the field. Check out some of his brightest moments of mentorship in SportsCast – Zeb Noland Orange Edition Part 3.",
+        "quantity": 1000,
+        "sn": true,
+        "price": {
+            "staging": 1.50,
+            "production": 250.00
+        },
+        "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmZWvT8o9NL4YHDsCJywd3mKgRjxBbhmoZYi6kPG13NcMq",
+        "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part3_Orange_Edition.mp4",
+        "unlocked-content_video_duration": "00:16:27.00",
+        "unlocked-content_comments": "ORANGE edition only has PART 3 of the interview.. This is only 16mins long"
     },
-    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmZWvT8o9NL4YHDsCJywd3mKgRjxBbhmoZYi6kPG13NcMq",
-    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part3_Orange_Edition.mp4",
-    "unlocked-content_video_duration": "00:16:27.00",
-    "unlocked-content_comments": "ORANGE edition only has PART 3 of the interview.. This is only 16mins long"
-},
-{
-    "name": "SportsCast - Zeb Noland Prizm Edition",
-    "editon": "prizm",
-    "parent_series": "Zeb Nolan",
-    "description": "Join quarterback Zeb Noland as he reflects on some of his highest (and lowest) moments in the game, sources of inspiration, future career plans, and more in SportsCast – Zeb Noland Prism Edition Part 4.",
-    "quantity": 500,
-    "sn": true,
-    "price": {
-        "staging": 1.75,
-        "production": 500.00
+    {
+        "name": "SportsCast - Zeb Noland Prizm Edition",
+        "editon": "prizm",
+        "parent_series": "Zeb Nolan",
+        "description": "Join quarterback Zeb Noland as he reflects on some of his highest (and lowest) moments in the game, sources of inspiration, future career plans, and more in SportsCast – Zeb Noland Prism Edition Part 4.",
+        "quantity": 500,
+        "sn": true,
+        "price": {
+            "staging": 1.75,
+            "production": 500.00
+        },
+        "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmc2sYN8tAQXvVYB57MfP5jUUWK4XnSPqsRQmfMpRpAa7t",
+        "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part4_Prism_Edition.mp4",
+        "unlocked-content_video_duration": "00:15:22.00",
+        "unlocked-content_comments": "PRISM edition only has PART 4 of the interview.. This is only 15mins long"
     },
-    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmc2sYN8tAQXvVYB57MfP5jUUWK4XnSPqsRQmfMpRpAa7t",
-    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Part4_Prism_Edition.mp4",
-    "unlocked-content_video_duration": "00:15:22.00",
-    "unlocked-content_comments": "PRISM edition only has PART 4 of the interview.. This is only 15mins long"
-},
-{
-    "name": "SportsCast - Zeb Noland Gold Edition",
-    "editon": "gold",
-    "parent_series": "Zeb Nolan",
-    "description": "In this full-length episode, QB Zeb Noland dives deep into his career and most significant sources of inspiration. He discusses his entire story – from the lessons he learned from his talented father, Travis Noland, to their shared passion for football, his growth as an athlete and mentor, and some of his best moments in the game – in SportsCast – Zeb Noland Gold Edition.",
-    "quantity": 250,
-    "sn": true,
-    "price": {
-        "staging": 2.00,
-        "production": 1000.00
-    },
-    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQtDkuHhegXZ6osvbQhaSLQtPYsh5WLj8SkTKqtW5miSf",
-    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4",
-    "unlocked-content_video_duration": "01:04:27.00",
-    "unlocked-content_comments": "The GOLD edition has the FULL interview (PART 1 + PART 2 + PART 3 + PART 4 PART 5… it is over 1 hour long!"
-}
+    {
+        "name": "SportsCast - Zeb Noland Gold Edition",
+        "editon": "gold",
+        "parent_series": "Zeb Nolan",
+        "description": "In this full-length episode, QB Zeb Noland dives deep into his career and most significant sources of inspiration. He discusses his entire story – from the lessons he learned from his talented father, Travis Noland, to their shared passion for football, his growth as an athlete and mentor, and some of his best moments in the game – in SportsCast – Zeb Noland Gold Edition.",
+        "quantity": 250,
+        "sn": true,
+        "price": {
+            "staging": 2.00,
+            "production": 1000.00
+        },
+        "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQtDkuHhegXZ6osvbQhaSLQtPYsh5WLj8SkTKqtW5miSf",
+        "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4",
+        "unlocked-content_video_duration": "01:04:27.00",
+        "unlocked-content_comments": "The GOLD edition has the FULL interview (PART 1 + PART 2 + PART 3 + PART 4 PART 5… it is over 1 hour long!"
+    }
+]

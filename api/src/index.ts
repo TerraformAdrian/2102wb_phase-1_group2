@@ -9,9 +9,9 @@ import { HandyItemsService } from "./services/handy-items";
 import dotenv from 'dotenv'
 import envExpand from 'dotenv-expand'
 
-const env = envExpand(dotenv.config({ 
-    path: path.resolve(process.cwd(), 'api/.env.testnet')
-  })).parsed || process.env;
+const env = envExpand(dotenv.config({
+  path: path.resolve(process.cwd(), 'api/.env.testnet')
+})).parsed || process.env;
 
 /*
 const config = process.env.NODE_ENV == "production" ? {
@@ -43,8 +43,8 @@ const config = process.env.NODE_ENV == "production" ? {
 async function run() {
   const config = {
     port: process.env.PORT || 3003,
-    minterAddress: await decrypt(env.MINTER_ADDRESS!),
-    minterPrivateKeyHex: await decrypt(env.MINTER_PRIVATE_KEY!),
+    minterAddress: env.MINTER_ADDRESS!,
+    minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
     minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
     accessApi: env.FLOW_ACCESS_API_URL,
     fungibleTokenAddress: await decrypt(env.FUNGIBLE_TOKEN_ADDRESS!),

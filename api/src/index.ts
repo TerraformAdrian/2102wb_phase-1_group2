@@ -1,3 +1,4 @@
+import path from "path";
 import * as fcl from "@onflow/fcl";
 
 import initApp from "./app";
@@ -9,7 +10,7 @@ import dotenv from 'dotenv'
 import envExpand from 'dotenv-expand'
 
 const env = envExpand(dotenv.config({ 
-    path: '.env.testnet'
+    path: path.resolve(process.cwd(), 'api/.env.testnet')
   })).parsed || process.env;
 
 /*

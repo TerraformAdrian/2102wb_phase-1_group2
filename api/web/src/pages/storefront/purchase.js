@@ -55,7 +55,11 @@ export function Page() {
                 },
                 async onError(error) {
                     setBuyingState(2);
-                    toast.error("Unexpected error occured! \n" + error);
+                    if (error.search("Amount withdrawn must be less than or equal than the balance of the Vault") > 0) {
+                        toast.error("You do not have enough funds, please DEPOSIT FUNDS here.")
+                    } else {
+                        toast.error("Unexpected error occured! \n" + error);
+                    }
                     console.log(error);
                 },
             }

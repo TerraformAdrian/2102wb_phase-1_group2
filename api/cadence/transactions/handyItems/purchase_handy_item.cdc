@@ -1,4 +1,4 @@
-import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
+import NonFungibleToken from 0x631e88ae7f1d7c20
 import HandyItems from "../../contracts/HandyItems.cdc"
 
 // This transction uses the NFTMinter resource to mint a new NFT.

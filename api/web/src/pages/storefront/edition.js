@@ -9,7 +9,7 @@ import { useSetItem } from "../../hooks/use-set-item.hook";
 export function Item({ meta }) {
 
     const { item } = useSetItem(meta.editionID);
-    var price = (Math.round(item.price * 100) / 100).toFixed(2);
+    var price = (Math.round(item?.price * 100) / 100).toFixed(2);
 
     return (
         <div className="px-3 py-6 transition-all border border-solid group sa_series_nft_card_wrapper md:p-6 border-purply-blue rounded-16 hover:border-purple hover:bg-blue-dark">

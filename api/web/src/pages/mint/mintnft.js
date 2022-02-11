@@ -397,7 +397,7 @@ export function MintNFT() {
             <div style={{ paddingLeft: "20px" }}>
                 <div>
                     <h3>Current NFTs</h3>
-                    {setList()}
+                    {/* {setList()} */}
                 </div>
             </div>
         </div>

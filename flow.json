@@ -12,8 +12,8 @@
     },
     "accounts": {
         "testnet-account": {
-            "address": "0xc1662d3e59d9060b",
-            "key": "3e52cfc67b20ae4a184f978335e8e9723a94ac1a94d7db4962f7ac0e58575dec"
+            "address": "0x67e66f5d6b5445f5",
+            "key": "4d5d6e5f1c8d25417dd7c37125ca3f39d3d3c5473b0914f900e1e67f20c39eff"
         },
         "emulator-account": {
             "address": "0xdbcfc90d16455eec",
@@ -30,11 +30,7 @@
     "deployments": {
         "testnet": {
             "testnet-account": [
-                "FungibleToken",
-                "FUSD",
-                "HandyItems",
-                "NFTStorefront",
-                "NonFungibleToken"
+                "HandyItems"
             ]
         }
     }

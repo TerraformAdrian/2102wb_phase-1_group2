@@ -68,4 +68,30 @@ pipelines:
             ENVIRONMENT_NAME: 'nft-sportscast-net'
             ZIP_FILE: 'nft-sportscast-net.zip'
             S3_BUCKET: 'nft-sportscast-net'
+            VERSION_LABEL: '_$(date +%Y-%m-%d_%H:%M:%S)_${BITBUCKET_COMMIT:0:8}
+  release/sportscast-ikonicc-ca:
+    - step:
+        name: "Zip: sportscast-ikonicc-ca"
+        script:
+          - ls -la
+          - zip -r sportscast-ikonicc-ca.zip * .[^.]*
+        artifacts: 
+          - sportscast-ikonicc-ca.zip
+    - step:
+        name: "Deploy: sportscast-ikonicc-ca"
+        # Track staging environments builds using deployments.
+        deployment: production
+        script:
+        - echo "Deploy: sportscast-ikonicc-ca"
+        - pipe: atlassian/aws-elasticbeanstalk-deploy:0.5.0
+          variables:
+            DEBUG: 'TRUE'
+            COMMAND: 'upload-only'
+            AWS_ACCESS_KEY_ID: $AWS_KEYID__demo_nft
+            AWS_SECRET_ACCESS_KEY: $AWS_KEYSECRET__demo_nft
+            AWS_DEFAULT_REGION: 'us-west-2'
+            APPLICATION_NAME: 'NFT Storefront'
+            ENVIRONMENT_NAME: 'sportscast-ikonicc-ca'
+            ZIP_FILE: 'sportscast-ikonicc-ca.zip'
+            S3_BUCKET: 'sportscast-ikonicc-ca'
             VERSION_LABEL: '_$(date +%Y-%m-%d_%H:%M:%S)_${BITBUCKET_COMMIT:0:8}'

@@ -1,7 +1,6 @@
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 import { ReactComponent as Facebook } from "../../assets/images/facebook.svg";
 import { ReactComponent as Twitter } from "../../assets/images/twitter.svg";
-import { ReactComponent as Instagram } from "../../assets/images/instagram.svg";
 import { ReactComponent as Linkedin } from "../../assets/images/linkedin.svg";
 import { Link } from "react-router-dom";
 import "../../index.css";
@@ -60,7 +59,7 @@ export function Footer() {
                                         href="https://www.facebook.com/SportsCastPros"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25  flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Facebook />
                                         </span>
@@ -72,7 +71,7 @@ export function Footer() {
                                         href="https://www.linkedin.com/company/sportscast"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Linkedin />
                                         </span>
@@ -84,7 +83,7 @@ export function Footer() {
                                         href="https://twitter.com/SportsCastPros"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple" rel="noreferrer"
                                     >
-                                        <span class="block ">
+                                        <span className="block ">
                                             {" "}
                                             <Twitter />
                                         </span>
@@ -96,7 +95,7 @@ export function Footer() {
                                         to="#"
                                         className="text-white relative block w-39 h-39 rounded-19.5 border border-solid border-white border-opacity-25 flex items-center justify-center hover:border-opacity-100 hover:transition-all hover:bg-purple"
                                     >
-                                        <span class="block">
+                                        <span className="block">
                                             {" "}
                                             <Instagram />
                                         </span>

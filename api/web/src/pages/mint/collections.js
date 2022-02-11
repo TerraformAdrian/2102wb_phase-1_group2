@@ -1,25 +1,12 @@
-import { useEffect, useRef } from "react";
-import { IDLE } from "../../global/constants";
-import { useCurrentUser } from "../../hooks/use-current-user.hook";
-import { useAccountItems } from "../../hooks/use-account-items.hook";
-import { Suspense, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import AccountItemsCluster from "../../comps/account-items";
-
+import { useEffect } from "react";
+import { useState } from "react";
 import { useSeriesList } from "../../hooks/use-series-list.hook";
-
 import { SideBar } from "./side_bar";
 import axios from "axios";
-import fs from "fs";
-
 import Loader from "react-loader-spinner";
 import { toast } from "react-toast";
-
 import { useEditionList } from "../../hooks/use-edition-list.hook";
-
-const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
-const PINATA_SECRET_API_KEY =
-    "609ec3e0c1641f4b41c0c6370eed55e108cea9f9396b9e5a1d123061de07b99b";
+import { Suspense } from "react";
 
 export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
@@ -30,8 +17,8 @@ export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
                 pinata_secret_api_key: pinataSecretApiKey,
             },
         })
-        .then(function (response) {})
-        .catch(function (error) {});
+        .then(function (response) { })
+        .catch(function (error) { });
 };
 
 export const pinFileToIPFS = async (
@@ -96,21 +83,19 @@ export const pinFileToIPFS = async (
 function Item({ meta }) {
     return (
         <div className="f3-collections-body-item f3-center">
-            <img src={meta.image} width="100px" />
+            <img alt="meta" src={meta.image} width="100px" />
             {meta.name}
         </div>
     );
 }
 
 export function SeriesCluster({ meta, reload }) {
-    console.log(typeof meta.id);
     const { editions } = useEditionList(meta.id, reload);
 
     const getEditionList = () => {
         var res = [];
-
         for (const prop in editions) {
-            res.push(<Item meta={editions[prop]} />);
+            res.push(<Item key={editions[prop].id} meta={editions[prop]} />);
         }
 
         return res;
@@ -121,7 +106,7 @@ export function SeriesCluster({ meta, reload }) {
             <div>
                 <div className="f3-center" style={{ paddingRight: "20px" }}>
                     {meta.name}
-                    <img src={meta.image} width="100px" height="auto" />
+                    <img alt="meta" src={meta.image} width="100px" height="auto" />
                 </div>
             </div>
             <div>Editions&nbsp;</div>
@@ -141,20 +126,22 @@ export function Assets() {
     const [upEditionStatus, setEditionStatus] = useState(0);
     const { series } = useSeriesList(isDirty);
 
-    useEffect(async () => {
-        if (!isDirty) return;
+    useEffect(() => {
+        async function fetchData() {
+            if (!isDirty) return;
 
-        const assetList = await axios.get(
-            process.env.REACT_APP_API_URL + "/v1/assets/list"
-        );
-        if (assetList.data.success != "true") return;
+            const assetList = await axios.get(
+                process.env.REACT_APP_API_URL + "/v1/assets/list"
+            );
+            if (assetList.data.success !== "true") return;
 
-        setDirty(false);
-        setList(assetList.data.result);
+            setDirty(false);
+            setList(assetList.data.result);
+        }
+        fetchData()
     }, [isDirty]);
 
     useEffect(() => {
-        console.log("3. Clear Dirty");
         setDirty(false);
     }, [isDirty]);
 
@@ -169,7 +156,7 @@ export function Assets() {
         try {
             setSeriesStatus(1);
             //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
-            await fetch("http://localhost:3003/v1/handy-items/create-series", {
+            await fetch("http://demo.nft.sportscast.net/v1/handy-items/create-series", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -230,11 +217,8 @@ export function Assets() {
     const getCurrentSeries = () => {
         var res = [];
 
-        console.log(series);
-
         for (const prop in series) {
-            console.log(series[prop]);
-            res.push(<SeriesCluster meta={series[prop]} reload={isDirty} />);
+            res.push(<SeriesCluster key={prop} meta={series[prop]} reload={isDirty} />);
         }
 
         return res;
@@ -279,12 +263,12 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            class="f3-collections-btn"
+                            className="f3-collections-btn"
                             id=""
                             onClick={handleCreateSeries}
                             disabled={upSeriesStatus === 1}
                         >
-                            {upSeriesStatus == 1 && (
+                            {upSeriesStatus === 1 && (
                                 <Loader
                                     type="Puff"
                                     color="#00BFFF"
@@ -344,12 +328,12 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            class="f3-collections-btn"
+                            className="f3-collections-btn"
                             id=""
                             onClick={handleCreateEdition}
                             disabled={upEditionStatus === 1}
                         >
-                            {upEditionStatus == 1 && (
+                            {upEditionStatus === 1 && (
                                 <Loader
                                     type="Puff"
                                     color="#00BFFF"
@@ -376,11 +360,11 @@ export function Assets() {
 
 export function Page() {
     return (
-        <div>
+        <Suspense fallback={null}>
             <SideBar />
             <div className="f3-main">
                 <Assets />
             </div>
-        </div>
+        </Suspense>
     );
 }

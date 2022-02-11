@@ -1,5 +1,4 @@
-import {send, decode, script, args, arg, cdc} from "@onflow/fcl"
-import {Address} from "@onflow/types"
+import { send, decode, script, args, cdc } from "@onflow/fcl"
 
 const CODE = cdc`
 import NFTStorefront from 0xNFTStorefront

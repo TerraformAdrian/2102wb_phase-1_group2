@@ -1,0 +1,16 @@
+{
+    "name": "SportsCast - Zeb Noland Gold Edition",
+    "editon": "gold",
+    "parent_series": "Zeb Nolan",
+    "description": "In this full-length episode, QB Zeb Noland dives deep into his career and most significant sources of inspiration. He discusses his entire story – from the lessons he learned from his talented father, Travis Noland, to their shared passion for football, his growth as an athlete and mentor, and some of his best moments in the game – in SportsCast – Zeb Noland Gold Edition.",
+    "quantity": 250,
+    "sn": true,
+    "price": {
+        "staging": 2.00,
+        "production": 1000.00
+    },
+    "nft_thumbnail": "https://cloudflare-ipfs.com/ipfs/QmQtDkuHhegXZ6osvbQhaSLQtPYsh5WLj8SkTKqtW5miSf",
+    "unlocked-content_video": "https://s3.us-west-2.amazonaws.com/nft.ikonicc.ca/ZebNoland_Partx_Gold_Edition.mp4",
+    "unlocked-content_video_duration": "01:04:27.00",
+    "unlocked-content_comments": "The GOLD edition has the FULL interview (PART 1 + PART 2 + PART 3 + PART 4 PART 5… it is over 1 hour long!"
+}

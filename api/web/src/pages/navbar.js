@@ -8,222 +8,205 @@ import { Link } from "react-router-dom";
 import "../index.css";
 
 export function Page() {
-    const [user, loggedIn, { signUp, logIn, logOut }] = useCurrentUser();
+  const [user, loggedIn, { logIn, logOut }] = useCurrentUser();
 
-    const init = useInitialized(user.addr);
+  const init = useInitialized(user.addr);
 
-    const handleConnectWallet = (e) => {
-        e.preventDefault();
-        setActive(!isActive);
-        logIn();
-    };
+  const handleConnectWallet = (e) => {
+    e.preventDefault();
+    setActive(!isActive);
+    logIn();
+  };
 
-    const handleInitializeWallet = (e) => {
-        e.preventDefault();
-        setActive(!isActive);
-        init.initialize(user.addr);
-    };
+  const handleInitializeWallet = (e) => {
+    e.preventDefault();
+    setActive(!isActive);
+    init.initialize(user.addr);
+  };
 
-    const handleLogout = (e) => {
-        e.preventDefault();
-        setActive(!isActive);
-        logOut();
-    };
-    
- const handleDeposit = (e) => {
-   e.preventDefault();
-   // live :"https://buy.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
-   // test :"https://buy-sandbox.moonpay.com/?apiKey=pk_live_R5Lf25uBfNZyKwccAZpzcxuL3ZdJ3Hc&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd"
-   window.open("https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&showOnlyCurrencies=flow%2Cfusd", "deposit", "width=800,height=600")
-   // window.open("https://buy-sandbox.moonpay.com?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM", "deposit", "width=600,height=400");
- }
+  const handleLogout = (e) => {
+    e.preventDefault();
+    setActive(!isActive);
+    logOut();
+  };
 
- 
-    const handleSlideToggle = (e) => {
-        e.preventDefault();
-    };
+  const [isActive, setActive] = useState("false");
 
-    const [isActive, setActive] = useState("false");
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
 
-    const handleToggle = () => {
-        setActive(!isActive);
-    };
+  const closeMenu = () => {
+    setActive(!isActive);
+  };
 
-    const closeMenu = () => {
-        setActive(!isActive);
-    };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // eslint-disable-next-line
+  }, []);
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        // eslint-disable-next-line
-    }, []);
+  return (
+    <header className="">
+      {init.isInitialized === true ? (
+        <div className="top-bar bg-purple py-2 text-center">
+          <span className="text-white f3-nav-addr text-[12px] leading-[14px] block">
+            Account Connected:&nbsp;{" "}
+            {user.addr}
+          </span>
+        </div>
+      ) : (
+        <span></span>
+      )}
 
-    return (
-        <header className="">
-            {init.isInitialized == true ? (
-               <div className="py-2 text-center top-bar bg-purple">     
-                    <span className="text-white f3-nav-addr text-[12px] leading-[14px] block">
-                        Account Connected:&nbsp;{" "}
-                        {user.addr}
-                    </span>
+      <nav className="navbar py-6">
+        <div className="container max-w-full px-4 m-auto w-1232">
+          <div className="flex items-center justify-between header-info">
+            <div className="site-logo">
+              <Link to="/" className="">
+                <Logo />
+              </Link>
+            </div>
+            <div className="block blue lg:hidden">
+              <Link
+                to="#"
+                onClick={handleToggle}
+                className="text-white res-button text-30px"
+              >
+                <Menuicon />
+              </Link>
+            </div>
+
+            <div
+              className={`bg-primary lg:bg-transparent navbar-info mobile_menu lg:relative ${isActive ? "" : "menu_active"
+                }`}
+            >
+              <div className="flex items-center justify-between header-info lg:hidden">
+                <div className="site-logo">
+                  <Link to="/" className="">
+                    <Logo />
+                  </Link>
                 </div>
-                ) : (
-                    <span></span>
-                )}
+                <div className="blue">
+                  <Link
+                    to="#"
+                    onClick={handleToggle}
+                    className="text-white res-button text-30px"
+                  >
+                    <Closeicon />
+                  </Link>
+                </div>
+              </div>
+              <ul className="mlist navbar-list flex flex-col justify-center lg:h-[auto] lg:block ">
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 mb-[24px] lg:mb-[0px] font-normal">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <a
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    href="https://sportscast.net/about/"
+                  >
+                    About
+                  </a>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="/"
+                  >
+                    Storefront
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="#"
+                  >
+                    DEPOSIT
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="/mywallet"
+                  >
+                    My Wallet
+                  </Link>
+                </li>
 
-            <nav className="py-6 navbar">
-                <div className="container max-w-full px-4 m-auto w-1232">
-                    <div className="flex items-center justify-between header-info">
-                        <div className="site-logo">
-                            <Link to="/" className="">
-                                <Logo />
-                            </Link>
-                        </div>
-                        <div className="block blue lg:hidden">
-                            <Link
-                                to="#"
-                                onClick={handleToggle}
-                                className="text-white res-button text-30px"
-                            >
-                                <Menuicon />
-                            </Link>
-                        </div>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <Link
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    to="/marketplace"
+                  >
+                    Marketplace
+                  </Link>
+                </li>
+                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
+                  <a
+                    onClick={closeMenu}
+                    className="block nav-link text-secondary"
+                    href="https://sportscast.net/contact/"
+                  >
+                    Contact
+                  </a>
+                </li>
 
-                        <div
-                            className={`bg-primary lg:bg-transparent navbar-info mobile_menu lg:relative ${
-                                isActive ? "" : "menu_active"
-                            }`}
+                {loggedIn ? (
+                  <li className="inline-block text-base font-normal nav-menu leading-19">
+                    <ul className="flex flex-col lg:block">
+                      {init.isInitialized === true ? (
+                        <span></span>
+                      ) : (
+                        <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
+                          <Link
+                            className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
+                            to="#"
+                            onClick={
+                              handleInitializeWallet
+                            }
+                          >
+                            Initialize Wallet
+                          </Link>
+                        </li>
+                      )}
+                      <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
+                        <Link
+                          className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
+                          to="#"
+                          onClick={handleLogout}
                         >
-                            <div className="flex items-center justify-between header-info lg:hidden">
-                                <div className="site-logo">
-                                    <Link to="/" className="">
-                                        <Logo />
-                                    </Link>
-                                </div>
-                                <div className="blue">
-                                    <Link
-                                        to="#"
-                                        onClick={handleToggle}
-                                        className="text-white res-button text-30px"
-                                    >
-                                        <Closeicon />
-                                    </Link>
-                                </div>
-                            </div>
-                            <ul className="mlist navbar-list flex flex-col justify-center lg:h-[auto] lg:block ">
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 mb-[24px] lg:mb-[0px] font-normal">
-                                    <a
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        href="http://www.sportscast.net/"
-                                    >
-                                        Home
-                                    </a>
-                                </li>
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <a
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        href="https://sportscast.net/about/"
-                                    >
-                                        About
-                                    </a>
-                                </li>
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        to="/"
-                                    >
-                                        Storefront
-                                    </Link>
-                                </li>
-                                {loggedIn && init.isInitialized && 
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
-                                        onClick={handleDeposit}
-                                        className="block nav-link text-secondary"
-                                        to="#"
-                                    >
-                                        Deposit
-                                    </Link>
-                                </li>}
-                                {loggedIn && 
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        to="/mywallet"
-                                    >
-                                        My Wallet
-                                    </Link>
-                                    </li>
-                                }
-
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <Link
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        to="/marketplace"
-                                    >
-                                        Marketplace
-                                    </Link>
-                                </li>
-                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0  mb-[24px] lg:mb-[0px] lg:ml-9">
-                                    <a
-                                        onClick={closeMenu}
-                                        className="block nav-link text-secondary"
-                                        href="https://sportscast.net/contact/"
-                                    >
-                                        Contact
-                                    </a>
-                                </li>
-
-                                {loggedIn ? (
-                                    <li className="inline-block text-base font-normal nav-menu leading-19">
-                                        <ul className="flex flex-col lg:block">
-                                            {init.isInitialized == true ? (
-                                                <span></span>
-                                            ) : (
-                                                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
-                                                    <Link
-                                                        className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
-                                                        to="#"
-                                                        onClick={
-                                                            handleInitializeWallet
-                                                        }
-                                                    >
-                                                        Initialize Wallet
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
-                                                <Link
-                                                    className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
-                                                    to="#"
-                                                    onClick={handleLogout}
-                                                >
-                                                    Sign out
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                ) : (
-                                    <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
-                                        <Link
-                                            className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
-                                            to="#"
-                                            onClick={handleConnectWallet}
-                                        >
-                                            Connect Wallet
-                                        </Link>
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    );
+                          Sign out
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                ) : (
+                  <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal ml-0  mb-[24px] lg:mb-[0px] lg:ml-26px">
+                    <Link
+                      className="nav-link text-white py-3.5 px-7 block rounded-2.25rem bg-gradient-to-r from-blue to-purple hover:bg-gradient-to-l ease-in duration-300"
+                      to="#"
+                      onClick={handleConnectWallet}
+                    >
+                      Connect Wallet
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
 }

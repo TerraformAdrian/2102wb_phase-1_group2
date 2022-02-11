@@ -17,7 +17,7 @@ pub fun main(account: Address): [UInt64] {
 `
 
 export function getMarketItems(address) {
-  if (address == null || address == "")
+  if (address === null || address === "")
     return Promise.resolve([])
 
   // prettier-ignore

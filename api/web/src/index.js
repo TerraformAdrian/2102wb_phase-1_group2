@@ -3,17 +3,15 @@ import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ToastContainer, toast } from "react-toast";
+import { ToastContainer } from "react-toast";
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import { Page as MintNFT2 } from "./pages/mint/mintnft2";
 
-import { Page as Root } from "./pages/root.page";
 import { Page as Publish } from "./pages/publish.page";
 import { Page as List } from "./pages/list.page";
 import { Page as Market } from "./pages/market.page";
-import { Page as MintPanel } from "./pages/mint";
 import { Page as Assets } from "./pages/mint/assets";
 import { Page as MintNFT } from "./pages/mint/mintnft";
 import { Page as Collections } from "./pages/mint/collections";

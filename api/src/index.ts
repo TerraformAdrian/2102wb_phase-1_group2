@@ -1,26 +1,18 @@
+import path from "path";
 import * as fcl from "@onflow/fcl";
 
 import initApp from "./app";
+import decrypt from "./utils/decrypt";
 import { FlowService } from "./services/flow";
 import { HandyItemsService } from "./services/handy-items";
 
 import dotenv from 'dotenv'
 import envExpand from 'dotenv-expand'
 
-const env = envExpand(dotenv.config({ 
-    path: '.env.testnet'
-  })).parsed || process.env;
+const env = envExpand(dotenv.config({
+  path: path.resolve(process.cwd(), 'api/.env.testnet')
+})).parsed || process.env;
 
-const config = {
-  port: process.env.PORT || 3003,
-  minterAddress: env.MINTER_ADDRESS!,
-  minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
-  minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
-  accessApi: env.FLOW_ACCESS_API_URL,
-  fungibleTokenAddress: env.FUNGIBLE_TOKEN_ADDRESS!,
-  nonFungibleTokenAddress: env.NON_FUNGIBLE_TOKEN_ADDRESS!
-}
-console.log(config);
 /*
 const config = process.env.NODE_ENV == "production" ? {
   port: process.env.PORT || 3003,
@@ -49,6 +41,17 @@ const config = process.env.NODE_ENV == "production" ? {
 // console.log(process.env);
 
 async function run() {
+  const config = {
+    port: process.env.PORT || 3003,
+    minterAddress: env.MINTER_ADDRESS!,
+    minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
+    minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
+    accessApi: env.FLOW_ACCESS_API_URL,
+    fungibleTokenAddress: await decrypt(env.FUNGIBLE_TOKEN_ADDRESS!),
+    nonFungibleTokenAddress: await decrypt(env.NON_FUNGIBLE_TOKEN_ADDRESS!)
+  }
+  console.log(config);
+
   const flowService = new FlowService(
     config.minterAddress,
     config.minterPrivateKeyHex,

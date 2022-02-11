@@ -1,14 +1,8 @@
 import { useEffect, useRef } from "react";
-import { IDLE } from "../../global/constants";
-import { useCurrentUser } from "../../hooks/use-current-user.hook";
-import { useAccountItems } from "../../hooks/use-account-items.hook";
-import { Suspense, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import AccountItemsCluster from "../../comps/account-items";
+import { useState } from "react";
 
 import { SideBar } from "./side_bar";
 import axios from "axios";
-import fs from "fs";
 
 const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
 const PINATA_SECRET_API_KEY =
@@ -23,8 +17,8 @@ export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
                 pinata_secret_api_key: pinataSecretApiKey,
             },
         })
-        .then(function (response) {})
-        .catch(function (error) {});
+        .then(function (response) { })
+        .catch(function (error) { });
 };
 
 export const pinFileToIPFS = async (
@@ -96,17 +90,20 @@ export function Assets() {
     const [isDirty, setDirty] = useState(true);
     const inputFile = useRef(null);
 
-    useEffect(async () => {
-        if (!isDirty) return;
+    useEffect(() => {
+        async function fetchData() {
+            if (!isDirty) return;
 
-        // const assetList = await axios.get("http://localhost:3003/v1/assets/list");
-        const assetList = await axios.get(
-            process.env.REACT_APP_API_URL + "/v1/assets/list"
-        );
-        if (assetList.data.success != "true") return;
+            // const assetList = await axios.get("http://localhost:3003/v1/assets/list");
+            const assetList = await axios.get(
+                process.env.REACT_APP_API_URL + "/v1/assets/list"
+            );
+            if (assetList.data.success !== "true") return;
 
-        setDirty(false);
-        setList(assetList.data.result);
+            setDirty(false);
+            setList(assetList.data.result);
+        }
+        fetchData()
     }, [isDirty]);
 
     const handleUpload = async (e) => {
@@ -114,7 +111,7 @@ export function Assets() {
 
         console.log(inputFile);
 
-        if (state.inFile.length == 0) return;
+        if (state.inFile.length === 0) return;
 
         await pinFileToIPFS(PINATA_API_KEY, PINATA_SECRET_API_KEY, {
             name: state.inName,
@@ -178,6 +175,7 @@ export function Assets() {
                         <div className="f3-current-asset">
                             <div>
                                 <img
+                                    alt="item"
                                     src={item.img_url}
                                     width="78px"
                                     height="49px"
@@ -204,40 +202,6 @@ export function Assets() {
 }
 
 export function Page() {
-    const [state, setState] = useState({
-        txtAddress: "",
-    });
-    const [address, setAddress] = useState("");
-    const [count, setCount] = useState(0);
-    const history = useHistory();
-    const [user] = useCurrentUser();
-
-    const handleChange = (e) => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleList = (e) => {
-        if (state.txtAddress.length != 18) {
-            return;
-        }
-
-        setAddress(state.txtAddress);
-        setCount(1 - count);
-    };
-
-    const handleMint = (e) => {
-        e.preventDefault();
-        history.push("/publish");
-    };
-
-    const handleMarket = (e) => {
-        e.preventDefault();
-        history.push("/market");
-    };
-
     return (
         <div>
             <SideBar />

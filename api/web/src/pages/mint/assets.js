@@ -1,15 +1,7 @@
 import { useEffect, useRef } from "react";
-import { IDLE } from "../../global/constants";
-import { useCurrentUser } from "../../hooks/use-current-user.hook";
-import { useAccountItems } from "../../hooks/use-account-items.hook";
-import { Suspense, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import AccountItemsCluster from "../../comps/account-items";
-
+import { useState } from "react";
 import { SideBar } from "./side_bar";
 import axios from "axios";
-import fs from "fs";
-
 import Loader from "react-loader-spinner";
 import { toast } from "react-toast";
 
@@ -26,8 +18,8 @@ export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
                 pinata_secret_api_key: pinataSecretApiKey,
             },
         })
-        .then(function (response) {})
-        .catch(function (error) {});
+        .then(function (response) { })
+        .catch(function (error) { });
 };
 
 export function Assets() {
@@ -42,24 +34,27 @@ export function Assets() {
     // 3: IPFS Failed, 4: DB Failed
     const inputFile = useRef(null);
 
-    useEffect(async () => {
-        if (!isDirty) return;
+    useEffect(() => {
+        async function fetchData() {
+            if (!isDirty) return;
 
-        try {
-            const assetList = await axios.get(
-                process.env.REACT_APP_API_URL + "/v1/assets/list"
-            );
-            if (assetList.data.success != "true") {
+            try {
+                const assetList = await axios.get(
+                    process.env.REACT_APP_API_URL + "/v1/assets/list"
+                );
+                if (assetList.data.success !== "true") {
+                    setListingStatus(2);
+                    return;
+                }
+
+                setDirty(false);
+                setListingStatus(1);
+                setList(assetList.data.result);
+            } catch (e) {
                 setListingStatus(2);
-                return;
             }
-
-            setDirty(false);
-            setListingStatus(1);
-            setList(assetList.data.result);
-        } catch (e) {
-            setListingStatus(2);
         }
+        fetchData()
     }, [isDirty]);
 
     const handleUpload = async (e) => {
@@ -67,7 +62,7 @@ export function Assets() {
 
         console.log(inputFile);
 
-        if (state.inFile.length == 0) return;
+        if (state.inFile.length === 0) return;
 
         try {
             await pinFileToIPFS(PINATA_API_KEY, PINATA_SECRET_API_KEY, {
@@ -77,7 +72,7 @@ export function Assets() {
             });
 
             setDirty(true);
-        } catch (e) {}
+        } catch (e) { }
     };
 
     const handleChange = (e) => {
@@ -193,9 +188,9 @@ export function Assets() {
                         <button
                             id=""
                             onClick={handleUpload}
-                            disabled={uploadStatus == 1 || uploadStatus == 2}
+                            disabled={uploadStatus === 1 || uploadStatus === 2}
                         >
-                            {(uploadStatus == 1 || uploadStatus == 2) && (
+                            {(uploadStatus === 1 || uploadStatus === 2) && (
                                 <Loader
                                     type="Puff"
                                     color="#00BFFF"
@@ -213,7 +208,7 @@ export function Assets() {
             <div style={{ paddingLeft: "20px" }}>
                 <div>
                     <h3>Current Assets</h3>
-                    {listingStatus == 0 && (
+                    {listingStatus === 0 && (
                         <Loader
                             type="Oval"
                             color="#1f1f1f"
@@ -222,11 +217,11 @@ export function Assets() {
                             className="f3-center"
                         />
                     )}
-                    {listingStatus == 1 &&
+                    {listingStatus === 1 &&
                         asList.map((item) => (
                             <div className="f3-current-asset">
                                 <div>
-                                    <img src={item.img_url} />
+                                    <img alt="item" src={item.img_url} />
                                 </div>
                                 <div>
                                     <div>
@@ -244,7 +239,7 @@ export function Assets() {
                                 </div>
                             </div>
                         ))}
-                    {listingStatus == 2 && (
+                    {listingStatus === 2 && (
                         <p className="f3-center">Unexpected error occured!</p>
                     )}
                 </div>

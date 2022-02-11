@@ -4,6 +4,7 @@
 * node.js
 * React
 * MoonPay - https://www.moonpay.com/
+* AWS KMS 
 
 ## Strucutre
 * /api : this runs the backend portion - javascript
@@ -17,6 +18,29 @@
 * / development : all approved pulls will come in here
 * / production : only approved development will be merged in here
     * / demo-nft-sportscast-net : this is only for the demo.nft.sportscast.net
+
+## AWS KMS
+You can use plaintext or encrypt the secrets to be more secure
+you will find documentation
+file: /api/src/utils/encrypt.js
+
+## Setup
+ * 1 - Generate Private/Public keys
+ 	* > flow keys generate
+ * 2 - Create wallet
+	* https://testnet-faucet.onflow.org
+ * 3 enable FUSD value?
+ * 4 Deploy SmartContracts
+	* https://docs.onflow.org/flow-cli/account-add-contract/
+	* > flow project deploy --network=testnet
+ * 5 update StoreFront code
+	* > .env files
+ * 6  use the MintPanel to setup everything
+	* > https://demo.nft.sportscast.net/mintpanel 
+		* a) Upload Assets to IPFS (Series + Editions)
+		* b) Create Series (eg. Zeb Nolan)
+		* c) Create Edition (eg. White, Pink, Orange, Prizm, Gold)
+
 
 ## Install
 npm run start

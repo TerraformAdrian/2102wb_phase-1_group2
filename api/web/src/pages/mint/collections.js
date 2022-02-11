@@ -82,7 +82,7 @@ export const pinFileToIPFS = async (
 
 function Item({ meta }) {
     return (
-        <div className="f3-collections-body-item f3-center">
+        <div className="f3-collections-body-item f3-center text-white">
             <img alt="meta" src={meta.image} width="100px" />
             {meta.name}
         </div>
@@ -104,12 +104,12 @@ export function SeriesCluster({ meta, reload }) {
     return (
         <div className="f3-collections-body">
             <div>
-                <div className="f3-center" style={{ paddingRight: "20px" }}>
+                <div className="f3-center text-white" style={{ paddingRight: "20px" }}>
                     {meta.name}
                     <img alt="meta" src={meta.image} width="100px" height="auto" />
                 </div>
             </div>
-            <div>Editions&nbsp;</div>
+            <div className="text-white">Editions&nbsp;</div>
             <div>{getEditionList()}</div>
         </div>
     );
@@ -228,11 +228,11 @@ export function Assets() {
         <div>
             <div style={{ paddingLeft: "20px" }}>
                 <div>
-                    <h3>::Series</h3>
+                    <h3 className="text-white">::Series</h3>
                 </div>
                 <div className="f3-panel-layout f3-collections-head">
                     <div>
-                        <label>Series Name:</label>
+                        <label className="text-white">Series Name:</label>
                     </div>
                     <div>
                         <input
@@ -244,7 +244,7 @@ export function Assets() {
                     </div>
                     <div></div>
                     <div>
-                        <label>Series Image: &nbsp;</label>
+                        <label className="text-white">Series Image: &nbsp;</label>
                     </div>
                     <div>
                         <select
@@ -282,7 +282,7 @@ export function Assets() {
                     </div>
                     <div className="f3-collections-hline"></div>
                     <div>
-                        <label>Series:</label>
+                        <label className="text-white">Series:</label>
                     </div>
                     <div>
                         <select
@@ -297,7 +297,7 @@ export function Assets() {
                     </div>
                     <div></div>
                     <div>
-                        <label>Edition Name: </label>
+                        <label className="text-white">Edition Name: </label>
                     </div>
                     <div>
                         <input
@@ -309,7 +309,7 @@ export function Assets() {
                     </div>
                     <div></div>
                     <div>
-                        <label>Edition Image: </label>
+                        <label className="text-white">Edition Image: </label>
                     </div>
                     <div>
                         <select
@@ -350,7 +350,7 @@ export function Assets() {
             <div className="hline" />
             <div style={{ paddingLeft: "20px" }}>
                 <div>
-                    <h3>Current Series</h3>
+                    <h3 className="text-white">Current Series</h3>
                 </div>
                 <div>{getCurrentSeries()}</div>
             </div>

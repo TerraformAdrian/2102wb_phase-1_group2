@@ -82,7 +82,7 @@ export const pinFileToIPFS = async (
 
 function Item({ meta }) {
     return (
-        <div className="f3-collections-body-item f3-center">
+        <div className="f3-collections-body-item f3-center text-white text-center">
             <img alt="meta" src={meta.image} width="100px" />
             {meta.name}
         </div>
@@ -102,14 +102,14 @@ export function SeriesCluster({ meta, reload }) {
     };
 
     return (
-        <div className="f3-collections-body">
+        <div className="f3-collections-body flex flex-row mb-[24px] items-center rounded-8 bg-blue-light p-4">
             <div>
-                <div className="f3-center" style={{ paddingRight: "20px" }}>
+                <div className="f3-center text-white text-center" style={{ paddingRight: "20px" }}>
                     {meta.name}
                     <img alt="meta" src={meta.image} width="100px" height="auto" />
                 </div>
             </div>
-            <div>Editions&nbsp;</div>
+            <div className="text-white">Editions &nbsp;</div>
             <div>{getEditionList()}</div>
         </div>
     );
@@ -226,32 +226,29 @@ export function Assets() {
 
     return (
         <div>
-            <div style={{ paddingLeft: "20px" }}>
+            <div style={{ padding: "20px" }}>
                 <div>
-                    <h3>::Series</h3>
+                    <h3 className="text-white">::Series</h3>
                 </div>
-                <div className="f3-panel-layout f3-collections-head">
-                    <div>
-                        <label>Series Name:</label>
-                    </div>
-                    <div>
+                <div className="">
+                    <div className="my-6">
+                        <label className="text-white mr-4 mb-3">Series Name:</label>
                         <input
                             id="inSeriesName"
                             name="inSeriesName"
                             value={state.inSeriesName}
                             onChange={handleChange}
+                            className="rounded-8 h-8 p-4"
                         />
                     </div>
-                    <div></div>
-                    <div>
-                        <label>Series Image: &nbsp;</label>
-                    </div>
-                    <div>
+                    <div className="my-6">
+                        <label className="text-white mr-4 mb-3">Series Image:</label>
                         <select
                             id="inSeriesImg"
                             name="inSeriesImg"
                             onChange={handleChange}
                             value={state.inSeriesImg}
+                            className="rounded-8 h-8"
                         >
                             <option value=""></option>
                             {asList.map((item, index) => (
@@ -263,7 +260,7 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            className="f3-collections-btn"
+                            className="f3-collections-btn p-4 rounded-8 mb-[24px]"
                             id=""
                             onClick={handleCreateSeries}
                             disabled={upSeriesStatus === 1}
@@ -281,42 +278,37 @@ export function Assets() {
                         </button>
                     </div>
                     <div className="f3-collections-hline"></div>
-                    <div>
-                        <label>Series:</label>
-                    </div>
-                    <div>
+                    <div className="my-6">
+                        <label className="text-white mr-4 mb-3">Series:</label>
                         <select
                             id="inEditionSeries"
                             name="inEditionSeries"
                             onChange={handleChange}
                             value={state.inEditionSeries}
+                            className="rounded-8 h-8"
                         >
                             <option value=""></option>
                             {getSeriesList()}
                         </select>
                     </div>
-                    <div></div>
-                    <div>
-                        <label>Edition Name: </label>
-                    </div>
-                    <div>
+                    <div className="my-6">
+                        <label className="text-white mr-4 mb-3">Edition Name: </label>
                         <input
                             id="inEditionName"
                             name="inEditionName"
                             value={state.inEditionName}
                             onChange={handleChange}
+                            className="rounded-8 h-8 p-4"
                         />
                     </div>
-                    <div></div>
-                    <div>
-                        <label>Edition Image: </label>
-                    </div>
-                    <div>
+                    <div className="my-6">
+                        <label className="text-white mr-4 mb-3">Edition Image: </label>
                         <select
                             id="inEditionImg"
                             name="inEditionImg"
                             onChange={handleChange}
                             value={state.inEditionImg}
+                            className="rounded-8 h-8"
                         >
                             <option value=""></option>
                             {asList.map((item, index) => (
@@ -328,7 +320,7 @@ export function Assets() {
                     </div>
                     <div>
                         <button
-                            className="f3-collections-btn"
+                            className="f3-collections-btn p-4 rounded-8 mb-[24px]"
                             id=""
                             onClick={handleCreateEdition}
                             disabled={upEditionStatus === 1}
@@ -348,9 +340,9 @@ export function Assets() {
                 </div>
             </div>
             <div className="hline" />
-            <div style={{ paddingLeft: "20px" }}>
+            <div style={{ padding: "0 20px" }}>
                 <div>
-                    <h3>Current Series</h3>
+                    <h1 className="text-white text-24px pr-0 mb-4">Current Series</h1>
                 </div>
                 <div>{getCurrentSeries()}</div>
             </div>

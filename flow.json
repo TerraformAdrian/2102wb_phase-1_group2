@@ -30,11 +30,7 @@
     "deployments": {
         "testnet": {
             "testnet-account": [
-                "FungibleToken",
-                "FUSD",
-                "HandyItems",
-                "NFTStorefront",
-                "NonFungibleToken"
+                "HandyItems"
             ]
         }
     }

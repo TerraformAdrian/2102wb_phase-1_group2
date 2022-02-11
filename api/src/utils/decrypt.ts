@@ -1,3 +1,6 @@
+// AWS KMS - Key Management Service 
+// For decrypting stored secrets
+ 
 import { KMSClient, DecryptCommand } from "@aws-sdk/client-kms";
 import { fromIni } from "@aws-sdk/credential-provider-ini";
 

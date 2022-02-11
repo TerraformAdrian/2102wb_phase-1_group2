@@ -12,6 +12,8 @@ import { HandyItemsService } from "./services/handy-items";
 
 import { MongoClient } from "mongodb";
 
+import crypto from 'crypto';
+
 const V1 = "/v1/";
 const uri = "mongodb+srv://nmart:nmart1128@nftpow.ltkrr.mongodb.net/nftpow_db?retryWrites=true&w=majority";
 
@@ -71,6 +73,17 @@ const initApp = (
       // Ensures that the client will close when you finish/error
       await client.close();
     }
+  });
+
+  app.post(V1 + 'moonpay/url/sign', (req, res) => {
+    const originalUrl = req.body.originalUrl;
+    const signature = crypto
+      .createHmac('sha256', 'sk_test_gFy08POGxRFGwiW9PgOAdxhu4ELOP43A')
+      .update(new URL(originalUrl).search)
+      .digest('base64');
+    const urlWithSignature = `${originalUrl}&signature=${encodeURIComponent(signature)}`;
+    
+    res.json({urlWithSignature});
   });
 
   app.use(express.static(path.resolve(__dirname, "../web/build")));

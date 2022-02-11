@@ -47,8 +47,8 @@ async function run() {
     minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
     minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
     accessApi: env.FLOW_ACCESS_API_URL,
-    fungibleTokenAddress: await decrypt(env.FUNGIBLE_TOKEN_ADDRESS!),
-    nonFungibleTokenAddress: await decrypt(env.NON_FUNGIBLE_TOKEN_ADDRESS!)
+    fungibleTokenAddress: env.FUNGIBLE_TOKEN_ADDRESS!,
+    nonFungibleTokenAddress: env.NON_FUNGIBLE_TOKEN_ADDRESS!
   }
   console.log(config);
 

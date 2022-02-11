@@ -31,7 +31,7 @@
         "testnet": {
             "testnet-account": [
                 "HandyItems",
-                "NFTStorefront",
+                "NFTStorefront"
             ]
         }
     }

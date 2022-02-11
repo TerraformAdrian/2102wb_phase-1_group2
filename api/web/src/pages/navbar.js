@@ -5,10 +5,14 @@ import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import { ReactComponent as Menuicon } from "../assets/images/menu_white.svg";
 import { ReactComponent as Closeicon } from "../assets/images/close_white.svg";
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
+import axios from "axios";
 import "../index.css";
+import "./navbar.css";
 
 export function Page() {
   const [user, loggedIn, { logIn, logOut }] = useCurrentUser();
+  const [isDepositLoading, setIsDepositLoading] = useState(false);
 
   const init = useInitialized(user.addr);
 
@@ -22,6 +26,27 @@ export function Page() {
     e.preventDefault();
     setActive(!isActive);
     init.initialize(user.addr);
+  };
+
+  const handleDepositInit = (e) => {
+    if (!loggedIn || isDepositLoading) return;
+    e.preventDefault();
+    setIsDepositLoading(true);
+    setActive(!isActive);
+    const walletAddresses = {
+      "flow": user.addr,
+      "fusd": user.addr
+    };
+    axios.post(process.env.REACT_APP_API_URL + "/v1/moonpay/url/sign", {
+      originalUrl: `https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&walletAddresses=${encodeURIComponent(JSON.stringify(walletAddresses))}&showOnlyCurrencies=flow%2Cfusd`
+    })
+      .then(response => {
+        window.open(response.data.urlWithSignature, "deposit", "width=600,height=700");
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      .then(() => setIsDepositLoading(false));
   };
 
   const handleLogout = (e) => {
@@ -124,15 +149,29 @@ export function Page() {
                     Storefront
                   </Link>
                 </li>
-                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                  <Link
-                    onClick={closeMenu}
-                    className="block nav-link text-secondary"
-                    to="#"
-                  >
-                    DEPOSIT
-                  </Link>
-                </li>
+                {loggedIn && (
+                  <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                    <span>
+                    <Link
+                      onClick={handleDepositInit}
+                      className="block nav-link text-secondary"
+                      to="#"
+                    >
+                      DEPOSIT
+                      {isDepositLoading && (
+                      <Loader
+                        type="Puff"
+                        color="rgb(144 44 242)"
+                        height={20}
+                        width={20}
+                        className="nav-loader"
+                        ariaLabel='loading'
+                      />
+                    )}
+                    </Link>
+                    </span>
+                  </li>
+                )}
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                   <Link
                     onClick={closeMenu}

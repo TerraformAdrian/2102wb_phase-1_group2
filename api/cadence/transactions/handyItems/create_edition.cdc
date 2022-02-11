@@ -1,4 +1,4 @@
-import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
+import NonFungibleToken from 0x631e88ae7f1d7c20
 import HandyItems from "../../contracts/HandyItems.cdc"
 
 transaction(series: UInt32, metadata: {String: String}) {

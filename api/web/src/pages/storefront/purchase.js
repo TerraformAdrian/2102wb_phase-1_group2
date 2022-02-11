@@ -9,6 +9,7 @@ import { useInitialized } from "../../hooks/use-initialized.hook";
 import { Page as Navbar } from "../navbar";
 import Fileearmark from "../../assets/images/fileearmark.png";
 
+import axios from "axios";
 import { toast } from "react-toast";
 import Loader from "react-loader-spinner";
 
@@ -19,6 +20,7 @@ export function Page() {
     const { item, reload } = useSetItem(id);
 
     const [user, loggedIn, { logIn }] = useCurrentUser();
+    const [isDepositLoading, setIsDepositLoading] = useState(false);
 
     const { series } = useSeriesItem(
         Object.keys(item).length !== 0 ? item.seriesID : ""
@@ -53,7 +55,11 @@ export function Page() {
                 },
                 async onError(error) {
                     setBuyingState(2);
-                    toast.error("Unexpected error occured! \n" + error);
+                    if (error.search("Amount withdrawn must be less than or equal than the balance of the Vault") > 0) {
+                        toast.error("You do not have enough funds, please DEPOSIT FUNDS here.")
+                    } else {
+                        toast.error("Unexpected error occured! \n" + error);
+                    }
                     console.log(error);
                 },
             }
@@ -70,7 +76,26 @@ export function Page() {
         init.initialize(user.addr);
     };
 
-    var price = (Math.round(item.price * 100) / 100).toFixed(2);
+    let price = (Math.round(item.price * 100) / 100).toFixed(2);
+
+    const handleDeposit = (e) => {
+        e.preventDefault();
+        setIsDepositLoading(true);
+        const walletAddresses = {
+            "flow": user.addr,
+            "fusd": user.addr
+        };
+        axios.post(process.env.REACT_APP_API_URL + "/v1/moonpay/url/sign", {
+            originalUrl: `https://buy-sandbox.moonpay.com/?apiKey=pk_test_HujosrJl5vx5M0M043cTD0qfgioJobiM&defaultCurrencyCode=flow&walletAddresses=${encodeURIComponent(JSON.stringify(walletAddresses))}&showOnlyCurrencies=flow%2Cfusd&baseCurrencyAmount=${price}`
+        })
+            .then(response => {
+                window.open(response.data.urlWithSignature, "deposit", "width=600,height=700");
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(() => setIsDepositLoading(false));
+    };
 
     return Object.keys(item).length !== 0 ? (
         <div>
@@ -132,8 +157,32 @@ export function Page() {
                                     </ul>
                                 </div>
 
-                                <div className="relative cart_button">
-                                    <div className="single_cart_button ">
+                                <div className="cart_button">
+                                    {loggedIn && (
+                                        <div className="single_cart_button w-[75%]">
+                                            <button
+                                                type="button"
+                                                className="single_cart_button py-4 md:py-22.5px pr-7 pl-9 md:pl-99px rounded-2.25rem md:h-16 block md:inline-block lg:block text-center md:text-current w-full hover:bg-white  max-w-full text-purple text-base leading-19 font-semibold not-italic text-center m-auto"
+                                                onClick={handleDeposit}
+                                                disabled={buyingState === 1}
+                                                style={{backgroundColor: "#2CF597"}}
+                                            >
+                                                {isDepositLoading && (
+                                                    <Loader
+                                                        type="Oval"
+                                                        color="#902CF2"
+                                                        strokeWidth={10}
+                                                        secondaryColor="yellow"
+                                                        height={20}
+                                                        width={20}
+                                                        className="f3-inline absolute right-[30px] transofrm translate-y-[-2px]"
+                                                    />
+                                                )}
+                                                Deposit Funds to Purchase
+                                            </button>        
+                                        </div>
+                                    )}
+                                    <div className="relative single_cart_button">
                                         {loggedIn !== true ? (
                                             <button
                                                 type="button"
@@ -163,7 +212,7 @@ export function Page() {
                                                         className="f3-inline absolute right-[30px] transofrm translate-y-[-2px]"
                                                     />
                                                 )}
-                                                <span className="cart_amount absolute left-1 sm:left-2 top-1 md:top-2  text-white leading-24 font-semibold font-oswald not-italic text-base p-[0.65rem] sm:py-3 sm:px-7 bg-purple rounded-2.25rem">
+                                                <span className="cart_amount left-1 sm:left-2 top-1 md:top-2  text-white leading-24 font-semibold font-oswald not-italic text-base p-[0.65rem] sm:py-3 sm:px-7 bg-purple rounded-2.25rem">
                                                     ${price}
                                                 </span>
                                                 Purchase
@@ -175,7 +224,7 @@ export function Page() {
                                                 onClick={handleInitializeWallet}
                                             >
                                                 {" "}
-                                                <span className="cart_amount absolute  left-1 sm:left-2 top-1 md:top-2  text-white leading-24 font-semibold font-oswald not-italic text-base p-[0.65rem] sm:py-3 sm:px-7 bg-purple rounded-2.25rem">
+                                                <span className="cart_amount absolute left-1 sm:left-2 top-1 md:top-2  text-white leading-24 font-semibold font-oswald not-italic text-base p-[0.65rem] sm:py-3 sm:px-7 bg-purple rounded-2.25rem">
                                                     ${price}
                                                 </span>
                                                 Initialize Wallet

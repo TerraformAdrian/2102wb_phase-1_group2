@@ -5,9 +5,15 @@ import axios from "axios";
 import Loader from "react-loader-spinner";
 import { toast } from "react-toast";
 
-const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
-const PINATA_SECRET_API_KEY =
-    "609ec3e0c1641f4b41c0c6370eed55e108cea9f9396b9e5a1d123061de07b99b";
+// IKONICC credentials
+// wallet: 0xc1662d3e59d9060b
+   const PINATA_API_KEY = "1d8513548fb41e8d4db9";
+   const PINATA_SECRET_API_KEY = "8b81f6485e8a662501230df92a13fe30e980f1aa989b218b4608d4e9cf749413";
+
+// This is OLD credentials for the old old dev site..please dont use
+// wallet: 0xab5876435fbf2063
+// const PINATA_API_KEY = "8b0d90ef4bf74827eb88";
+// const PINATA_SECRET_API_KEY = "609ec3e0c1641f4b41c0c6370eed55e108cea9f9396b9e5a1d123061de07b99b";
 
 export const pinJSONToIPFS = (pinataApiKey, pinataSecretApiKey, JSONBody) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;

@@ -149,27 +149,29 @@ export function Page() {
                     Storefront
                   </Link>
                 </li>
-                <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
-                  <span>
-                  <Link
-                    onClick={handleDepositInit}
-                    className="block nav-link text-secondary"
-                    to="#"
-                  >
-                    DEPOSIT
-                    {isDepositLoading && (
-                    <Loader
-                      type="Puff"
-                      color="rgb(144 44 242)"
-                      height={20}
-                      width={20}
-                      className="nav-loader"
-                      ariaLabel='loading'
-                    />
-                  )}
-                  </Link>
-                  </span>
-                </li>
+                {loggedIn && (
+                  <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
+                    <span>
+                    <Link
+                      onClick={handleDepositInit}
+                      className="block nav-link text-secondary"
+                      to="#"
+                    >
+                      DEPOSIT
+                      {isDepositLoading && (
+                      <Loader
+                        type="Puff"
+                        color="rgb(144 44 242)"
+                        height={20}
+                        width={20}
+                        className="nav-loader"
+                        ariaLabel='loading'
+                      />
+                    )}
+                    </Link>
+                    </span>
+                  </li>
+                )}
                 <li className="nav-menu inline-block text-[24px] leading-[25px] sm:text-base sm:leading-19 font-normal  ml-0 mb-[24px] lg:mb-[0px] lg:ml-9">
                   <Link
                     onClick={closeMenu}

@@ -68,7 +68,7 @@ pipelines:
             ENVIRONMENT_NAME: 'nft-sportscast-net'
             ZIP_FILE: 'nft-sportscast-net.zip'
             S3_BUCKET: 'nft-sportscast-net'
-            VERSION_LABEL: '_$(date +%Y-%m-%d_%H:%M:%S)_${BITBUCKET_COMMIT:0:8}
+            VERSION_LABEL: '_$(date +%Y-%m-%d_%H:%M:%S)_${BITBUCKET_COMMIT:0:8}'
   release/sportscast-ikonicc-ca:
     - step:
         name: "Zip: sportscast-ikonicc-ca"

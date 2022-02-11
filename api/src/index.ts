@@ -41,15 +41,41 @@ const config = process.env.NODE_ENV == "production" ? {
 // console.log(process.env);
 
 async function run() {
+  
+  // CONFIG - DEFAULT
+  // ADDRESS and PRIVATE KEY is plain text 
+  // easy for development...
+  // ***INSECURE*** for production!!!!
   const config = {
     port: process.env.PORT || 3003,
+    // this calls the un-encrytped plaintext
     minterAddress: env.MINTER_ADDRESS!,
+    // this calls the un-encrytped plaintext
     minterPrivateKeyHex: env.MINTER_PRIVATE_KEY!,
     minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
     accessApi: env.FLOW_ACCESS_API_URL,
-    fungibleTokenAddress: await decrypt(env.FUNGIBLE_TOKEN_ADDRESS!),
-    nonFungibleTokenAddress: await decrypt(env.NON_FUNGIBLE_TOKEN_ADDRESS!)
+    fungibleTokenAddress: env.FUNGIBLE_TOKEN_ADDRESS!,
+    nonFungibleTokenAddress: env.NON_FUNGIBLE_TOKEN_ADDRESS!
   }
+
+  // CONFIG - AWS KMS
+  // ADDRESS and PRIVATE KEY is plain text 
+  // more complicated for development...
+  // ***SECURE*** for production!!!!
+  /*
+  const config = {
+    port: process.env.PORT || 3003,
+    // this calls the ENCRYPTED AWS KMS
+    minterAddress: await decrypt(env.MINTER_ADDRESS_AWS-KMS!),
+    // this calls the ENCRYPTED AWS KMS
+    minterPrivateKeyHex: await decrypt(env.MINTER_PRIVATE_KEY_AWS-KMS!),
+    minterAccountKeyIndex: env.MINTER_ACCOUNT_KEY_INDEX || 0,
+    accessApi: env.FLOW_ACCESS_API_URL,
+    fungibleTokenAddress: env.FUNGIBLE_TOKEN_ADDRESS!,
+    nonFungibleTokenAddress: env.NON_FUNGIBLE_TOKEN_ADDRESS!
+  }
+  */
+
   console.log(config);
 
   const flowService = new FlowService(

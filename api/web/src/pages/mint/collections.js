@@ -155,8 +155,8 @@ export function Assets() {
     const handleCreateSeries = async (e) => {
         try {
             setSeriesStatus(1);
-            //await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
-            await fetch("http://localhost:3003/v1/handy-items/create-series", {
+            await fetch(process.env.REACT_APP_API_URL + "/v1/handy-items/create-series", {
+            // await fetch("http://localhost:3003/v1/handy-items/create-series", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
